@@ -12,7 +12,7 @@ import * as cr from 'aws-cdk-lib/custom-resources';
 import { Construct } from 'constructs';
 
 /**
- * Configuration options for the Frontend Serverless Stack
+ * Configuration options for the Quantum Blockchain Interactive Frontend Stack
  */
 export interface QcBcInteractiveCdkStackProps extends cdk.StackProps {
   /**
@@ -37,7 +37,7 @@ export interface QcBcInteractiveCdkStackProps extends cdk.StackProps {
 }
 
 /**
- * Frontend Serverless Stack
+ * Quantum Blockchain Interactive Frontend Stack
  *
  * Architecture: CloudFront -> HTTP API Gateway -> Lambda (Docker) -> Next.js
  *
@@ -375,7 +375,7 @@ export class QcBcInteractiveCdkStack extends cdk.Stack {
     });
 
     this.distribution = new cloudfront.Distribution(this, 'Distribution', {
-      comment: 'Frontend Serverless - Next.js on Lambda',
+      comment: 'Quantum Blockchain Interactive Frontend',
       defaultBehavior: {
         origin: apiOrigin,
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,

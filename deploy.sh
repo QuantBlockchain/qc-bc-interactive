@@ -86,7 +86,7 @@ fi
 echo "Synthesizing CDK template..."
 cdk synth QcBcInteractiveCdkStack
 
-# Deploy the frontend serverless stack
+# Deploy the Quantum Blockchain Interactive Frontend stack
 echo "Deploying QcBcInteractiveCdkStack to AWS..."
 cdk deploy QcBcInteractiveCdkStack --require-approval never
 
