@@ -1,0 +1,95 @@
+# Project specific
+design/
+# for storing images for the UI design
+frontend/ui-design/images 
+src/templates/ux
+*.db
+test_*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Node.js / CDK
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.npm
+.yarn-integrity
+*.tgz
+*.tar.gz
+
+# CDK
+cdk.out/
+cdk.out.*/
+.cdk.staging/
+cdk.context.json
+*.d.ts
+dist/
+build/
+
+# Testing
+.nyc_output/
+coverage/
+*.lcov
+.jest/
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# AWS
+.aws/
+credentials
+config
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+*.js
+*.d.ts
+experiments/

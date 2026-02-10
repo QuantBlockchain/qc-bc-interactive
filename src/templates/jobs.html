@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Job Status</title>
+    <link rel="stylesheet" href="/static/css/style.css?v={{ cache_bust }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="quantum-background">
+        <div class="quantum-particles"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>⚡ Quantum Job Monitor</h1>
+            <p>Track quantum computing jobs across multiple devices</p>
+            <div class="nav-controls">
+                <a href="/" class="nav-btn">🏠 Home</a>
+                <a href="/signup" class="nav-btn">✨ Create Signature</a>
+                <a href="/wall" class="nav-btn">🌌 View Wall</a>
+                <a href="/admin" class="nav-btn">🔧 Admin</a>
+            </div>
+        </header>
+
+        <div class="jobs-content">
+            <!-- Enhanced Jobs Overview -->
+            <div class="jobs-overview">
+                <div class="overview-cards">
+                    <div class="overview-card">
+                        <div class="card-icon">🔄</div>
+                        <div class="card-content">
+                            <h3>Active Jobs</h3>
+                            <div class="stat-number" id="activeJobs">0</div>
+                        </div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="card-icon">✅</div>
+                        <div class="card-content">
+                            <h3>Completed</h3>
+                            <div class="stat-number" id="completedJobs">0</div>
+                        </div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="card-icon">❌</div>
+                        <div class="card-content">
+                            <h3>Failed</h3>
+                            <div class="stat-number" id="failedJobs">0</div>
+                        </div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="card-icon">🏭</div>
+                        <div class="card-content">
+                            <h3>Total Devices</h3>
+                            <div class="stat-number" id="totalDevices">--</div>
+                        </div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="card-icon">⏱️</div>
+                        <div class="card-content">
+                            <h3>Avg. Time</h3>
+                            <div class="stat-number" id="avgTime">--</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controls-section">
+                    <button id="refreshJobs" class="action-btn primary-btn">🔄 Refresh Jobs</button>
+                    <button id="toggleAutoRefresh" class="action-btn secondary-btn">⏰ Auto-refresh: OFF</button>
+                </div>
+            </div>
+
+            <!-- Primary Feature: Jobs by Device Category -->
+            <div class="jobs-section featured-section">
+                <div class="section-header">
+                    <h2>🖥️ Jobs by Device Category</h2>
+                    <p class="section-description">Quantum jobs organized by computing platform and device type</p>
+                </div>
+                <div class="device-categories" id="deviceCategories">
+                    <div class="loading-placeholder">Loading device categories...</div>
+                </div>
+            </div>
+
+            <!-- Compact Active Jobs (only if needed) -->
+            <div class="jobs-section compact-section" id="activeJobsSection" style="display: none;">
+                <h3>🔄 Currently Running</h3>
+                <div class="jobs-list compact-list" id="activeJobsList">
+                    <div class="no-jobs-message">
+                        <div class="no-jobs-icon">⚡</div>
+                        <p>No active jobs - all computations complete!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Job Details Modal -->
+        <div id="jobModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>🔍 Job Details</h2>
+                    <button id="closeJobModal" class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="job-details-grid">
+                        <div class="detail-item">
+                            <span class="label">Job ID:</span>
+                            <span class="value" id="modalJobId"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Device:</span>
+                            <span class="value" id="modalDeviceName"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Status:</span>
+                            <span class="value status" id="modalStatus"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Created:</span>
+                            <span class="value" id="modalCreated"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Updated:</span>
+                            <span class="value" id="modalUpdated"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">User:</span>
+                            <span class="value" id="modalUser"></span>
+                        </div>
+                    </div>
+                    <div class="job-progress" id="modalProgress" style="display: none;">
+                        <h4>Processing Progress</h4>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="modalProgressFill"></div>
+                        </div>
+                        <p class="progress-text" id="modalProgressText"></p>
+                    </div>
+                    <div class="job-error" id="modalError" style="display: none;">
+                        <h4>Error Details</h4>
+                        <div class="error-message" id="modalErrorMessage"></div>
+                    </div>
+                    <div class="job-results" id="modalResults" style="display: none;">
+                        <h4>Quantum Results</h4>
+                        <div class="results-data" id="modalResultsData"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="retryJob" class="action-btn secondary-btn" style="display: none;">🔄 Retry Job</button>
+                    <button id="cancelJob" class="action-btn danger-btn" style="display: none;">❌ Cancel Job</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/jobs.js?v={{ cache_bust }}"></script>
+</body>
+</html>

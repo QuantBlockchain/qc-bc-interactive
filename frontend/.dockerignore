@@ -1,0 +1,48 @@
+# Dependencies (will be installed fresh in container)
+node_modules
+
+# Build outputs
+.next
+out
+build
+dist
+
+# Development files
+.git
+.gitignore
+*.md
+LICENSE
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Test files
+coverage
+__tests__
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# Keep these files (explicitly not ignored)
+!package.json
+!package-lock.json
+!next.config.ts
+!tsconfig.json
+!tailwind.config.ts
+!postcss.config.mjs
+!Dockerfile
+!src
+!public

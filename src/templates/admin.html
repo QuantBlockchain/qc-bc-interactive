@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Quantum Signature Wall</title>
+    <link rel="stylesheet" href="/static/css/style.css?v={{ cache_bust }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="quantum-background">
+        <div class="quantum-particles"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>🔧 Admin Panel</h1>
+            <p>Administrative controls for Quantum Signature Wall</p>
+            <div class="admin-nav">
+                <a href="/" class="nav-btn">🏠 Home</a>
+                <a href="/signup" class="nav-btn">🔐 Create Signature</a>
+                <a href="/wall" class="nav-btn">🌌 View Wall</a>
+            </div>
+        </header>
+
+        <div class="admin-content">
+            <!-- Current Statistics Section -->
+            <div class="admin-section">
+                <h2>📊 Current Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">🔮</div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="totalSignatures">Loading...</span>
+                            <span class="stat-label">Total Signatures</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⚙️</div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="totalJobs">Loading...</span>
+                            <span class="stat-label">Quantum Jobs</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="yesVotes">Loading...</span>
+                            <span class="stat-label">"是" Votes</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">❌</div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="noVotes">Loading...</span>
+                            <span class="stat-label">"不是" Votes</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🎲</div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="avgQuantum">Loading...</span>
+                            <span class="stat-label">Avg Quantum #</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Management Actions Section -->
+            <div class="admin-section">
+                <h2>⚡ Management Actions</h2>
+                <div class="action-grid">
+                    <div class="action-card">
+                        <div class="action-icon">🗑️</div>
+                        <h3>Clear All Data</h3>
+                        <p>Remove all signatures and quantum jobs from the system. This action cannot be undone.</p>
+                        <button id="clearAllBtn" class="action-btn danger-btn">
+                            🗑️ Clear All Data
+                        </button>
+                    </div>
+                    <div class="action-card">
+                        <div class="action-icon">📊</div>
+                        <h3>Refresh Statistics</h3>
+                        <p>Reload the latest statistics and signature count.</p>
+                        <button id="refreshStatsBtn" class="action-btn primary-btn">
+                            🔄 Refresh Stats
+                        </button>
+                    </div>
+                    <div class="action-card">
+                        <div class="action-icon">👥</div>
+                        <h3>View All Signatures</h3>
+                        <p>Navigate to the main wall to see all current signatures.</p>
+                        <a href="/" class="action-btn secondary-btn">
+                            🌌 View Wall
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity Section -->
+            <div class="admin-section">
+                <h2>🕒 Recent Activity</h2>
+                <div class="activity-container">
+                    <div class="activity-list" id="recentActivity">
+                        <div class="activity-loading">Loading recent signatures...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Confirmation Modal -->
+        <div class="modal-overlay" id="confirmModal" style="display: none;">
+            <div class="modal-content confirm-modal">
+                <div class="modal-header">
+                    <h2>⚠️ Confirm Action</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="confirm-message">
+                        <div class="confirm-icon">🗑️</div>
+                        <h3>Clear All Data?</h3>
+                        <p>This will permanently delete:</p>
+                        <ul class="clear-items-list">
+                            <li><span id="confirmSignatureCount">0</span> signatures from the wall</li>
+                            <li><span id="confirmJobCount">0</span> quantum jobs from the system</li>
+                        </ul>
+                        <p><strong>This action cannot be undone!</strong></p>
+                    </div>
+                    <div class="confirm-actions">
+                        <button id="confirmClearBtn" class="confirm-btn danger-btn">
+                            Yes, Clear All
+                        </button>
+                        <button id="cancelClearBtn" class="confirm-btn secondary-btn">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+            <div class="loading-content">
+                <div class="quantum-spinner"></div>
+                <p id="loadingMessage">Processing...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/admin.js?v={{ cache_bust }}"></script>
+</body>
+</html>

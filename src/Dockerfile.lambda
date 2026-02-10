@@ -1,0 +1,24 @@
+# Python Lambda Dockerfile for Quantum Key Generation
+# Uses Docker container deployment for AWS Lambda
+
+FROM public.ecr.aws/lambda/python:3.12
+
+# Install pip dependencies
+RUN pip install --no-cache-dir \
+    amazon-braket-sdk>=1.102.6 \
+    boto3>=1.40.50 \
+    numpy>=1.26.0
+
+# Copy the quantum_service package
+COPY quantum_service/ ${LAMBDA_TASK_ROOT}/quantum_service/
+
+# Copy the Lambda handler entry point
+COPY lambda_quantum_keys.py ${LAMBDA_TASK_ROOT}/
+
+# Set proper permissions
+RUN chmod -R 644 ${LAMBDA_TASK_ROOT}/quantum_service/*.py && \
+    chmod 755 ${LAMBDA_TASK_ROOT}/quantum_service && \
+    chmod 644 ${LAMBDA_TASK_ROOT}/lambda_quantum_keys.py
+
+# Set the handler
+CMD ["lambda_quantum_keys.handler"]

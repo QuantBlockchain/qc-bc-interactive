@@ -1,0 +1,3647 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Futures - Human-AI Interaction Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        },
+                        dark: {
+                            900: '#0a0f1a',
+                            800: '#111827',
+                            700: '#1f2937',
+                            600: '#374151',
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px rgba(20, 184, 166, 0.5)' },
+                            '100%': { boxShadow: '0 0 20px rgba(20, 184, 166, 0.8)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #0a0f1a 0%, #111827 50%, #0a1628 100%);
+        }
+
+        .gradient-accent {
+            background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+        }
+
+        .card-gradient {
+            background: linear-gradient(145deg, rgba(31, 41, 55, 0.8) 0%, rgba(17, 24, 39, 0.9) 100%);
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .step-indicator {
+            transition: all 0.3s ease;
+        }
+
+        .step-indicator.active {
+            background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+            box-shadow: 0 0 15px rgba(20, 184, 166, 0.5);
+        }
+
+        .step-indicator.completed {
+            background: #0d9488;
+        }
+
+        .page-section {
+            display: none;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.4s ease;
+        }
+
+        .page-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .word-cloud-input {
+            background: transparent;
+            border: 2px solid rgba(20, 184, 166, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .word-cloud-input:focus {
+            border-color: #14b8a6;
+            box-shadow: 0 0 20px rgba(20, 184, 166, 0.3);
+            outline: none;
+        }
+
+        .device-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .device-card:hover {
+            transform: translateY(-5px);
+            border-color: #14b8a6;
+        }
+
+        .device-card.selected {
+            border-color: #14b8a6;
+            box-shadow: 0 0 25px rgba(20, 184, 166, 0.4);
+        }
+
+        .industry-option {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .industry-option:hover {
+            background: rgba(20, 184, 166, 0.1);
+            border-color: rgba(20, 184, 166, 0.5);
+        }
+
+        .industry-option.selected {
+            background: rgba(20, 184, 166, 0.2);
+            border-color: #14b8a6;
+        }
+
+        .progress-ring {
+            transition: stroke-dashoffset 0.5s ease;
+        }
+
+        .key-display {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.1) 0%, rgba(13, 148, 136, 0.05) 100%);
+        }
+
+        .sdg-badge {
+            transition: all 0.3s ease;
+        }
+
+        .sdg-badge:hover {
+            transform: scale(1.05);
+        }
+
+        .checkbox-custom {
+            appearance: none;
+            min-width: 20px;
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            border: 2px solid #14b8a6;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-custom:checked {
+            background: #14b8a6;
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(20, 184, 166, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            border: 2px solid #14b8a6;
+            color: #14b8a6;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(20, 184, 166, 0.1);
+        }
+
+        .floating-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(20, 184, 166, 0.3);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .word-tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 4px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        /* Word Cloud Canvas Styles */
+        .word-cloud-canvas {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .word-cloud-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .cloud-word {
+            position: absolute;
+            white-space: nowrap;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: default;
+            opacity: 0;
+            transform: scale(0);
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        .cloud-word.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .cloud-word:hover {
+            transform: scale(1.15) !important;
+            filter: brightness(1.2);
+            z-index: 100;
+        }
+
+        .cloud-word.user-word {
+            z-index: 50;
+            animation: userWordGlow 2.5s ease-in-out infinite;
+        }
+
+        @keyframes userWordGlow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(20, 184, 166, 0.4), 0 0 40px rgba(20, 184, 166, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(20, 184, 166, 0.6), 0 0 60px rgba(20, 184, 166, 0.3);
+            }
+        }
+
+        .cloud-word.size-lg {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .cloud-word.size-md {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .cloud-word.size-sm {
+            font-size: 14px;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        .cloud-word.size-xs {
+            font-size: 12px;
+            font-weight: 400;
+            opacity: 0.6;
+        }
+
+        /* Subtle floating animation for variety */
+        .cloud-word.float-1 { animation: gentleFloat1 6s ease-in-out infinite; }
+        .cloud-word.float-2 { animation: gentleFloat2 7s ease-in-out infinite; }
+        .cloud-word.float-3 { animation: gentleFloat3 8s ease-in-out infinite; }
+
+        @keyframes gentleFloat1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(3px, -5px) scale(1.02); }
+        }
+
+        @keyframes gentleFloat2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-4px, -3px) scale(1.02); }
+        }
+
+        @keyframes gentleFloat3 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(2px, -4px) scale(1.01); }
+        }
+
+        /* User word special container */
+        .user-word-container {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 50;
+        }
+
+        .user-word-ring {
+            position: absolute;
+            border: 2px solid rgba(20, 184, 166, 0.3);
+            border-radius: 50%;
+            animation: ringPulse 3s ease-in-out infinite;
+        }
+
+        .user-word-ring:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 0s;
+        }
+
+        .user-word-ring:nth-child(2) {
+            width: 160px;
+            height: 160px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 0.5s;
+        }
+
+        .user-word-ring:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 1s;
+        }
+
+        @keyframes ringPulse {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        .loading-spinner {
+            border: 3px solid rgba(20, 184, 166, 0.2);
+            border-top-color: #14b8a6;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .tooltip {
+            position: relative;
+        }
+
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 8px 12px;
+            background: #1f2937;
+            color: white;
+            font-size: 12px;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .tooltip:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Flip Card Styles */
+        .flip-card {
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 0.75rem;
+        }
+
+        .flip-card-front {
+            z-index: 2;
+        }
+
+        .flip-card-back {
+            transform: rotateY(180deg);
+            z-index: 1;
+        }
+
+        /* Info Modal Styles */
+        .info-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .info-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .info-modal-content {
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: scale(0.9) rotateX(-10deg);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .info-modal.active .info-modal-content {
+            transform: scale(1) rotateX(0deg);
+        }
+
+        /* SDG Card specific */
+        .sdg-flip-card {
+            height: 140px;
+        }
+
+        .sdg-flip-card .flip-card-front,
+        .sdg-flip-card .flip-card-back {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sdg-flip-card .flip-card-back {
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            overflow-y: auto;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+        }
+
+        .sdg-flip-card .flip-card-back::-webkit-scrollbar {
+            display: none; /* Chrome/Safari/Opera */
+        }
+
+        .sdg-flip-card .flip-card-back .text-xs {
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* Device Info Button */
+        .device-info-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(20, 184, 166, 0.2);
+            border: 1px solid rgba(20, 184, 166, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .device-info-btn:hover {
+            background: rgba(20, 184, 166, 0.4);
+            transform: scale(1.1);
+        }
+
+        .device-info-btn i {
+            color: #14b8a6;
+            font-size: 12px;
+        }
+
+        /* Dashboard Tab Styles */
+        .dashboard-tab {
+            background: rgba(255, 255, 255, 0.05);
+            color: #9ca3af;
+            border: 1px solid transparent;
+        }
+
+        .dashboard-tab:hover {
+            background: rgba(20, 184, 166, 0.1);
+            color: #14b8a6;
+        }
+
+        .dashboard-tab.active {
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.2), rgba(13, 148, 136, 0.1));
+            color: #14b8a6;
+            border-color: rgba(20, 184, 166, 0.3);
+        }
+
+        .dashboard-content {
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .dashboard-content.hidden {
+            display: none;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Confirmation Modal */
+        .confirm-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .confirm-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .confirm-modal-content {
+            max-width: 400px;
+            width: 90%;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .confirm-modal.active .confirm-modal-content {
+            transform: scale(1);
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            padding: 16px 24px;
+            border-radius: 12px;
+            background: rgba(31, 41, 55, 0.95);
+            border: 1px solid rgba(20, 184, 166, 0.3);
+            backdrop-filter: blur(10px);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 200;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            border-color: rgba(74, 222, 128, 0.5);
+        }
+
+        .toast.error {
+            border-color: rgba(248, 113, 113, 0.5);
+        }
+
+        /* 3D Quantum Computer Visualization */
+        .quantum-3d-container {
+            width: 100%;
+            height: 320px;
+            perspective: 1200px;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, rgba(20, 184, 166, 0.15) 0%, rgba(13, 148, 136, 0.05) 40%, transparent 70%);
+            border-radius: 16px;
+            margin-bottom: 20px;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .quantum-3d-container:active {
+            cursor: grabbing;
+        }
+
+        .quantum-3d-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 30% 20%, rgba(20, 184, 166, 0.1) 0%, transparent 25%),
+                radial-gradient(circle at 70% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 25%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Grid floor effect */
+        .quantum-3d-floor {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 300px;
+            height: 150px;
+            transform: translateX(-50%) rotateX(60deg);
+            background:
+                linear-gradient(90deg, rgba(20, 184, 166, 0.1) 1px, transparent 1px),
+                linear-gradient(rgba(20, 184, 166, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.5;
+            animation: gridPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes gridPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .quantum-3d-scene {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+        }
+
+        .quantum-3d-scene.auto-rotate {
+            animation: sceneRotate 20s linear infinite;
+        }
+
+        .quantum-3d-scene.dragging {
+            transition: none;
+        }
+
+        @keyframes sceneRotate {
+            from { transform: rotateX(var(--rotateX, 0deg)) rotateY(0deg) scale(var(--scale, 1)); }
+            to { transform: rotateX(var(--rotateX, 0deg)) rotateY(360deg) scale(var(--scale, 1)); }
+        }
+
+        /* Floating particles in 3D space */
+        .quantum-particle-3d {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, #14b8a6 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: floatParticle3D 4s ease-in-out infinite;
+        }
+
+        @keyframes floatParticle3D {
+            0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.3; }
+            50% { transform: translate3d(20px, -30px, 50px) scale(1.5); opacity: 0.8; }
+        }
+
+        /* Energy ring effect */
+        .energy-ring {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            border: 2px solid rgba(20, 184, 166, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) rotateX(75deg);
+            animation: energyRingPulse 2s ease-out infinite;
+        }
+
+        @keyframes energyRingPulse {
+            0% { width: 50px; height: 50px; opacity: 0.8; border-color: rgba(20, 184, 166, 0.6); }
+            100% { width: 200px; height: 200px; opacity: 0; border-color: rgba(20, 184, 166, 0); }
+        }
+
+        /* Holographic scan line */
+        .holo-scanline {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(20, 184, 166, 0.8), transparent);
+            animation: holoScan 3s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes holoScan {
+            0% { top: 0; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        /* AWS SV1 Cloud Visualization */
+        .cloud-server {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .server-rack {
+            width: 100px;
+            height: 140px;
+            background: linear-gradient(180deg, #1f2937 0%, #111827 100%);
+            border-radius: 8px;
+            border: 2px solid #374151;
+            position: relative;
+            transform-style: preserve-3d;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .server-slot {
+            height: 20px;
+            margin: 8px;
+            background: linear-gradient(90deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 4px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+        }
+
+        .server-led {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            margin-right: 4px;
+            animation: ledBlink 1s ease-in-out infinite;
+        }
+
+        .server-led.green { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
+        .server-led.blue { background: #3b82f6; box-shadow: 0 0 8px #3b82f6; animation-delay: 0.2s; }
+        .server-led.orange { background: #f97316; box-shadow: 0 0 8px #f97316; animation-delay: 0.4s; }
+
+        @keyframes ledBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .data-flow {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #14b8a6;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #14b8a6;
+            animation: dataFlowUp 2s linear infinite;
+        }
+
+        @keyframes dataFlowUp {
+            0% { transform: translateY(60px); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-60px); opacity: 0; }
+        }
+
+        /* IonQ Trapped Ion Visualization */
+        .ion-trap {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .trap-chamber {
+            width: 160px;
+            height: 80px;
+            border: 3px solid #a855f7;
+            border-radius: 40px;
+            position: relative;
+            background: rgba(168, 85, 247, 0.1);
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.3), inset 0 0 20px rgba(168, 85, 247, 0.1);
+        }
+
+        .ion-particle {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle, #a855f7 0%, #7c3aed 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 15px #a855f7, 0 0 30px rgba(168, 85, 247, 0.5);
+            animation: ionFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes ionFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-5px) scale(1.1); }
+        }
+
+        .laser-beam {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f472b6, transparent);
+            animation: laserPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes laserPulse {
+            0%, 100% { opacity: 0.3; width: 0; }
+            50% { opacity: 1; width: 100%; }
+        }
+
+        /* Superconducting Chip Visualization */
+        .superconducting-chip {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .chip-base {
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            border-radius: 12px;
+            border: 2px solid #374151;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(6, 182, 212, 0.1);
+        }
+
+        .qubit-grid {
+            position: absolute;
+            inset: 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .qubit-node {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #06b6d4 0%, #0891b2 100%);
+            border-radius: 50%;
+            animation: qubitPulse 2s ease-in-out infinite;
+            box-shadow: 0 0 10px #06b6d4;
+        }
+
+        @keyframes qubitPulse {
+            0%, 100% { transform: scale(0.8); opacity: 0.6; }
+            50% { transform: scale(1); opacity: 1; }
+        }
+
+        .cooling-ring {
+            position: absolute;
+            border: 2px solid rgba(6, 182, 212, 0.3);
+            border-radius: 50%;
+            animation: coolingExpand 3s ease-out infinite;
+        }
+
+        @keyframes coolingExpand {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+        }
+
+        /* Neutral Atom Visualization */
+        .atom-array {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .tweezer-grid {
+            width: 180px;
+            height: 180px;
+            position: relative;
+        }
+
+        .atom-site {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(34, 197, 94, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .atom-particle {
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, #22c55e 0%, #16a34a 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 10px #22c55e;
+            animation: atomTrap 2s ease-in-out infinite;
+        }
+
+        @keyframes atomTrap {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .tweezer-beam {
+            position: absolute;
+            width: 2px;
+            background: linear-gradient(180deg, #22c55e, transparent);
+            animation: tweezePulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes tweezePulse {
+            0%, 100% { height: 0; opacity: 0; }
+            50% { height: 40px; opacity: 0.8; }
+        }
+
+        /* Rigetti Superconducting */
+        .rigetti-chip {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hex-grid {
+            width: 160px;
+            height: 140px;
+            position: relative;
+        }
+
+        .hex-qubit {
+            position: absolute;
+            width: 24px;
+            height: 28px;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            animation: hexPulse 2s ease-in-out infinite;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+        }
+
+        @keyframes hexPulse {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.5); }
+        }
+
+        .coupling-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ef4444, transparent);
+            transform-origin: left center;
+        }
+
+        /* Interactive controls */
+        .quantum-controls {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+            background: rgba(15, 23, 42, 0.8);
+            padding: 8px 16px;
+            border-radius: 24px;
+            border: 1px solid rgba(20, 184, 166, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .quantum-control-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(31, 41, 55, 0.8);
+            border: 1px solid rgba(20, 184, 166, 0.3);
+            color: #14b8a6;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .quantum-control-btn:hover {
+            background: rgba(20, 184, 166, 0.3);
+            border-color: #14b8a6;
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(20, 184, 166, 0.4);
+        }
+
+        .quantum-control-btn.active {
+            background: rgba(20, 184, 166, 0.4);
+            border-color: #14b8a6;
+            box-shadow: 0 0 10px rgba(20, 184, 166, 0.5);
+        }
+
+        .quantum-control-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Zoom indicator */
+        .zoom-indicator {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 4px 10px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(20, 184, 166, 0.2);
+            border-radius: 12px;
+            font-size: 11px;
+            color: #14b8a6;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        /* Drag hint */
+        .drag-hint {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 4px 10px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(20, 184, 166, 0.2);
+            border-radius: 12px;
+            font-size: 11px;
+            color: rgba(20, 184, 166, 0.7);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.3s ease;
+        }
+
+        .drag-hint.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Enhanced info modal */
+        .info-modal-content {
+            max-width: 650px;
+        }
+
+        /* Glow effects for different device types */
+        .glow-orange { filter: drop-shadow(0 0 20px rgba(249, 115, 22, 0.4)); }
+        .glow-purple { filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.4)); }
+        .glow-cyan { filter: drop-shadow(0 0 20px rgba(6, 182, 212, 0.4)); }
+        .glow-green { filter: drop-shadow(0 0 20px rgba(34, 197, 94, 0.4)); }
+        .glow-red { filter: drop-shadow(0 0 20px rgba(239, 68, 68, 0.4)); }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white overflow-x-hidden">
+    <!-- Floating Particles Background -->
+    <div class="floating-particles" id="particles"></div>
+
+    <!-- Main Container -->
+    <div class="relative z-10 min-h-screen flex flex-col">
+        <!-- Header with Progress -->
+        <header class="fixed top-0 left-0 right-0 z-50 glass-effect">
+            <div class="max-w-6xl mx-auto px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <!-- Logo -->
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-lg gradient-accent flex items-center justify-center cursor-pointer" onclick="goToHome()">
+                            <i class="fas fa-atom text-white text-lg"></i>
+                        </div>
+                        <span class="text-xl font-semibold cursor-pointer" onclick="goToHome()">Quantum Futures</span>
+                    </div>
+
+                    <!-- Dashboard Toggle Button -->
+                    <button onclick="toggleDashboard()" id="dashboard-toggle" class="hidden md:flex items-center space-x-2 px-4 py-2 rounded-lg bg-dark-700/50 hover:bg-dark-600/50 border border-gray-700 hover:border-primary-500/50 transition-all">
+                        <i class="fas fa-chart-line text-primary-400"></i>
+                        <span class="text-sm">Dashboard</span>
+                    </button>
+
+                    <!-- Progress Steps -->
+                    <div class="hidden md:flex items-center space-x-2" id="progress-steps">
+                        <div class="step-indicator w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium bg-dark-700" data-step="0">1</div>
+                        <div class="w-8 h-0.5 bg-dark-700" data-line="0"></div>
+                        <div class="step-indicator w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium bg-dark-700" data-step="1">2</div>
+                        <div class="w-8 h-0.5 bg-dark-700" data-line="1"></div>
+                        <div class="step-indicator w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium bg-dark-700" data-step="2">3</div>
+                        <div class="w-8 h-0.5 bg-dark-700" data-line="2"></div>
+                        <div class="step-indicator w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium bg-dark-700" data-step="3">4</div>
+                        <div class="w-8 h-0.5 bg-dark-700" data-line="3"></div>
+                        <div class="step-indicator w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium bg-dark-700" data-step="4">5</div>
+                        <div class="w-8 h-0.5 bg-dark-700" data-line="4"></div>
+                        <div class="step-indicator w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium bg-dark-700" data-step="5">6</div>
+                    </div>
+
+                    <!-- Mobile Progress & Dashboard -->
+                    <div class="md:hidden flex items-center space-x-3">
+                        <button onclick="toggleDashboard()" class="p-2 rounded-lg bg-dark-700/50 border border-gray-700">
+                            <i class="fas fa-chart-line text-primary-400"></i>
+                        </button>
+                        <span class="text-sm text-gray-400">Step <span id="current-step-mobile">1</span>/6</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 pt-24 pb-12 px-6">
+            <div class="max-w-4xl mx-auto">
+
+                <!-- Page 0: Welcome -->
+                <section class="page-section active" id="page-0">
+                    <div class="text-center mb-12">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-6">
+                            Welcome to <span class="text-primary-400">Quantum Futures</span>
+                        </h1>
+                        <p class="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+                            Quantum computing uses quantum superposition and entanglement to perform computations far beyond what classical computers can handle.
+                        </p>
+                    </div>
+
+                    <div class="mb-10">
+                        <p class="text-gray-400 text-center mb-6">
+                            This journey shows how quantum technologies relate to global challenges, including:
+                        </p>
+
+                        <!-- SDG Grid with Flip Cards -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                            <div class="flip-card sdg-flip-card" onclick="toggleFlipCard(this)">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front p-4 text-center">
+                                        <div class="w-12 h-12 mx-auto mb-2 rounded-lg bg-red-600 flex items-center justify-center">
+                                            <i class="fas fa-graduation-cap text-white"></i>
+                                        </div>
+                                        <span class="text-sm font-medium">Quality Education</span>
+                                        <span class="block text-xs text-gray-500">SDG 4</span>
+                                        <span class="block text-xs text-primary-400 mt-1"><i class="fas fa-hand-pointer mr-1"></i>Tap to learn</span>
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <div class="text-xs text-gray-300 leading-relaxed">
+                                            <p class="font-semibold text-red-400 mb-1">SDG 4: Quality Education</p>
+                                            <p>Quantum computing can revolutionize education through advanced simulations and personalized learning algorithms.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card sdg-flip-card" onclick="toggleFlipCard(this)">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front p-4 text-center">
+                                        <div class="w-12 h-12 mx-auto mb-2 rounded-lg bg-yellow-500 flex items-center justify-center">
+                                            <i class="fas fa-sun text-white"></i>
+                                        </div>
+                                        <span class="text-sm font-medium">Clean Energy</span>
+                                        <span class="block text-xs text-gray-500">SDG 7</span>
+                                        <span class="block text-xs text-primary-400 mt-1"><i class="fas fa-hand-pointer mr-1"></i>Tap to learn</span>
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <div class="text-xs text-gray-300 leading-relaxed">
+                                            <p class="font-semibold text-yellow-400 mb-1">SDG 7: Clean Energy</p>
+                                            <p>Quantum optimization can improve energy grid efficiency and accelerate discovery of new materials for solar cells.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card sdg-flip-card" onclick="toggleFlipCard(this)">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front p-4 text-center">
+                                        <div class="w-12 h-12 mx-auto mb-2 rounded-lg bg-pink-600 flex items-center justify-center">
+                                            <i class="fas fa-chart-line text-white"></i>
+                                        </div>
+                                        <span class="text-sm font-medium">Economic Growth</span>
+                                        <span class="block text-xs text-gray-500">SDG 8</span>
+                                        <span class="block text-xs text-primary-400 mt-1"><i class="fas fa-hand-pointer mr-1"></i>Tap to learn</span>
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <div class="text-xs text-gray-300 leading-relaxed">
+                                            <p class="font-semibold text-pink-400 mb-1">SDG 8: Economic Growth</p>
+                                            <p>Quantum finance can optimize portfolios and risk analysis, driving more efficient markets and economic growth.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card sdg-flip-card" onclick="toggleFlipCard(this)">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front p-4 text-center">
+                                        <div class="w-12 h-12 mx-auto mb-2 rounded-lg bg-orange-500 flex items-center justify-center">
+                                            <i class="fas fa-industry text-white"></i>
+                                        </div>
+                                        <span class="text-sm font-medium">Innovation</span>
+                                        <span class="block text-xs text-gray-500">SDG 9</span>
+                                        <span class="block text-xs text-primary-400 mt-1"><i class="fas fa-hand-pointer mr-1"></i>Tap to learn</span>
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <div class="text-xs text-gray-300 leading-relaxed">
+                                            <p class="font-semibold text-orange-400 mb-1">SDG 9: Innovation</p>
+                                            <p>Quantum computing drives breakthrough innovations in materials science, drug discovery, and AI capabilities.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card sdg-flip-card" onclick="toggleFlipCard(this)">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front p-4 text-center">
+                                        <div class="w-12 h-12 mx-auto mb-2 rounded-lg bg-pink-500 flex items-center justify-center">
+                                            <i class="fas fa-equals text-white"></i>
+                                        </div>
+                                        <span class="text-sm font-medium">Reduced Inequalities</span>
+                                        <span class="block text-xs text-gray-500">SDG 10</span>
+                                        <span class="block text-xs text-primary-400 mt-1"><i class="fas fa-hand-pointer mr-1"></i>Tap to learn</span>
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <div class="text-xs text-gray-300 leading-relaxed">
+                                            <p class="font-semibold text-pink-300 mb-1">SDG 10: Reduced Inequalities</p>
+                                            <p>Democratizing quantum access can help bridge the technology gap between developed and developing nations.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card sdg-flip-card" onclick="toggleFlipCard(this)">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front p-4 text-center">
+                                        <div class="w-12 h-12 mx-auto mb-2 rounded-lg bg-amber-600 flex items-center justify-center">
+                                            <i class="fas fa-city text-white"></i>
+                                        </div>
+                                        <span class="text-sm font-medium">Sustainable Cities</span>
+                                        <span class="block text-xs text-gray-500">SDG 11</span>
+                                        <span class="block text-xs text-primary-400 mt-1"><i class="fas fa-hand-pointer mr-1"></i>Tap to learn</span>
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <div class="text-xs text-gray-300 leading-relaxed">
+                                            <p class="font-semibold text-amber-400 mb-1">SDG 11: Sustainable Cities</p>
+                                            <p>Quantum algorithms can optimize traffic flow, urban planning, and resource distribution in smart cities.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card sdg-flip-card" onclick="toggleFlipCard(this)">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front p-4 text-center">
+                                        <div class="w-12 h-12 mx-auto mb-2 rounded-lg bg-green-600 flex items-center justify-center">
+                                            <i class="fas fa-leaf text-white"></i>
+                                        </div>
+                                        <span class="text-sm font-medium">Climate Action</span>
+                                        <span class="block text-xs text-gray-500">SDG 13</span>
+                                        <span class="block text-xs text-primary-400 mt-1"><i class="fas fa-hand-pointer mr-1"></i>Tap to learn</span>
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <div class="text-xs text-gray-300 leading-relaxed">
+                                            <p class="font-semibold text-green-400 mb-1">SDG 13: Climate Action</p>
+                                            <p>Quantum simulations can model climate systems with unprecedented accuracy to predict and mitigate climate change.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card sdg-flip-card" onclick="toggleFlipCard(this)">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front p-4 text-center">
+                                        <div class="w-12 h-12 mx-auto mb-2 rounded-lg bg-blue-600 flex items-center justify-center">
+                                            <i class="fas fa-handshake text-white"></i>
+                                        </div>
+                                        <span class="text-sm font-medium">Partnerships</span>
+                                        <span class="block text-xs text-gray-500">SDG 17</span>
+                                        <span class="block text-xs text-primary-400 mt-1"><i class="fas fa-hand-pointer mr-1"></i>Tap to learn</span>
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <div class="text-xs text-gray-300 leading-relaxed">
+                                            <p class="font-semibold text-blue-400 mb-1">SDG 17: Partnerships</p>
+                                            <p>Quantum-secured communications enable trusted global collaboration and data sharing between nations.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Consent -->
+                    <div class="glass-effect rounded-2xl p-6 mb-8">
+                        <div class="flex items-start space-x-4">
+                            <input type="checkbox" id="consent-checkbox" class="checkbox-custom mt-1">
+                            <label for="consent-checkbox" class="text-gray-300 cursor-pointer">
+                                I agree to participate. Your participation is anonymous and voluntary. Data collected will be used for research purposes only.
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center">
+                        <button onclick="nextPage()" id="start-btn" disabled class="btn-primary px-8 py-3 rounded-full font-medium text-white flex items-center space-x-2">
+                            <span>Start Journey</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Page 1: Public Sentiment -->
+                <section class="page-section" id="page-1">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                            Public Sentiment
+                        </h2>
+                        <p class="text-xl text-gray-300">
+                            What's the first word that comes to mind when you hear <span class="text-primary-400 font-medium">"quantum computing"</span>?
+                        </p>
+                    </div>
+
+                    <div class="max-w-xl mx-auto mb-8">
+                        <input type="text" id="sentiment-input" placeholder="Type your word here..."
+                               class="word-cloud-input w-full px-6 py-4 rounded-xl text-lg text-white placeholder-gray-500">
+                    </div>
+
+                    <div class="text-center mb-8">
+                        <button onclick="submitSentiment()" id="submit-sentiment-btn" class="btn-primary px-6 py-3 rounded-full font-medium">
+                            Submit
+                        </button>
+                    </div>
+
+                    <!-- Word Cloud Visualization -->
+                    <div id="word-cloud-container" class="hidden">
+                        <div class="glass-effect rounded-2xl p-6 mb-8">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold">Community Responses</h3>
+                                <div class="flex items-center space-x-2 text-sm text-gray-400">
+                                    <span class="inline-block w-2 h-2 rounded-full bg-primary-400 animate-pulse"></span>
+                                    <span id="word-count">0</span> responses
+                                </div>
+                            </div>
+                            <div id="word-cloud" class="word-cloud-canvas rounded-xl bg-dark-900/30 border border-gray-800">
+                                <!-- Words will be dynamically added -->
+                            </div>
+                            <div class="mt-4 flex items-center justify-center space-x-8 text-xs text-gray-400">
+                                <div class="flex items-center space-x-2">
+                                    <span class="w-3 h-3 rounded-full bg-primary-500 shadow-lg shadow-primary-500/50"></span>
+                                    <span>Your response</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="flex space-x-0.5">
+                                        <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                                        <span class="w-2 h-2 rounded-full bg-pink-400"></span>
+                                        <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                                        <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                                    </span>
+                                    <span>Community</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-center">
+                            <button onclick="nextPage()" class="btn-primary px-8 py-3 rounded-full font-medium text-white flex items-center space-x-2">
+                                <span>Continue</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Page 2: Quantum-Resistant Keys Education -->
+                <section class="page-section" id="page-2">
+                    <div class="mb-10">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                            Why Quantum-Resistant Keys Matter
+                        </h2>
+
+                        <div class="space-y-6 text-gray-300">
+                            <div class="glass-effect rounded-xl p-6">
+                                <h3 class="text-xl font-semibold text-white mb-3">
+                                    <i class="fas fa-lock text-primary-400 mr-2"></i>
+                                    Current Security: RSA Encryption
+                                </h3>
+                                <p>Modern digital security relies heavily on RSA encryption. It keeps information safe by using two very large prime numbers, making it extremely difficult for classical computers to break.</p>
+                            </div>
+
+                            <div class="glass-effect rounded-xl p-6">
+                                <h3 class="text-xl font-semibold text-white mb-3">
+                                    <i class="fas fa-bolt text-yellow-400 mr-2"></i>
+                                    The Quantum Threat
+                                </h3>
+                                <p>Quantum computers use <span class="text-primary-400">Shor's Algorithm</span> to factor large numbers dramatically faster. A sufficiently powerful quantum computer could break RSA encryption in <span class="text-primary-400 font-medium">minutes</span>, not millennia.</p>
+                            </div>
+
+                            <div class="glass-effect rounded-xl p-6 border-l-4 border-primary-500">
+                                <p class="italic text-gray-400">
+                                    "A sufficiently powerful quantum computer could break RSA encryption in hours, putting much of today's secure communication at risk."
+                                </p>
+                                <p class="text-sm text-gray-500 mt-2">— MIT Technology Review</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-effect rounded-2xl p-6 mb-8">
+                        <h3 class="text-lg font-semibold mb-4">
+                            Do you think quantum-resistant keys will be needed within the next 5 years?
+                        </h3>
+                        <div class="flex flex-wrap gap-3">
+                            <button onclick="selectTimeframe(this, 'yes')" class="timeframe-btn px-6 py-2 rounded-full border border-gray-600 hover:border-primary-500 transition-all">
+                                Yes
+                            </button>
+                            <button onclick="selectTimeframe(this, 'no')" class="timeframe-btn px-6 py-2 rounded-full border border-gray-600 hover:border-primary-500 transition-all">
+                                No
+                            </button>
+                            <button onclick="selectTimeframe(this, 'unsure')" class="timeframe-btn px-6 py-2 rounded-full border border-gray-600 hover:border-primary-500 transition-all">
+                                Unsure
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center">
+                        <button onclick="nextPage()" id="page2-next" disabled class="btn-primary px-8 py-3 rounded-full font-medium text-white flex items-center space-x-2">
+                            <span>Next</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Page 3: Device Investment Selection -->
+                <section class="page-section" id="page-3">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                            Invest in a Quantum Device
+                        </h2>
+                        <p class="text-xl text-gray-300">
+                            Suppose you have <span class="text-primary-400 font-bold">$1,000,000 USD</span> to invest in one quantum device.
+                        </p>
+                        <p class="text-gray-400 mt-2">
+                            Explore each device's description and choose the one you believe holds the most promise.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                        <!-- Device 1: AWS Braket SV1 -->
+                        <div class="device-card glass-effect rounded-2xl p-6 border-2 border-transparent relative" onclick="selectDevice(this, 'aws_sv1')">
+                            <button class="device-info-btn" onclick="event.stopPropagation(); showDeviceInfo('aws_sv1')">
+                                <i class="fas fa-info"></i>
+                            </button>
+                            <div class="flex items-center mb-4">
+                                <div class="w-14 h-14 rounded-xl bg-orange-600/20 flex items-center justify-center mr-4">
+                                    <span class="text-2xl">☁️</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold">Amazon Braket SV1</h3>
+                                    <span class="text-sm text-gray-400">Quantum Simulator</span>
+                                </div>
+                            </div>
+                            <ul class="text-gray-300 space-y-2 text-sm">
+                                <li><i class="fas fa-check text-green-400 mr-2"></i>Up to 34 qubits simulation</li>
+                                <li><i class="fas fa-check text-green-400 mr-2"></i>Stable & noise-free</li>
+                                <li><i class="fas fa-clock text-blue-400 mr-2"></i>Runtime: ~minutes</li>
+                            </ul>
+                            <div class="mt-4 pt-4 border-t border-gray-700">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-400">Type</span>
+                                    <span class="text-orange-400">Simulator</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Device 2: IonQ Forte -->
+                        <div class="device-card glass-effect rounded-2xl p-6 border-2 border-transparent relative" onclick="selectDevice(this, 'ionq_forte')">
+                            <button class="device-info-btn" onclick="event.stopPropagation(); showDeviceInfo('ionq_forte')">
+                                <i class="fas fa-info"></i>
+                            </button>
+                            <div class="absolute top-3 left-3 px-2 py-1 rounded-full bg-yellow-500/20 text-yellow-400 text-xs">
+                                <i class="fas fa-tools mr-1"></i>Maintenance
+                            </div>
+                            <div class="flex items-center mb-4 mt-6">
+                                <div class="w-14 h-14 rounded-xl bg-purple-600/20 flex items-center justify-center mr-4">
+                                    <span class="text-2xl">⚛️</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold">IonQ Forte</h3>
+                                    <span class="text-sm text-gray-400">Trapped Ion QPU</span>
+                                </div>
+                            </div>
+                            <ul class="text-gray-300 space-y-2 text-sm">
+                                <li><i class="fas fa-check text-green-400 mr-2"></i>High gate fidelity</li>
+                                <li><i class="fas fa-check text-green-400 mr-2"></i>Full connectivity</li>
+                                <li><i class="fas fa-clock text-blue-400 mr-2"></i>Runtime: ~10+ min</li>
+                            </ul>
+                            <div class="mt-4 pt-4 border-t border-gray-700">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-400">Type</span>
+                                    <span class="text-purple-400">Real QPU</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Device 3: IQM Garnet -->
+                        <div class="device-card glass-effect rounded-2xl p-6 border-2 border-transparent relative" onclick="selectDevice(this, 'iqm_garnet')">
+                            <button class="device-info-btn" onclick="event.stopPropagation(); showDeviceInfo('iqm_garnet')">
+                                <i class="fas fa-info"></i>
+                            </button>
+                            <div class="flex items-center mb-4">
+                                <div class="w-14 h-14 rounded-xl bg-cyan-600/20 flex items-center justify-center mr-4">
+                                    <span class="text-2xl">💎</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold">IQM Garnet</h3>
+                                    <span class="text-sm text-gray-400">Superconducting QPU</span>
+                                </div>
+                            </div>
+                            <ul class="text-gray-300 space-y-2 text-sm">
+                                <li><i class="fas fa-check text-green-400 mr-2"></i>Low noise architecture</li>
+                                <li><i class="fas fa-check text-green-400 mr-2"></i>Fast gate operations</li>
+                                <li><i class="fas fa-clock text-blue-400 mr-2"></i>Runtime: ~10+ min</li>
+                            </ul>
+                            <div class="mt-4 pt-4 border-t border-gray-700">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-400">Type</span>
+                                    <span class="text-cyan-400">Real QPU</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Device 4: QuEra Aquila -->
+                        <div class="device-card glass-effect rounded-2xl p-6 border-2 border-transparent relative" onclick="selectDevice(this, 'quera_aquila')">
+                            <button class="device-info-btn" onclick="event.stopPropagation(); showDeviceInfo('quera_aquila')">
+                                <i class="fas fa-info"></i>
+                            </button>
+                            <div class="flex items-center mb-4">
+                                <div class="w-14 h-14 rounded-xl bg-green-600/20 flex items-center justify-center mr-4">
+                                    <span class="text-2xl">🔬</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold">QuEra Aquila</h3>
+                                    <span class="text-sm text-gray-400">Neutral Atom QPU</span>
+                                </div>
+                            </div>
+                            <ul class="text-gray-300 space-y-2 text-sm">
+                                <li><i class="fas fa-check text-green-400 mr-2"></i>High scalability</li>
+                                <li><i class="fas fa-check text-green-400 mr-2"></i>Programmable layout</li>
+                                <li><i class="fas fa-clock text-blue-400 mr-2"></i>Runtime: ~10+ min</li>
+                            </ul>
+                            <div class="mt-4 pt-4 border-t border-gray-700">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-400">Type</span>
+                                    <span class="text-green-400">Real QPU</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Device 5: Rigetti Ankaa 3 -->
+                        <div class="device-card glass-effect rounded-2xl p-6 border-2 border-transparent relative" onclick="selectDevice(this, 'rigetti_ankaa3')">
+                            <button class="device-info-btn" onclick="event.stopPropagation(); showDeviceInfo('rigetti_ankaa3')">
+                                <i class="fas fa-info"></i>
+                            </button>
+                            <div class="flex items-center mb-4">
+                                <div class="w-14 h-14 rounded-xl bg-red-600/20 flex items-center justify-center mr-4">
+                                    <span class="text-2xl">🎯</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold">Rigetti Ankaa 3</h3>
+                                    <span class="text-sm text-gray-400">Superconducting QPU</span>
+                                </div>
+                            </div>
+                            <ul class="text-gray-300 space-y-2 text-sm">
+                                <li><i class="fas fa-check text-green-400 mr-2"></i>Fast gate execution</li>
+                                <li><i class="fas fa-check text-green-400 mr-2"></i>Optimized fidelity</li>
+                                <li><i class="fas fa-clock text-blue-400 mr-2"></i>Runtime: ~10+ min</li>
+                            </ul>
+                            <div class="mt-4 pt-4 border-t border-gray-700">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-400">Type</span>
+                                    <span class="text-red-400">Real QPU</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="device-selection-info" class="hidden glass-effect rounded-xl p-4 mb-6 border-l-4 border-primary-500">
+                        <p class="text-gray-300">
+                            <i class="fas fa-info-circle text-primary-400 mr-2"></i>
+                            You selected: <span id="selected-device-name" class="font-bold text-primary-400"></span>
+                        </p>
+                    </div>
+
+                    <div class="flex justify-center">
+                        <button onclick="nextPage()" id="page3-next" disabled class="btn-primary px-8 py-3 rounded-full font-medium text-white flex items-center space-x-2">
+                            <span>Confirm Investment</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Page 4: Industry Prediction -->
+                <section class="page-section" id="page-4">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                            Which Industry Will Quantum Transform First?
+                        </h2>
+                        <p class="text-gray-300">
+                            Select the industry you believe <span class="text-primary-400">quantum technologies</span> will transform first — or most significantly.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+                        <div class="industry-option glass-effect rounded-xl p-5 text-center border-2 border-transparent" onclick="selectIndustry(this, 'finance')">
+                            <i class="fas fa-chart-pie text-3xl text-green-400 mb-3"></i>
+                            <h4 class="font-semibold">Finance</h4>
+                            <p class="text-xs text-gray-400 mt-1">Risk analysis, trading</p>
+                        </div>
+                        <div class="industry-option glass-effect rounded-xl p-5 text-center border-2 border-transparent" onclick="selectIndustry(this, 'healthcare')">
+                            <i class="fas fa-heartbeat text-3xl text-red-400 mb-3"></i>
+                            <h4 class="font-semibold">Healthcare</h4>
+                            <p class="text-xs text-gray-400 mt-1">Drug discovery</p>
+                        </div>
+                        <div class="industry-option glass-effect rounded-xl p-5 text-center border-2 border-transparent" onclick="selectIndustry(this, 'cybersecurity')">
+                            <i class="fas fa-shield-alt text-3xl text-blue-400 mb-3"></i>
+                            <h4 class="font-semibold">Cybersecurity</h4>
+                            <p class="text-xs text-gray-400 mt-1">Encryption, security</p>
+                        </div>
+                        <div class="industry-option glass-effect rounded-xl p-5 text-center border-2 border-transparent" onclick="selectIndustry(this, 'logistics')">
+                            <i class="fas fa-truck text-3xl text-yellow-400 mb-3"></i>
+                            <h4 class="font-semibold">Logistics</h4>
+                            <p class="text-xs text-gray-400 mt-1">Optimization</p>
+                        </div>
+                        <div class="industry-option glass-effect rounded-xl p-5 text-center border-2 border-transparent" onclick="selectIndustry(this, 'energy')">
+                            <i class="fas fa-bolt text-3xl text-amber-400 mb-3"></i>
+                            <h4 class="font-semibold">Energy</h4>
+                            <p class="text-xs text-gray-400 mt-1">Grid optimization</p>
+                        </div>
+                        <div class="industry-option glass-effect rounded-xl p-5 text-center border-2 border-transparent" onclick="selectIndustry(this, 'ai')">
+                            <i class="fas fa-brain text-3xl text-purple-400 mb-3"></i>
+                            <h4 class="font-semibold">AI & ML</h4>
+                            <p class="text-xs text-gray-400 mt-1">Machine learning</p>
+                        </div>
+                    </div>
+
+                    <!-- Results Preview -->
+                    <div id="industry-results" class="hidden glass-effect rounded-2xl p-6 mb-8">
+                        <h3 class="text-lg font-semibold mb-4">Community Predictions</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <span class="w-28 text-sm text-gray-400">Finance</span>
+                                <div class="flex-1 h-3 bg-dark-700 rounded-full overflow-hidden">
+                                    <div class="h-full bg-green-500 rounded-full" style="width: 28%"></div>
+                                </div>
+                                <span class="w-12 text-right text-sm">28%</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-28 text-sm text-gray-400">Healthcare</span>
+                                <div class="flex-1 h-3 bg-dark-700 rounded-full overflow-hidden">
+                                    <div class="h-full bg-red-500 rounded-full" style="width: 24%"></div>
+                                </div>
+                                <span class="w-12 text-right text-sm">24%</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-28 text-sm text-gray-400">Cybersecurity</span>
+                                <div class="flex-1 h-3 bg-dark-700 rounded-full overflow-hidden">
+                                    <div class="h-full bg-blue-500 rounded-full" style="width: 22%"></div>
+                                </div>
+                                <span class="w-12 text-right text-sm">22%</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-28 text-sm text-gray-400">AI & ML</span>
+                                <div class="flex-1 h-3 bg-dark-700 rounded-full overflow-hidden">
+                                    <div class="h-full bg-purple-500 rounded-full" style="width: 15%"></div>
+                                </div>
+                                <span class="w-12 text-right text-sm">15%</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-28 text-sm text-gray-400">Other</span>
+                                <div class="flex-1 h-3 bg-dark-700 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gray-500 rounded-full" style="width: 11%"></div>
+                                </div>
+                                <span class="w-12 text-right text-sm">11%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center">
+                        <button onclick="nextPage()" id="page4-next" disabled class="btn-primary px-8 py-3 rounded-full font-medium text-white flex items-center space-x-2">
+                            <span>Continue</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Page 5: Key Generation -->
+                <section class="page-section" id="page-5">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                            Generating Your Quantum-Resistant Key
+                        </h2>
+                        <p class="text-gray-300">
+                            Your personalized key is being generated using the <span id="chosen-device" class="text-primary-400 font-medium">quantum device</span> you selected.
+                        </p>
+                    </div>
+
+                    <!-- Generation Animation -->
+                    <div id="generation-progress" class="flex flex-col items-center mb-10">
+                        <div class="relative w-32 h-32 mb-6">
+                            <svg class="w-32 h-32 transform -rotate-90">
+                                <circle cx="64" cy="64" r="56" stroke="#1f2937" stroke-width="8" fill="none"/>
+                                <circle id="progress-circle" cx="64" cy="64" r="56" stroke="#14b8a6" stroke-width="8" fill="none"
+                                        stroke-dasharray="352" stroke-dashoffset="352" class="progress-ring"/>
+                            </svg>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span id="progress-percent" class="text-2xl font-bold">0%</span>
+                            </div>
+                        </div>
+                        <p id="generation-status" class="text-gray-400">Initializing quantum circuits...</p>
+                    </div>
+
+                    <!-- Key Display (hidden initially) -->
+                    <div id="key-result" class="hidden">
+                        <!-- Success Header -->
+                        <div class="text-center mb-8">
+                            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-green-500/20 flex items-center justify-center">
+                                <i class="fas fa-check-circle text-green-400 text-3xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-green-400 mb-2">Signature Created Successfully!</h3>
+                            <p class="text-gray-400">Your quantum-resistant digital signature has been generated</p>
+                        </div>
+
+                        <!-- Quantum ID Card -->
+                        <div class="glass-effect rounded-2xl p-6 mb-6 border border-primary-500/30">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-primary-500/20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-dice text-primary-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Your Quantum ID</h4>
+                                    <p class="text-xs text-gray-500">Quantum-generated unique identifier</p>
+                                </div>
+                            </div>
+                            <div class="bg-dark-900/50 rounded-lg p-4 text-center">
+                                <span id="quantum-id-display" class="text-3xl font-bold text-primary-400 font-mono">0.5127</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-3 text-center">
+                                This number was derived from quantum superposition measurements on your selected device
+                            </p>
+                        </div>
+
+                        <!-- Cryptographic Keys Card -->
+                        <div class="glass-effect rounded-2xl p-6 mb-6 border border-blue-500/30">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center mr-4">
+                                        <i class="fas fa-key text-blue-400 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold">Quantum-Resistant Keys</h4>
+                                        <p class="text-xs text-gray-500">Post-quantum cryptographic signature</p>
+                                    </div>
+                                </div>
+                                <button onclick="copyAllKeys()" class="text-sm text-blue-400 hover:text-blue-300 flex items-center px-3 py-1 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 transition-all">
+                                    <i class="fas fa-copy mr-1"></i>
+                                    Copy All
+                                </button>
+                            </div>
+
+                            <div class="space-y-4">
+                                <!-- Algorithm -->
+                                <div class="bg-dark-900/50 rounded-lg p-4">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-sm font-medium text-gray-400 flex items-center">
+                                            <i class="fas fa-cog text-purple-400 mr-2"></i>
+                                            Algorithm
+                                        </span>
+                                        <span class="px-2 py-1 rounded-full bg-purple-500/20 text-purple-400 text-xs">Lattice-Based</span>
+                                    </div>
+                                    <div class="font-mono text-sm text-white" id="algorithm-display">Dilithium-3 (CRYSTALS)</div>
+                                    <p class="text-xs text-gray-500 mt-2">
+                                        NIST-standardized post-quantum digital signature algorithm based on lattice problems, resistant to both classical and quantum attacks
+                                    </p>
+                                </div>
+
+                                <!-- Public Key -->
+                                <div class="bg-dark-900/50 rounded-lg p-4">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-sm font-medium text-gray-400 flex items-center">
+                                            <i class="fas fa-lock-open text-green-400 mr-2"></i>
+                                            Public Key
+                                        </span>
+                                        <button onclick="copyPublicKey()" class="text-xs text-gray-500 hover:text-primary-400 transition-colors">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    <div class="font-mono text-xs text-gray-300 break-all leading-relaxed max-h-20 overflow-y-auto" id="public-key-display">
+                                        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA...
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-2">
+                                        Your public verification key - can be shared openly to verify your signatures
+                                    </p>
+                                </div>
+
+                                <!-- Digital Signature -->
+                                <div class="bg-dark-900/50 rounded-lg p-4">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-sm font-medium text-gray-400 flex items-center">
+                                            <i class="fas fa-signature text-amber-400 mr-2"></i>
+                                            Digital Signature
+                                        </span>
+                                        <button onclick="copySignature()" class="text-xs text-gray-500 hover:text-primary-400 transition-colors">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    <div class="font-mono text-xs text-gray-300 break-all leading-relaxed max-h-20 overflow-y-auto" id="signature-display">
+                                        0x7a8b9c4d5e6f...
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-2">
+                                        Your unique digital signature - cryptographically proves your response authenticity
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Device Info Card -->
+                        <div class="glass-effect rounded-2xl p-6 mb-8 border border-cyan-500/30">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-microchip text-cyan-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Device Information</h4>
+                                    <p class="text-xs text-gray-500">Quantum computing platform details</p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-dark-900/50 rounded-lg p-3">
+                                    <span class="text-xs text-gray-500 block mb-1">Device</span>
+                                    <span class="text-sm font-medium" id="device-name-display">Amazon Braket SV1</span>
+                                </div>
+                                <div class="bg-dark-900/50 rounded-lg p-3">
+                                    <span class="text-xs text-gray-500 block mb-1">Processing Type</span>
+                                    <span class="text-sm font-medium" id="processing-type-display">Quantum Simulation</span>
+                                </div>
+                                <div class="bg-dark-900/50 rounded-lg p-3">
+                                    <span class="text-xs text-gray-500 block mb-1">Job ID</span>
+                                    <span class="text-sm font-mono text-primary-400" id="job-id-display">QJ-2024-001</span>
+                                </div>
+                                <div class="bg-dark-900/50 rounded-lg p-3">
+                                    <span class="text-xs text-gray-500 block mb-1">Status</span>
+                                    <span class="text-sm font-medium text-green-400"><i class="fas fa-check-circle mr-1"></i>Completed</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Security Note -->
+                        <div class="bg-gradient-to-r from-primary-500/10 to-blue-500/10 rounded-xl p-5 mb-8 border border-primary-500/20">
+                            <div class="flex items-start">
+                                <i class="fas fa-shield-alt text-primary-400 mr-3 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold mb-2">About Post-Quantum Security</h4>
+                                    <p class="text-sm text-gray-400">
+                                        Your signature uses <strong class="text-primary-400">quantum-resistant cryptography</strong> designed to withstand attacks from both classical and future quantum computers. This represents the cutting edge of digital security, protecting your data against emerging quantum threats.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-center">
+                            <button onclick="nextPage()" class="btn-primary px-8 py-3 rounded-full font-medium text-white flex items-center space-x-2">
+                                <span>Complete Journey</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Page 6: Completion -->
+                <section class="page-section" id="page-6">
+                    <div class="text-center mb-10">
+                        <div class="w-20 h-20 mx-auto mb-6 rounded-full gradient-accent flex items-center justify-center animate-pulse-slow">
+                            <i class="fas fa-check text-white text-3xl"></i>
+                        </div>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                            Congratulations!
+                        </h2>
+                        <p class="text-xl text-gray-300">
+                            You've completed your first <span class="text-primary-400 font-medium">Quantum Journey</span>
+                        </p>
+                    </div>
+
+                    <div class="glass-effect rounded-2xl p-8 mb-8">
+                        <h3 class="text-xl font-semibold mb-6 text-center">Your Journey Summary</h3>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-dark-800/50 rounded-xl p-5">
+                                <div class="flex items-center mb-3">
+                                    <i class="fas fa-comment-dots text-primary-400 mr-3"></i>
+                                    <span class="font-medium">Your First Thought</span>
+                                </div>
+                                <p class="text-gray-400" id="summary-sentiment">—</p>
+                            </div>
+
+                            <div class="bg-dark-800/50 rounded-xl p-5">
+                                <div class="flex items-center mb-3">
+                                    <i class="fas fa-microchip text-primary-400 mr-3"></i>
+                                    <span class="font-medium">Device Investment</span>
+                                </div>
+                                <p class="text-gray-400" id="summary-device">—</p>
+                            </div>
+
+                            <div class="bg-dark-800/50 rounded-xl p-5">
+                                <div class="flex items-center mb-3">
+                                    <i class="fas fa-industry text-primary-400 mr-3"></i>
+                                    <span class="font-medium">Industry Prediction</span>
+                                </div>
+                                <p class="text-gray-400" id="summary-industry">—</p>
+                            </div>
+
+                            <div class="bg-dark-800/50 rounded-xl p-5">
+                                <div class="flex items-center mb-3">
+                                    <i class="fas fa-key text-primary-400 mr-3"></i>
+                                    <span class="font-medium">Key Generated</span>
+                                </div>
+                                <p class="text-gray-400 text-sm truncate" id="summary-key">—</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mb-8">
+                        <p class="text-gray-400 mb-6">
+                            You've explored the foundations of quantum computing, post-quantum security, and future applications. You are now one step closer to being <span class="text-primary-400 font-medium italic">quantum ready</span>.
+                        </p>
+
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <button onclick="restartJourney()" class="btn-secondary px-6 py-3 rounded-full font-medium flex items-center space-x-2">
+                                <i class="fas fa-redo"></i>
+                                <span>Restart Journey</span>
+                            </button>
+                            <button onclick="showResources()" class="btn-primary px-6 py-3 rounded-full font-medium flex items-center space-x-2">
+                                <i class="fas fa-book"></i>
+                                <span>Explore Resources</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- SDG Alignment -->
+                    <div class="glass-effect rounded-xl p-6 text-center">
+                        <p class="text-sm text-gray-400 mb-4">This experience aligns with UN Sustainable Development Goals</p>
+                        <div class="flex flex-wrap justify-center gap-2">
+                            <span class="px-3 py-1 rounded-full bg-red-600/20 text-red-400 text-xs">SDG 4</span>
+                            <span class="px-3 py-1 rounded-full bg-yellow-600/20 text-yellow-400 text-xs">SDG 7</span>
+                            <span class="px-3 py-1 rounded-full bg-pink-600/20 text-pink-400 text-xs">SDG 8</span>
+                            <span class="px-3 py-1 rounded-full bg-orange-600/20 text-orange-400 text-xs">SDG 9</span>
+                            <span class="px-3 py-1 rounded-full bg-pink-500/20 text-pink-300 text-xs">SDG 10</span>
+                            <span class="px-3 py-1 rounded-full bg-amber-600/20 text-amber-400 text-xs">SDG 11</span>
+                            <span class="px-3 py-1 rounded-full bg-green-600/20 text-green-400 text-xs">SDG 13</span>
+                            <span class="px-3 py-1 rounded-full bg-blue-600/20 text-blue-400 text-xs">SDG 17</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Dashboard Section -->
+                <section class="page-section" id="page-dashboard">
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <h2 class="text-3xl md:text-4xl font-bold mb-2">
+                                    <i class="fas fa-chart-line text-primary-400 mr-3"></i>Dashboard
+                                </h2>
+                                <p class="text-gray-400">Monitor quantum jobs, system statistics, and manage the platform</p>
+                            </div>
+                            <button onclick="closeDashboard()" class="btn-secondary px-4 py-2 rounded-lg flex items-center space-x-2">
+                                <i class="fas fa-arrow-left"></i>
+                                <span>Back</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tab Navigation -->
+                    <div class="flex flex-wrap gap-2 mb-8 border-b border-gray-700 pb-4">
+                        <button onclick="switchDashboardTab('overview')" class="dashboard-tab active px-5 py-2.5 rounded-lg text-sm font-medium transition-all" data-tab="overview">
+                            <i class="fas fa-chart-pie mr-2"></i>Overview
+                        </button>
+                        <button onclick="switchDashboardTab('jobs')" class="dashboard-tab px-5 py-2.5 rounded-lg text-sm font-medium transition-all" data-tab="jobs">
+                            <i class="fas fa-bolt mr-2"></i>Job Monitor
+                        </button>
+                        <button onclick="switchDashboardTab('admin')" class="dashboard-tab px-5 py-2.5 rounded-lg text-sm font-medium transition-all" data-tab="admin">
+                            <i class="fas fa-cog mr-2"></i>Admin
+                        </button>
+                    </div>
+
+                    <!-- Overview Tab -->
+                    <div class="dashboard-content active" id="tab-overview">
+                        <!-- Platform Statistics -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fas fa-chart-bar text-primary-400 mr-2"></i>Platform Statistics
+                            </h3>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div class="glass-effect rounded-xl p-5 text-center">
+                                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-primary-500/20 flex items-center justify-center">
+                                        <i class="fas fa-key text-primary-400 text-xl"></i>
+                                    </div>
+                                    <div class="text-2xl font-bold text-primary-400" id="stat-signatures">127</div>
+                                    <div class="text-xs text-gray-400 mt-1">Total Signatures</div>
+                                </div>
+                                <div class="glass-effect rounded-xl p-5 text-center">
+                                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-blue-500/20 flex items-center justify-center">
+                                        <i class="fas fa-cogs text-blue-400 text-xl"></i>
+                                    </div>
+                                    <div class="text-2xl font-bold text-blue-400" id="stat-jobs">89</div>
+                                    <div class="text-xs text-gray-400 mt-1">Quantum Jobs</div>
+                                </div>
+                                <div class="glass-effect rounded-xl p-5 text-center">
+                                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-green-500/20 flex items-center justify-center">
+                                        <i class="fas fa-check-circle text-green-400 text-xl"></i>
+                                    </div>
+                                    <div class="text-2xl font-bold text-green-400" id="stat-yes">78</div>
+                                    <div class="text-xs text-gray-400 mt-1">"Yes" Votes</div>
+                                </div>
+                                <div class="glass-effect rounded-xl p-5 text-center">
+                                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-purple-500/20 flex items-center justify-center">
+                                        <i class="fas fa-dice text-purple-400 text-xl"></i>
+                                    </div>
+                                    <div class="text-2xl font-bold text-purple-400" id="stat-avg-quantum">0.512</div>
+                                    <div class="text-xs text-gray-400 mt-1">Avg Quantum #</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Technology Stack -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fas fa-layer-group text-primary-400 mr-2"></i>Technology Stack
+                            </h3>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="glass-effect rounded-xl p-5">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-lg bg-blue-600/20 flex items-center justify-center mr-3">
+                                            <i class="fas fa-microchip text-blue-400"></i>
+                                        </div>
+                                        <h4 class="font-semibold">Multi-Device Quantum Computing</h4>
+                                    </div>
+                                    <p class="text-sm text-gray-400">AWS Braket integration supporting local simulators, managed simulators, and real quantum hardware from IonQ, IQM, QuEra, and Rigetti</p>
+                                </div>
+                                <div class="glass-effect rounded-xl p-5">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-lg bg-green-600/20 flex items-center justify-center mr-3">
+                                            <i class="fas fa-shield-alt text-green-400"></i>
+                                        </div>
+                                        <h4 class="font-semibold">Post-Quantum Cryptography</h4>
+                                    </div>
+                                    <p class="text-sm text-gray-400">Lattice-based quantum-resistant digital signatures protecting against quantum attacks</p>
+                                </div>
+                                <div class="glass-effect rounded-xl p-5">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-lg bg-purple-600/20 flex items-center justify-center mr-3">
+                                            <i class="fas fa-globe text-purple-400"></i>
+                                        </div>
+                                        <h4 class="font-semibold">Web Technologies</h4>
+                                    </div>
+                                    <p class="text-sm text-gray-400">FastAPI backend with modern frontend featuring 3D visualizations and real-time updates</p>
+                                </div>
+                                <div class="glass-effect rounded-xl p-5">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-lg bg-amber-600/20 flex items-center justify-center mr-3">
+                                            <i class="fas fa-paint-brush text-amber-400"></i>
+                                        </div>
+                                        <h4 class="font-semibold">Interactive Design</h4>
+                                    </div>
+                                    <p class="text-sm text-gray-400">Glassmorphism effects, quantum animations, and responsive design with Chart.js visualizations</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="glass-effect rounded-xl p-6">
+                            <h3 class="text-lg font-semibold mb-4">Quick Actions</h3>
+                            <div class="flex flex-wrap gap-3">
+                                <a href="/signup" class="px-4 py-2 rounded-lg bg-primary-500/20 text-primary-400 hover:bg-primary-500/30 transition-all flex items-center space-x-2">
+                                    <i class="fas fa-plus"></i>
+                                    <span>Create Signature</span>
+                                </a>
+                                <a href="/wall" class="px-4 py-2 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition-all flex items-center space-x-2">
+                                    <i class="fas fa-th"></i>
+                                    <span>View Wall</span>
+                                </a>
+                                <button onclick="switchDashboardTab('jobs')" class="px-4 py-2 rounded-lg bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 transition-all flex items-center space-x-2">
+                                    <i class="fas fa-bolt"></i>
+                                    <span>Monitor Jobs</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job Monitor Tab -->
+                    <div class="dashboard-content hidden" id="tab-jobs">
+                        <!-- Job Stats -->
+                        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+                            <div class="glass-effect rounded-xl p-4 text-center">
+                                <div class="text-2xl font-bold text-yellow-400" id="jobs-active">3</div>
+                                <div class="text-xs text-gray-400 mt-1 flex items-center justify-center">
+                                    <i class="fas fa-sync-alt mr-1 text-yellow-400"></i>Active
+                                </div>
+                            </div>
+                            <div class="glass-effect rounded-xl p-4 text-center">
+                                <div class="text-2xl font-bold text-green-400" id="jobs-completed">82</div>
+                                <div class="text-xs text-gray-400 mt-1 flex items-center justify-center">
+                                    <i class="fas fa-check mr-1 text-green-400"></i>Completed
+                                </div>
+                            </div>
+                            <div class="glass-effect rounded-xl p-4 text-center">
+                                <div class="text-2xl font-bold text-red-400" id="jobs-failed">4</div>
+                                <div class="text-xs text-gray-400 mt-1 flex items-center justify-center">
+                                    <i class="fas fa-times mr-1 text-red-400"></i>Failed
+                                </div>
+                            </div>
+                            <div class="glass-effect rounded-xl p-4 text-center">
+                                <div class="text-2xl font-bold text-blue-400" id="jobs-devices">5</div>
+                                <div class="text-xs text-gray-400 mt-1 flex items-center justify-center">
+                                    <i class="fas fa-server mr-1 text-blue-400"></i>Devices
+                                </div>
+                            </div>
+                            <div class="glass-effect rounded-xl p-4 text-center">
+                                <div class="text-2xl font-bold text-purple-400" id="jobs-avg-time">2.3s</div>
+                                <div class="text-xs text-gray-400 mt-1 flex items-center justify-center">
+                                    <i class="fas fa-clock mr-1 text-purple-400"></i>Avg Time
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Device Categories -->
+                        <div class="mb-8">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-xl font-semibold flex items-center">
+                                    <i class="fas fa-server text-primary-400 mr-2"></i>Jobs by Device
+                                </h3>
+                                <button onclick="refreshJobs()" class="px-4 py-2 rounded-lg bg-primary-500/20 text-primary-400 hover:bg-primary-500/30 transition-all flex items-center space-x-2">
+                                    <i class="fas fa-sync-alt"></i>
+                                    <span>Refresh</span>
+                                </button>
+                            </div>
+
+                            <div class="space-y-4">
+                                <!-- Local Simulator -->
+                                <div class="glass-effect rounded-xl p-5">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 rounded-lg bg-green-600/20 flex items-center justify-center mr-3">
+                                                <i class="fas fa-laptop-code text-green-400"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold">Local Simulator</h4>
+                                                <span class="text-xs text-gray-400">Development & Testing</span>
+                                            </div>
+                                        </div>
+                                        <span class="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-sm">Online</span>
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-400 space-x-6">
+                                        <span><i class="fas fa-check text-green-400 mr-1"></i>45 completed</span>
+                                        <span><i class="fas fa-sync-alt text-yellow-400 mr-1"></i>1 active</span>
+                                        <span><i class="fas fa-clock mr-1"></i>0.8s avg</span>
+                                    </div>
+                                </div>
+
+                                <!-- AWS SV1 -->
+                                <div class="glass-effect rounded-xl p-5">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 rounded-lg bg-orange-600/20 flex items-center justify-center mr-3">
+                                                <i class="fab fa-aws text-orange-400"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold">AWS SV1</h4>
+                                                <span class="text-xs text-gray-400">State Vector Simulator</span>
+                                            </div>
+                                        </div>
+                                        <span class="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-sm">Online</span>
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-400 space-x-6">
+                                        <span><i class="fas fa-check text-green-400 mr-1"></i>28 completed</span>
+                                        <span><i class="fas fa-sync-alt text-yellow-400 mr-1"></i>2 active</span>
+                                        <span><i class="fas fa-clock mr-1"></i>3.2s avg</span>
+                                    </div>
+                                </div>
+
+                                <!-- IonQ -->
+                                <div class="glass-effect rounded-xl p-5">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 rounded-lg bg-purple-600/20 flex items-center justify-center mr-3">
+                                                <i class="fas fa-atom text-purple-400"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold">IonQ Harmony</h4>
+                                                <span class="text-xs text-gray-400">Trapped Ion - 11 Qubits</span>
+                                            </div>
+                                        </div>
+                                        <span class="px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-400 text-sm">Queued</span>
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-400 space-x-6">
+                                        <span><i class="fas fa-check text-green-400 mr-1"></i>9 completed</span>
+                                        <span><i class="fas fa-hourglass-half text-yellow-400 mr-1"></i>2 queued</span>
+                                        <span><i class="fas fa-clock mr-1"></i>45s avg</span>
+                                    </div>
+                                </div>
+
+                                <!-- Rigetti -->
+                                <div class="glass-effect rounded-xl p-5 opacity-60">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 rounded-lg bg-blue-600/20 flex items-center justify-center mr-3">
+                                                <i class="fas fa-microchip text-blue-400"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold">Rigetti Aspen-M</h4>
+                                                <span class="text-xs text-gray-400">Superconducting - 80 Qubits</span>
+                                            </div>
+                                        </div>
+                                        <span class="px-3 py-1 rounded-full bg-gray-500/20 text-gray-400 text-sm">Offline</span>
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-400 space-x-6">
+                                        <span><i class="fas fa-check text-green-400 mr-1"></i>0 completed</span>
+                                        <span><i class="fas fa-ban text-gray-400 mr-1"></i>Maintenance</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Jobs -->
+                        <div class="glass-effect rounded-xl p-6">
+                            <h3 class="text-lg font-semibold mb-4 flex items-center">
+                                <i class="fas fa-history text-primary-400 mr-2"></i>Recent Jobs
+                            </h3>
+                            <div class="space-y-3" id="recent-jobs-list">
+                                <div class="flex items-center justify-between p-3 rounded-lg bg-dark-800/50">
+                                    <div class="flex items-center space-x-3">
+                                        <i class="fas fa-check-circle text-green-400"></i>
+                                        <div>
+                                            <span class="text-sm font-medium">QJob-2024-001</span>
+                                            <span class="text-xs text-gray-500 ml-2">Local Simulator</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-400">2 min ago</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 rounded-lg bg-dark-800/50">
+                                    <div class="flex items-center space-x-3">
+                                        <i class="fas fa-check-circle text-green-400"></i>
+                                        <div>
+                                            <span class="text-sm font-medium">QJob-2024-002</span>
+                                            <span class="text-xs text-gray-500 ml-2">AWS SV1</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-400">5 min ago</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 rounded-lg bg-dark-800/50">
+                                    <div class="flex items-center space-x-3">
+                                        <i class="fas fa-sync-alt text-yellow-400 animate-spin"></i>
+                                        <div>
+                                            <span class="text-sm font-medium">QJob-2024-003</span>
+                                            <span class="text-xs text-gray-500 ml-2">IonQ Harmony</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-yellow-400">Running...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Admin Tab -->
+                    <div class="dashboard-content hidden" id="tab-admin">
+                        <!-- Admin Stats -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                            <div class="glass-effect rounded-xl p-5 text-center">
+                                <div class="text-2xl font-bold text-primary-400">127</div>
+                                <div class="text-xs text-gray-400 mt-1">Total Signatures</div>
+                            </div>
+                            <div class="glass-effect rounded-xl p-5 text-center">
+                                <div class="text-2xl font-bold text-blue-400">89</div>
+                                <div class="text-xs text-gray-400 mt-1">Quantum Jobs</div>
+                            </div>
+                            <div class="glass-effect rounded-xl p-5 text-center">
+                                <div class="text-2xl font-bold text-green-400">78</div>
+                                <div class="text-xs text-gray-400 mt-1">"是" Votes</div>
+                            </div>
+                            <div class="glass-effect rounded-xl p-5 text-center">
+                                <div class="text-2xl font-bold text-red-400">49</div>
+                                <div class="text-xs text-gray-400 mt-1">"不是" Votes</div>
+                            </div>
+                        </div>
+
+                        <!-- Management Actions -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fas fa-tools text-primary-400 mr-2"></i>Management Actions
+                            </h3>
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <div class="glass-effect rounded-xl p-6">
+                                    <div class="w-12 h-12 rounded-xl bg-red-600/20 flex items-center justify-center mb-4">
+                                        <i class="fas fa-trash-alt text-red-400 text-xl"></i>
+                                    </div>
+                                    <h4 class="font-semibold mb-2">Clear All Data</h4>
+                                    <p class="text-sm text-gray-400 mb-4">Remove all signatures and quantum jobs from the system.</p>
+                                    <button onclick="showClearConfirmation()" class="w-full py-2 rounded-lg bg-red-500/20 text-red-400 hover:bg-red-500/30 transition-all">
+                                        <i class="fas fa-trash mr-2"></i>Clear All
+                                    </button>
+                                </div>
+                                <div class="glass-effect rounded-xl p-6">
+                                    <div class="w-12 h-12 rounded-xl bg-blue-600/20 flex items-center justify-center mb-4">
+                                        <i class="fas fa-sync-alt text-blue-400 text-xl"></i>
+                                    </div>
+                                    <h4 class="font-semibold mb-2">Refresh Statistics</h4>
+                                    <p class="text-sm text-gray-400 mb-4">Reload the latest statistics and signature count.</p>
+                                    <button onclick="refreshStats()" class="w-full py-2 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition-all">
+                                        <i class="fas fa-sync-alt mr-2"></i>Refresh
+                                    </button>
+                                </div>
+                                <div class="glass-effect rounded-xl p-6">
+                                    <div class="w-12 h-12 rounded-xl bg-purple-600/20 flex items-center justify-center mb-4">
+                                        <i class="fas fa-download text-purple-400 text-xl"></i>
+                                    </div>
+                                    <h4 class="font-semibold mb-2">Export Data</h4>
+                                    <p class="text-sm text-gray-400 mb-4">Download all signatures and responses as JSON.</p>
+                                    <button onclick="exportData()" class="w-full py-2 rounded-lg bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 transition-all">
+                                        <i class="fas fa-download mr-2"></i>Export
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="glass-effect rounded-xl p-6">
+                            <h3 class="text-lg font-semibold mb-4 flex items-center">
+                                <i class="fas fa-clock text-primary-400 mr-2"></i>Recent Activity
+                            </h3>
+                            <div class="space-y-3" id="recent-activity-list">
+                                <div class="flex items-center justify-between p-3 rounded-lg bg-dark-800/50">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 rounded-full bg-primary-500/20 flex items-center justify-center">
+                                            <i class="fas fa-key text-primary-400 text-xs"></i>
+                                        </div>
+                                        <div>
+                                            <span class="text-sm font-medium">New signature created</span>
+                                            <span class="text-xs text-gray-500 block">User: Anonymous</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-400">Just now</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 rounded-lg bg-dark-800/50">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center">
+                                            <i class="fas fa-check text-green-400 text-xs"></i>
+                                        </div>
+                                        <div>
+                                            <span class="text-sm font-medium">Quantum job completed</span>
+                                            <span class="text-xs text-gray-500 block">Device: Local Simulator</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-400">2 min ago</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 rounded-lg bg-dark-800/50">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
+                                            <i class="fas fa-vote-yea text-blue-400 text-xs"></i>
+                                        </div>
+                                        <div>
+                                            <span class="text-sm font-medium">Survey response submitted</span>
+                                            <span class="text-xs text-gray-500 block">Industry: Finance</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-400">5 min ago</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 rounded-lg bg-dark-800/50">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center">
+                                            <i class="fas fa-microchip text-purple-400 text-xs"></i>
+                                        </div>
+                                        <div>
+                                            <span class="text-sm font-medium">Device selected</span>
+                                            <span class="text-xs text-gray-500 block">Superconducting Qubits</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-400">8 min ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="glass-effect py-4 px-6">
+            <div class="max-w-6xl mx-auto flex items-center justify-between text-sm text-gray-500">
+                <span>Quantum Futures - Human-AI Interaction</span>
+                <span>Research Project</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Device Info Modal -->
+    <div id="device-info-modal" class="info-modal" onclick="closeDeviceInfo(event)">
+        <div class="info-modal-content glass-effect rounded-2xl p-6" onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                    <div id="device-modal-icon" class="w-12 h-12 rounded-xl flex items-center justify-center mr-3">
+                        <span class="text-2xl">☁️</span>
+                    </div>
+                    <div>
+                        <h3 id="device-modal-title" class="text-xl font-bold">Device Name</h3>
+                        <span id="device-modal-companies" class="text-sm text-gray-400">Type</span>
+                    </div>
+                </div>
+                <button onclick="closeDeviceInfo()" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <!-- 3D Visualization Container -->
+            <div id="quantum-3d-visualization" class="quantum-3d-container"
+                 onmousedown="startDrag(event)" onmousemove="onDrag(event)" onmouseup="endDrag(event)" onmouseleave="endDrag(event)"
+                 ontouchstart="startDrag(event)" ontouchmove="onDrag(event)" ontouchend="endDrag(event)"
+                 onwheel="onZoom(event)">
+                <!-- Background effects -->
+                <div class="quantum-3d-floor"></div>
+                <div class="holo-scanline"></div>
+                <div class="energy-ring" style="animation-delay: 0s;"></div>
+                <div class="energy-ring" style="animation-delay: 0.7s;"></div>
+                <div class="energy-ring" style="animation-delay: 1.4s;"></div>
+
+                <!-- Floating particles -->
+                <div class="quantum-particle-3d" style="left: 15%; top: 20%; animation-delay: 0s;"></div>
+                <div class="quantum-particle-3d" style="left: 80%; top: 30%; animation-delay: 0.5s;"></div>
+                <div class="quantum-particle-3d" style="left: 25%; top: 70%; animation-delay: 1s;"></div>
+                <div class="quantum-particle-3d" style="left: 75%; top: 75%; animation-delay: 1.5s;"></div>
+                <div class="quantum-particle-3d" style="left: 50%; top: 15%; animation-delay: 2s;"></div>
+
+                <!-- 3D Scene -->
+                <div id="quantum-3d-scene" class="quantum-3d-scene auto-rotate">
+                    <!-- 3D content will be dynamically inserted -->
+                </div>
+
+                <!-- UI Overlays -->
+                <div class="drag-hint" id="drag-hint">
+                    <i class="fas fa-hand-pointer"></i>
+                    <span>Drag to rotate</span>
+                </div>
+                <div class="zoom-indicator" id="zoom-indicator">100%</div>
+
+                <!-- Control Panel -->
+                <div class="quantum-controls">
+                    <button class="quantum-control-btn" onclick="toggleAutoRotate()" title="Toggle auto-rotation" id="auto-rotate-btn">
+                        <i class="fas fa-play" id="rotation-icon"></i>
+                    </button>
+                    <button class="quantum-control-btn" onclick="zoomIn()" title="Zoom in">
+                        <i class="fas fa-search-plus"></i>
+                    </button>
+                    <button class="quantum-control-btn" onclick="zoomOut()" title="Zoom out">
+                        <i class="fas fa-search-minus"></i>
+                    </button>
+                    <button class="quantum-control-btn" onclick="resetView()" title="Reset view">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="device-modal-content" class="text-gray-300 text-sm space-y-4 max-h-60 overflow-y-auto">
+                <!-- Content will be dynamically inserted -->
+            </div>
+            <div class="mt-6 flex justify-end">
+                <button onclick="closeDeviceInfo()" class="btn-primary px-6 py-2 rounded-full text-sm">
+                    Got it
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirm-modal" class="confirm-modal" onclick="closeConfirmModal(event)">
+        <div class="confirm-modal-content glass-effect rounded-2xl p-6" onclick="event.stopPropagation()">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-500/20 flex items-center justify-center">
+                    <i class="fas fa-exclamation-triangle text-red-400 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Clear All Data?</h3>
+                <p class="text-gray-400 text-sm">This will permanently delete all signatures and quantum jobs. This action cannot be undone.</p>
+            </div>
+            <div class="flex space-x-3">
+                <button onclick="closeConfirmModal()" class="flex-1 py-3 rounded-lg bg-dark-700 hover:bg-dark-600 transition-all">
+                    Cancel
+                </button>
+                <button onclick="confirmClearData()" class="flex-1 py-3 rounded-lg bg-red-500/20 text-red-400 hover:bg-red-500/30 transition-all">
+                    <i class="fas fa-trash mr-2"></i>Clear All
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <div class="flex items-center space-x-3">
+            <i id="toast-icon" class="fas fa-check-circle text-green-400"></i>
+            <span id="toast-message">Action completed successfully</span>
+        </div>
+    </div>
+
+    <!-- Resources Modal -->
+    <div id="resources-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 backdrop-blur-sm">
+        <div class="glass-effect rounded-2xl p-8 max-w-lg mx-4">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-xl font-bold">Learn More</h3>
+                <button onclick="closeResources()" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <a href="#" class="block p-4 rounded-xl bg-dark-800/50 hover:bg-dark-700/50 transition-all">
+                    <h4 class="font-semibold mb-1">IBM Quantum Learning</h4>
+                    <p class="text-sm text-gray-400">Free courses on quantum computing fundamentals</p>
+                </a>
+                <a href="#" class="block p-4 rounded-xl bg-dark-800/50 hover:bg-dark-700/50 transition-all">
+                    <h4 class="font-semibold mb-1">NIST Post-Quantum Cryptography</h4>
+                    <p class="text-sm text-gray-400">Official standards for quantum-resistant encryption</p>
+                </a>
+                <a href="#" class="block p-4 rounded-xl bg-dark-800/50 hover:bg-dark-700/50 transition-all">
+                    <h4 class="font-semibold mb-1">UN Sustainable Development Goals</h4>
+                    <p class="text-sm text-gray-400">Learn about global sustainability initiatives</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State management
+        let state = {
+            currentPage: 0,
+            consent: false,
+            sentiment: '',
+            timeframe: '',
+            device: '',
+            industry: '',
+            key: ''
+        };
+
+        const deviceNames = {
+            'aws_sv1': 'Amazon Braket SV1',
+            'ionq_forte': 'IonQ Forte',
+            'iqm_garnet': 'IQM Garnet',
+            'quera_aquila': 'QuEra Aquila',
+            'rigetti_ankaa3': 'Rigetti Ankaa 3'
+        };
+
+        const industryNames = {
+            'finance': 'Finance',
+            'healthcare': 'Healthcare',
+            'cybersecurity': 'Cybersecurity',
+            'logistics': 'Logistics',
+            'energy': 'Energy',
+            'ai': 'AI & Machine Learning'
+        };
+
+        // Initialize particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particle.style.opacity = Math.random() * 0.5 + 0.2;
+                container.appendChild(particle);
+            }
+        }
+
+        // Consent checkbox handler
+        document.getElementById('consent-checkbox').addEventListener('change', function() {
+            state.consent = this.checked;
+            document.getElementById('start-btn').disabled = !this.checked;
+        });
+
+        // Navigation
+        function updateProgress() {
+            const steps = document.querySelectorAll('.step-indicator');
+            const lines = document.querySelectorAll('[data-line]');
+
+            steps.forEach((step, index) => {
+                step.classList.remove('active', 'completed');
+                if (index < state.currentPage) {
+                    step.classList.add('completed');
+                    step.innerHTML = '<i class="fas fa-check text-xs"></i>';
+                } else if (index === state.currentPage) {
+                    step.classList.add('active');
+                    step.textContent = index + 1;
+                } else {
+                    step.textContent = index + 1;
+                }
+            });
+
+            lines.forEach((line, index) => {
+                if (index < state.currentPage) {
+                    line.classList.remove('bg-dark-700');
+                    line.classList.add('bg-primary-500');
+                } else {
+                    line.classList.remove('bg-primary-500');
+                    line.classList.add('bg-dark-700');
+                }
+            });
+
+            document.getElementById('current-step-mobile').textContent = Math.min(state.currentPage + 1, 6);
+        }
+
+        function showPage(pageNum) {
+            document.querySelectorAll('.page-section').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            const targetPage = document.getElementById(`page-${pageNum}`);
+            if (targetPage) {
+                setTimeout(() => {
+                    targetPage.classList.add('active');
+                }, 50);
+            }
+
+            // Special handling for page 5 (key generation)
+            if (pageNum === 5) {
+                startKeyGeneration();
+            }
+
+            // Update summary on completion page
+            if (pageNum === 6) {
+                updateSummary();
+            }
+        }
+
+        function nextPage() {
+            if (state.currentPage < 6) {
+                state.currentPage++;
+                updateProgress();
+                showPage(state.currentPage);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Page 1: Sentiment
+        function submitSentiment() {
+            const input = document.getElementById('sentiment-input');
+            const value = input.value.trim();
+
+            if (value) {
+                state.sentiment = value;
+                document.getElementById('submit-sentiment-btn').disabled = true;
+                document.getElementById('submit-sentiment-btn').innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Processing...';
+                input.disabled = true;
+
+                // Show word cloud with delay for effect
+                setTimeout(() => {
+                    showWordCloud(value);
+                }, 800);
+            }
+        }
+
+        function showWordCloud(userWord) {
+            const container = document.getElementById('word-cloud-container');
+            const cloud = document.getElementById('word-cloud');
+
+            // Curated word list with vibrant, diverse colors
+            const communityWords = [
+                { text: 'Future', weight: 90, color: '#60a5fa' },      // Blue
+                { text: 'Revolutionary', weight: 85, color: '#f472b6' }, // Pink
+                { text: 'Innovation', weight: 80, color: '#4ade80' },   // Green
+                { text: 'Computing', weight: 75, color: '#a78bfa' },    // Purple
+                { text: 'Powerful', weight: 70, color: '#fbbf24' },     // Amber
+                { text: 'Technology', weight: 68, color: '#22d3ee' },   // Cyan
+                { text: 'Exciting', weight: 60, color: '#fb923c' },     // Orange
+                { text: 'Science', weight: 58, color: '#818cf8' },      // Indigo
+                { text: 'Fast', weight: 55, color: '#34d399' },         // Emerald
+                { text: 'Complex', weight: 50, color: '#f87171' },      // Red
+                { text: 'Progress', weight: 48, color: '#38bdf8' },     // Sky
+                { text: 'Hope', weight: 45, color: '#a3e635' },         // Lime
+                { text: 'Change', weight: 42, color: '#e879f9' },       // Fuchsia
+                { text: 'Speed', weight: 40, color: '#2dd4bf' },        // Teal
+                { text: 'Challenge', weight: 35, color: '#fcd34d' },    // Yellow
+                { text: 'Mysterious', weight: 32, color: '#c084fc' },   // Violet
+            ];
+
+            // Sort by weight for proper layering
+            communityWords.sort((a, b) => b.weight - a.weight);
+
+            cloud.innerHTML = '';
+            container.classList.remove('hidden');
+
+            // Create inner container
+            const innerCloud = document.createElement('div');
+            innerCloud.className = 'word-cloud-inner';
+            cloud.appendChild(innerCloud);
+
+            const cloudRect = cloud.getBoundingClientRect();
+            const centerX = cloudRect.width / 2;
+            const centerY = cloudRect.height / 2;
+
+            // Create user word container with rings first
+            const userContainer = document.createElement('div');
+            userContainer.className = 'user-word-container';
+            userContainer.innerHTML = `
+                <div class="user-word-ring"></div>
+                <div class="user-word-ring"></div>
+                <div class="user-word-ring"></div>
+            `;
+
+            // Create user word element
+            const userWordEl = document.createElement('span');
+            userWordEl.className = 'cloud-word user-word';
+            userWordEl.textContent = userWord;
+            userWordEl.style.cssText = `
+                position: relative;
+                font-size: 28px;
+                font-weight: 700;
+                color: #14b8a6;
+                background: linear-gradient(135deg, rgba(20, 184, 166, 0.25), rgba(13, 148, 136, 0.1));
+                padding: 12px 24px;
+                border-radius: 12px;
+                border: 2px solid rgba(20, 184, 166, 0.6);
+                display: inline-block;
+                text-shadow: 0 0 20px rgba(20, 184, 166, 0.5);
+            `;
+            userContainer.appendChild(userWordEl);
+            innerCloud.appendChild(userContainer);
+
+            // Animate user word
+            setTimeout(() => {
+                userWordEl.classList.add('visible');
+            }, 300);
+
+            // Pre-defined positions for balanced layout (relative to center)
+            const positions = [
+                // Inner ring
+                { x: -120, y: -80, size: 'lg' },
+                { x: 100, y: -70, size: 'lg' },
+                { x: -140, y: 50, size: 'md' },
+                { x: 130, y: 60, size: 'md' },
+                // Middle ring
+                { x: -200, y: -30, size: 'md' },
+                { x: 190, y: -20, size: 'md' },
+                { x: -80, y: -120, size: 'sm' },
+                { x: 60, y: -110, size: 'sm' },
+                { x: -100, y: 100, size: 'sm' },
+                { x: 80, y: 110, size: 'sm' },
+                // Outer ring
+                { x: -220, y: -90, size: 'sm' },
+                { x: 210, y: -80, size: 'sm' },
+                { x: -230, y: 70, size: 'xs' },
+                { x: 220, y: 80, size: 'xs' },
+                { x: -30, y: -130, size: 'xs' },
+                { x: 20, y: 120, size: 'xs' },
+            ];
+
+            // Update word count with animation
+            let count = 1; // Start at 1 for user word
+            const countEl = document.getElementById('word-count');
+            countEl.textContent = count;
+
+            // Place community words
+            communityWords.forEach((word, index) => {
+                if (index >= positions.length) return;
+
+                const pos = positions[index];
+                const wordEl = document.createElement('span');
+                wordEl.className = `cloud-word size-${pos.size}`;
+                wordEl.textContent = word.text;
+
+                // Calculate actual position
+                const x = centerX + pos.x;
+                const y = centerY + pos.y;
+
+                wordEl.style.left = x + 'px';
+                wordEl.style.top = y + 'px';
+                wordEl.style.color = word.color;
+
+                // Add subtle floating animation
+                const floatClass = `float-${(index % 3) + 1}`;
+                wordEl.classList.add(floatClass);
+                wordEl.style.animationDelay = (index * 0.2) + 's';
+
+                innerCloud.appendChild(wordEl);
+
+                // Staggered animation
+                setTimeout(() => {
+                    wordEl.classList.add('visible');
+                    count++;
+                    countEl.textContent = count;
+                }, index * 100 + 500);
+            });
+        }
+
+        document.getElementById('sentiment-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                submitSentiment();
+            }
+        });
+
+        // Page 2: Timeframe selection
+        function selectTimeframe(btn, value) {
+            state.timeframe = value;
+
+            document.querySelectorAll('.timeframe-btn').forEach(b => {
+                b.classList.remove('bg-primary-500', 'border-primary-500', 'text-white');
+            });
+
+            btn.classList.add('bg-primary-500', 'border-primary-500', 'text-white');
+            document.getElementById('page2-next').disabled = false;
+        }
+
+        // Page 3: Device selection
+        function selectDevice(card, device) {
+            state.device = device;
+
+            document.querySelectorAll('.device-card').forEach(c => {
+                c.classList.remove('selected');
+            });
+
+            card.classList.add('selected');
+            document.getElementById('device-selection-info').classList.remove('hidden');
+            document.getElementById('selected-device-name').textContent = deviceNames[device];
+            document.getElementById('page3-next').disabled = false;
+        }
+
+        // Page 4: Industry selection
+        function selectIndustry(option, industry) {
+            state.industry = industry;
+
+            document.querySelectorAll('.industry-option').forEach(o => {
+                o.classList.remove('selected');
+            });
+
+            option.classList.add('selected');
+
+            // Show results after selection
+            setTimeout(() => {
+                document.getElementById('industry-results').classList.remove('hidden');
+            }, 300);
+
+            document.getElementById('page4-next').disabled = false;
+        }
+
+        // Page 5: Key generation
+        function startKeyGeneration() {
+            document.getElementById('chosen-device').textContent = deviceNames[state.device] || 'quantum device';
+
+            const circle = document.getElementById('progress-circle');
+            const percent = document.getElementById('progress-percent');
+            const status = document.getElementById('generation-status');
+
+            const statuses = [
+                'Initializing quantum circuits...',
+                'Preparing entangled qubits...',
+                'Running post-quantum algorithm...',
+                'Applying error correction...',
+                'Finalizing cryptographic key...'
+            ];
+
+            let progress = 0;
+            const circumference = 352;
+
+            const interval = setInterval(() => {
+                progress += 2;
+
+                const offset = circumference - (progress / 100) * circumference;
+                circle.style.strokeDashoffset = offset;
+                percent.textContent = progress + '%';
+
+                const statusIndex = Math.floor(progress / 25);
+                if (statusIndex < statuses.length) {
+                    status.textContent = statuses[statusIndex];
+                }
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    showGeneratedKey();
+                }
+            }, 60);
+        }
+
+        function showGeneratedKey() {
+            // Generate quantum-resistant cryptographic data
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+            const hexChars = '0123456789abcdef';
+
+            // Generate quantum ID (simulated quantum measurement result)
+            const quantumId = (Math.random() * 0.5 + 0.25).toFixed(4);
+
+            // Generate public key (base64-like)
+            let publicKey = '';
+            for (let i = 0; i < 256; i++) {
+                publicKey += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+
+            // Generate digital signature (hex format)
+            let signature = '0x';
+            for (let i = 0; i < 128; i++) {
+                signature += hexChars.charAt(Math.floor(Math.random() * hexChars.length));
+            }
+
+            // Generate job ID
+            const jobId = `QJ-${new Date().getFullYear()}-${String(Math.floor(Math.random() * 9999)).padStart(4, '0')}`;
+
+            // Store in state
+            state.quantumId = quantumId;
+            state.publicKey = publicKey;
+            state.signature = signature;
+            state.jobId = jobId;
+            state.key = publicKey; // For backward compatibility
+
+            // Update display elements
+            document.getElementById('quantum-id-display').textContent = quantumId;
+            document.getElementById('public-key-display').textContent = publicKey;
+            document.getElementById('signature-display').textContent = signature;
+            document.getElementById('job-id-display').textContent = jobId;
+            document.getElementById('device-name-display').textContent = deviceNames[state.device] || 'Local Simulator';
+
+            // Set processing type based on device
+            const processingTypes = {
+                'aws_sv1': 'Quantum Simulation',
+                'ionq_forte': 'Trapped Ion QPU',
+                'iqm_garnet': 'Superconducting QPU',
+                'quera_aquila': 'Neutral Atom QPU',
+                'rigetti_ankaa3': 'Superconducting QPU'
+            };
+            document.getElementById('processing-type-display').textContent = processingTypes[state.device] || 'Quantum Simulation';
+
+            document.getElementById('generation-progress').classList.add('hidden');
+            document.getElementById('key-result').classList.remove('hidden');
+        }
+
+        function copyPublicKey() {
+            navigator.clipboard.writeText(state.publicKey);
+            showToast('Public key copied to clipboard', 'success');
+        }
+
+        function copySignature() {
+            navigator.clipboard.writeText(state.signature);
+            showToast('Signature copied to clipboard', 'success');
+        }
+
+        function copyAllKeys() {
+            const allData = `Algorithm: Dilithium-3 (CRYSTALS)\n\nQuantum ID: ${state.quantumId}\n\nPublic Key:\n${state.publicKey}\n\nDigital Signature:\n${state.signature}\n\nDevice: ${deviceNames[state.device] || 'Local Simulator'}\nJob ID: ${state.jobId}`;
+            navigator.clipboard.writeText(allData);
+            showToast('All cryptographic data copied to clipboard', 'success');
+        }
+
+        // Page 6: Summary
+        function updateSummary() {
+            document.getElementById('summary-sentiment').textContent = state.sentiment || '—';
+            document.getElementById('summary-device').textContent = deviceNames[state.device] || '—';
+            document.getElementById('summary-industry').textContent = industryNames[state.industry] || '—';
+            document.getElementById('summary-key').textContent = state.signature ? state.signature.substring(0, 24) + '...' : '—';
+        }
+
+        function restartJourney() {
+            state = {
+                currentPage: 0,
+                consent: false,
+                sentiment: '',
+                timeframe: '',
+                device: '',
+                industry: ''
+            };
+
+            // Reset UI
+            document.getElementById('consent-checkbox').checked = false;
+            document.getElementById('start-btn').disabled = true;
+            document.getElementById('sentiment-input').value = '';
+            document.getElementById('sentiment-input').disabled = false;
+            document.getElementById('submit-sentiment-btn').disabled = false;
+            document.getElementById('submit-sentiment-btn').innerHTML = 'Submit';
+            document.getElementById('word-cloud-container').classList.add('hidden');
+            document.getElementById('word-cloud').innerHTML = '';
+            document.getElementById('word-count').textContent = '0';
+            document.querySelectorAll('.timeframe-btn').forEach(b => {
+                b.classList.remove('bg-primary-500', 'border-primary-500', 'text-white');
+            });
+            document.getElementById('page2-next').disabled = true;
+            document.querySelectorAll('.device-card').forEach(c => c.classList.remove('selected'));
+            document.getElementById('device-selection-info').classList.add('hidden');
+            document.getElementById('page3-next').disabled = true;
+            document.querySelectorAll('.industry-option').forEach(o => o.classList.remove('selected'));
+            document.getElementById('industry-results').classList.add('hidden');
+            document.getElementById('page4-next').disabled = true;
+            document.getElementById('generation-progress').classList.remove('hidden');
+            document.getElementById('key-result').classList.add('hidden');
+            document.getElementById('progress-circle').style.strokeDashoffset = 352;
+            document.getElementById('progress-percent').textContent = '0%';
+
+            updateProgress();
+            showPage(0);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showResources() {
+            document.getElementById('resources-modal').classList.remove('hidden');
+            document.getElementById('resources-modal').classList.add('flex');
+        }
+
+        function closeResources() {
+            document.getElementById('resources-modal').classList.add('hidden');
+            document.getElementById('resources-modal').classList.remove('flex');
+        }
+
+        // Flip Card functionality
+        function toggleFlipCard(card) {
+            card.classList.toggle('flipped');
+        }
+
+        // Device Info Modal
+        const deviceInfoData = {
+            'aws_sv1': {
+                title: 'Amazon Braket SV1 Quantum Simulator',
+                type: 'Classical Simulation (Not real quantum hardware)',
+                emoji: '☁️',
+                iconBg: 'bg-orange-600/20',
+                content: `
+                    <p><strong>How it works:</strong> SV1 is a high-performance State Vector quantum circuit simulator provided by Amazon Braket. It uses classical supercomputing resources to simulate up to <strong>34 qubits</strong> (depending on circuit depth and structure).</p>
+                    <p><strong>Key advantages:</strong></p>
+                    <ul class="list-disc list-inside ml-2 space-y-1">
+                        <li>Stable, fast, and noise-free operation</li>
+                        <li>Perfect for learning and debugging quantum circuits</li>
+                        <li>Full amplitude visibility for understanding quantum superposition</li>
+                        <li>Ideal for algorithm prototyping (Grover, QAOA, VQE)</li>
+                    </ul>
+                    <p><strong>Runtime:</strong> ~minutes</p>
+                    <p class="text-primary-400 mt-2"><strong>Recommended for beginners as your first quantum computing experience!</strong></p>
+                `,
+                visualization: 'cloud'
+            },
+            'ionq_forte': {
+                title: 'IonQ Forte Trapped Ion Quantum Computer',
+                type: 'Real Quantum Hardware (Maintenance until Nov 2026)',
+                emoji: '⚛️',
+                iconBg: 'bg-purple-600/20',
+                content: `
+                    <p><strong>How it works:</strong> IonQ uses "trapped ion" technology - electromagnetic fields suspend individual atoms in space, and precise laser pulses control the quantum bits.</p>
+                    <p><strong>Key advantages:</strong></p>
+                    <ul class="list-disc list-inside ml-2 space-y-1">
+                        <li>Extremely high quantum gate fidelity (almost no errors)</li>
+                        <li>Flexible all-to-all qubit connectivity</li>
+                        <li>Ideal for precision-dependent programs like quantum ML</li>
+                    </ul>
+                    <p><strong>Challenges:</strong></p>
+                    <ul class="list-disc list-inside ml-2 space-y-1">
+                        <li>Currently under maintenance</li>
+                        <li>Expected back online: November 20, 2026</li>
+                    </ul>
+                    <p><strong>Runtime:</strong> ~10+ minutes</p>
+                    <p class="text-yellow-400 mt-2">Trapped ion technology is considered one of the most promising quantum computing approaches.</p>
+                `,
+                visualization: 'ion'
+            },
+            'iqm_garnet': {
+                title: 'IQM Garnet Superconducting Processor',
+                type: 'Real Quantum Hardware (Superconducting)',
+                emoji: '💎',
+                iconBg: 'bg-cyan-600/20',
+                content: `
+                    <p><strong>How it works:</strong> IQM's superconducting qubits operate by allowing current to flow without resistance at temperatures near absolute zero, enabling high-speed quantum gate operations.</p>
+                    <p><strong>Key advantages:</strong></p>
+                    <ul class="list-disc list-inside ml-2 space-y-1">
+                        <li>Low noise physical architecture for better reliability</li>
+                        <li>Fast gate execution for variational algorithms</li>
+                        <li>Advanced European quantum technology</li>
+                        <li>Excellent for VQE and QAOA experiments</li>
+                    </ul>
+                    <p><strong>Runtime:</strong> ~10+ minutes</p>
+                    <p class="text-cyan-400 mt-2">Superconducting qubits are the most commercially mature quantum computing technology.</p>
+                `,
+                visualization: 'superconducting'
+            },
+            'quera_aquila': {
+                title: 'QuEra Aquila Neutral Atom Processor',
+                type: 'Real Quantum Hardware (Neutral Atom Array)',
+                emoji: '🔬',
+                iconBg: 'bg-green-600/20',
+                content: `
+                    <p><strong>How it works:</strong> QuEra uses optical tweezers to arrange neutral atoms into various 2D geometric patterns, forming a "Programmable Quantum Matter" platform.</p>
+                    <p><strong>Key advantages:</strong></p>
+                    <ul class="list-disc list-inside ml-2 space-y-1">
+                        <li>High scalability for larger systems</li>
+                        <li>Dynamic qubit spatial rearrangement</li>
+                        <li>Natural fit for physics simulations (Ising model, materials science)</li>
+                        <li>Significant potential for optimization algorithms</li>
+                    </ul>
+                    <p><strong>Runtime:</strong> ~10+ minutes</p>
+                    <p class="text-green-400 mt-2">This is the closest approach to natural quantum simulation principles.</p>
+                `,
+                visualization: 'atom'
+            },
+            'rigetti_ankaa3': {
+                title: 'Rigetti Ankaa 3 Superconducting Computer',
+                type: 'Real Quantum Hardware (Superconducting)',
+                emoji: '🎯',
+                iconBg: 'bg-red-600/20',
+                content: `
+                    <p><strong>How it works:</strong> Rigetti's superconducting qubits execute quantum gates with nanosecond-level microwave pulses at near absolute zero temperatures.</p>
+                    <p><strong>Key advantages:</strong></p>
+                    <ul class="list-disc list-inside ml-2 space-y-1">
+                        <li>Fast quantum gate execution (nanoseconds)</li>
+                        <li>Optimized gate fidelity and noise models</li>
+                        <li>Visible coupling map topology</li>
+                        <li>Supports universal quantum circuit programming</li>
+                    </ul>
+                    <p><strong>Applications:</strong> Finance, logistics optimization, chemical simulation, quantum AI</p>
+                    <p><strong>Runtime:</strong> ~10+ minutes</p>
+                    <p class="text-red-400 mt-2">Best example of what commercial quantum chips might look like in the future!</p>
+                `,
+                visualization: 'rigetti'
+            }
+        };
+
+        // 3D Visualization generators
+        const visualizations = {
+            cloud: () => `
+                <div class="cloud-server">
+                    <div class="server-rack">
+                        <div class="server-slot"><div class="server-led green"></div><div class="server-led blue"></div><div class="server-led orange"></div></div>
+                        <div class="server-slot"><div class="server-led blue"></div><div class="server-led green"></div><div class="server-led blue"></div></div>
+                        <div class="server-slot"><div class="server-led orange"></div><div class="server-led orange"></div><div class="server-led green"></div></div>
+                        <div class="server-slot"><div class="server-led green"></div><div class="server-led blue"></div><div class="server-led green"></div></div>
+                        <div class="server-slot"><div class="server-led blue"></div><div class="server-led green"></div><div class="server-led orange"></div></div>
+                    </div>
+                    <div class="data-flow" style="left: 20px; animation-delay: 0s;"></div>
+                    <div class="data-flow" style="left: 40px; animation-delay: 0.3s;"></div>
+                    <div class="data-flow" style="left: 60px; animation-delay: 0.6s;"></div>
+                    <div class="data-flow" style="left: 80px; animation-delay: 0.9s;"></div>
+                </div>
+            `,
+            ion: () => `
+                <div class="ion-trap">
+                    <div class="trap-chamber">
+                        <div class="ion-particle" style="left: 25%; top: 50%; transform: translate(-50%, -50%); animation-delay: 0s;"></div>
+                        <div class="ion-particle" style="left: 40%; top: 50%; transform: translate(-50%, -50%); animation-delay: 0.3s;"></div>
+                        <div class="ion-particle" style="left: 55%; top: 50%; transform: translate(-50%, -50%); animation-delay: 0.6s;"></div>
+                        <div class="ion-particle" style="left: 70%; top: 50%; transform: translate(-50%, -50%); animation-delay: 0.9s;"></div>
+                        <div class="laser-beam" style="top: 30%; left: 0; width: 100%;"></div>
+                        <div class="laser-beam" style="top: 70%; left: 0; width: 100%; animation-delay: 1s;"></div>
+                    </div>
+                    <div style="position: absolute; top: -40px; left: 50%; transform: translateX(-50%); font-size: 12px; color: #a855f7;">Electromagnetic Trap</div>
+                    <div style="position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); font-size: 12px; color: #f472b6;">Laser Control</div>
+                </div>
+            `,
+            superconducting: () => `
+                <div class="superconducting-chip">
+                    <div class="chip-base">
+                        <div class="qubit-grid">
+                            ${Array(16).fill().map((_, i) => `<div class="qubit-node" style="animation-delay: ${i * 0.1}s;"></div>`).join('')}
+                        </div>
+                    </div>
+                    <div class="cooling-ring" style="width: 180px; height: 180px; left: 50%; top: 50%;"></div>
+                    <div class="cooling-ring" style="width: 220px; height: 220px; left: 50%; top: 50%; animation-delay: 1s;"></div>
+                    <div class="cooling-ring" style="width: 260px; height: 260px; left: 50%; top: 50%; animation-delay: 2s;"></div>
+                    <div style="position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%); font-size: 11px; color: #06b6d4;">Temperature: 15 mK (-273.135°C)</div>
+                </div>
+            `,
+            atom: () => `
+                <div class="atom-array">
+                    <div class="tweezer-grid">
+                        ${[
+                            {x: 30, y: 30}, {x: 80, y: 30}, {x: 130, y: 30},
+                            {x: 55, y: 70}, {x: 105, y: 70},
+                            {x: 30, y: 110}, {x: 80, y: 110}, {x: 130, y: 110},
+                            {x: 55, y: 150}, {x: 105, y: 150}
+                        ].map((pos, i) => `
+                            <div class="atom-site" style="left: ${pos.x}px; top: ${pos.y}px;">
+                                <div class="atom-particle" style="animation-delay: ${i * 0.2}s;"></div>
+                            </div>
+                            <div class="tweezer-beam" style="left: ${pos.x + 9}px; top: ${pos.y - 40}px; animation-delay: ${i * 0.15}s;"></div>
+                        `).join('')}
+                    </div>
+                    <div style="position: absolute; top: -30px; left: 50%; transform: translateX(-50%); font-size: 11px; color: #22c55e;">Optical Tweezer Array</div>
+                </div>
+            `,
+            rigetti: () => `
+                <div class="rigetti-chip">
+                    <div class="hex-grid">
+                        ${[
+                            {x: 20, y: 20}, {x: 55, y: 20}, {x: 90, y: 20}, {x: 125, y: 20},
+                            {x: 37, y: 55}, {x: 72, y: 55}, {x: 107, y: 55},
+                            {x: 20, y: 90}, {x: 55, y: 90}, {x: 90, y: 90}, {x: 125, y: 90}
+                        ].map((pos, i) => `<div class="hex-qubit" style="left: ${pos.x}px; top: ${pos.y}px; animation-delay: ${i * 0.15}s;"></div>`).join('')}
+                        <div class="coupling-line" style="width: 25px; left: 44px; top: 34px;"></div>
+                        <div class="coupling-line" style="width: 25px; left: 79px; top: 34px;"></div>
+                        <div class="coupling-line" style="width: 25px; left: 114px; top: 34px;"></div>
+                        <div class="coupling-line" style="width: 25px; left: 61px; top: 69px;"></div>
+                        <div class="coupling-line" style="width: 25px; left: 96px; top: 69px;"></div>
+                    </div>
+                    <div style="position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); font-size: 11px; color: #ef4444;">Hexagonal Qubit Topology</div>
+                </div>
+            `
+        };
+
+        // 3D Interaction State
+        let view3D = {
+            isAutoRotating: true,
+            isDragging: false,
+            startX: 0,
+            startY: 0,
+            rotateX: 10,
+            rotateY: 0,
+            scale: 1,
+            minScale: 0.5,
+            maxScale: 2,
+            currentDeviceGlow: ''
+        };
+
+        function showDeviceInfo(deviceId) {
+            const data = deviceInfoData[deviceId];
+            if (!data) return;
+
+            const modal = document.getElementById('device-info-modal');
+            const iconDiv = document.getElementById('device-modal-icon');
+            const scene = document.getElementById('quantum-3d-scene');
+
+            document.getElementById('device-modal-title').textContent = data.title;
+            document.getElementById('device-modal-companies').textContent = data.type;
+            document.getElementById('device-modal-content').innerHTML = data.content;
+
+            // Update icon with emoji
+            iconDiv.className = `w-12 h-12 rounded-xl flex items-center justify-center mr-3 ${data.iconBg}`;
+            iconDiv.innerHTML = `<span class="text-2xl">${data.emoji}</span>`;
+
+            // Set glow class based on device
+            const glowMap = {
+                'aws_sv1': 'glow-orange',
+                'ionq_forte': 'glow-purple',
+                'iqm_garnet': 'glow-cyan',
+                'quera_aquila': 'glow-green',
+                'rigetti_ankaa3': 'glow-red'
+            };
+            view3D.currentDeviceGlow = glowMap[deviceId] || '';
+
+            // Generate 3D visualization
+            const vizFunc = visualizations[data.visualization];
+            if (vizFunc) {
+                scene.innerHTML = vizFunc();
+                // Add glow to the main element
+                const mainElement = scene.firstElementChild;
+                if (mainElement && view3D.currentDeviceGlow) {
+                    mainElement.classList.add(view3D.currentDeviceGlow);
+                }
+            }
+
+            // Reset view state
+            view3D.isAutoRotating = true;
+            view3D.rotateX = 10;
+            view3D.rotateY = 0;
+            view3D.scale = 1;
+            updateSceneTransform();
+            updateZoomIndicator();
+
+            scene.classList.add('auto-rotate');
+            scene.classList.remove('dragging');
+            document.getElementById('rotation-icon').className = 'fas fa-pause';
+            document.getElementById('auto-rotate-btn').classList.add('active');
+            document.getElementById('drag-hint').classList.remove('hidden');
+
+            // Show modal with animation
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('active');
+            }, 10);
+
+            // Hide drag hint after 3 seconds
+            setTimeout(() => {
+                document.getElementById('drag-hint').classList.add('hidden');
+            }, 3000);
+        }
+
+        function closeDeviceInfo(event) {
+            if (event && event.target !== event.currentTarget) return;
+
+            const modal = document.getElementById('device-info-modal');
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        // Mouse/Touch Drag Functions
+        function startDrag(event) {
+            event.preventDefault();
+            const scene = document.getElementById('quantum-3d-scene');
+
+            // Stop auto rotation when user starts dragging
+            if (view3D.isAutoRotating) {
+                toggleAutoRotate();
+            }
+
+            view3D.isDragging = true;
+            scene.classList.add('dragging');
+            document.getElementById('drag-hint').classList.add('hidden');
+
+            const point = event.touches ? event.touches[0] : event;
+            view3D.startX = point.clientX;
+            view3D.startY = point.clientY;
+        }
+
+        function onDrag(event) {
+            if (!view3D.isDragging) return;
+            event.preventDefault();
+
+            const point = event.touches ? event.touches[0] : event;
+            const deltaX = point.clientX - view3D.startX;
+            const deltaY = point.clientY - view3D.startY;
+
+            view3D.rotateY += deltaX * 0.5;
+            view3D.rotateX -= deltaY * 0.3;
+
+            // Clamp rotateX
+            view3D.rotateX = Math.max(-60, Math.min(60, view3D.rotateX));
+
+            view3D.startX = point.clientX;
+            view3D.startY = point.clientY;
+
+            updateSceneTransform();
+        }
+
+        function endDrag(event) {
+            view3D.isDragging = false;
+            const scene = document.getElementById('quantum-3d-scene');
+            scene.classList.remove('dragging');
+        }
+
+        function onZoom(event) {
+            event.preventDefault();
+            const delta = event.deltaY > 0 ? -0.1 : 0.1;
+            view3D.scale = Math.max(view3D.minScale, Math.min(view3D.maxScale, view3D.scale + delta));
+            updateSceneTransform();
+            updateZoomIndicator();
+        }
+
+        function zoomIn() {
+            view3D.scale = Math.min(view3D.maxScale, view3D.scale + 0.2);
+            updateSceneTransform();
+            updateZoomIndicator();
+        }
+
+        function zoomOut() {
+            view3D.scale = Math.max(view3D.minScale, view3D.scale - 0.2);
+            updateSceneTransform();
+            updateZoomIndicator();
+        }
+
+        function updateSceneTransform() {
+            const scene = document.getElementById('quantum-3d-scene');
+            if (!view3D.isAutoRotating) {
+                scene.style.transform = `rotateX(${view3D.rotateX}deg) rotateY(${view3D.rotateY}deg) scale(${view3D.scale})`;
+            }
+            scene.style.setProperty('--rotateX', `${view3D.rotateX}deg`);
+            scene.style.setProperty('--scale', view3D.scale);
+        }
+
+        function updateZoomIndicator() {
+            document.getElementById('zoom-indicator').textContent = Math.round(view3D.scale * 100) + '%';
+        }
+
+        function toggleAutoRotate() {
+            const scene = document.getElementById('quantum-3d-scene');
+            const icon = document.getElementById('rotation-icon');
+            const btn = document.getElementById('auto-rotate-btn');
+
+            view3D.isAutoRotating = !view3D.isAutoRotating;
+
+            if (view3D.isAutoRotating) {
+                scene.classList.add('auto-rotate');
+                icon.className = 'fas fa-pause';
+                btn.classList.add('active');
+            } else {
+                scene.classList.remove('auto-rotate');
+                scene.style.transform = `rotateX(${view3D.rotateX}deg) rotateY(${view3D.rotateY}deg) scale(${view3D.scale})`;
+                icon.className = 'fas fa-play';
+                btn.classList.remove('active');
+            }
+        }
+
+        function resetView() {
+            view3D.rotateX = 10;
+            view3D.rotateY = 0;
+            view3D.scale = 1;
+            view3D.isAutoRotating = true;
+
+            const scene = document.getElementById('quantum-3d-scene');
+            scene.classList.add('auto-rotate');
+            scene.classList.remove('dragging');
+            scene.style.transform = '';
+            scene.style.setProperty('--rotateX', '10deg');
+            scene.style.setProperty('--scale', '1');
+
+            // Force animation restart
+            scene.style.animation = 'none';
+            scene.offsetHeight;
+            scene.style.animation = '';
+
+            document.getElementById('rotation-icon').className = 'fas fa-pause';
+            document.getElementById('auto-rotate-btn').classList.add('active');
+            updateZoomIndicator();
+        }
+
+        // Dashboard state
+        let dashboardState = {
+            previousPage: 0,
+            currentTab: 'overview'
+        };
+
+        // Dashboard functions
+        function toggleDashboard() {
+            const dashboardPage = document.getElementById('page-dashboard');
+            const isActive = dashboardPage.classList.contains('active');
+
+            if (isActive) {
+                closeDashboard();
+            } else {
+                openDashboard();
+            }
+        }
+
+        function openDashboard() {
+            dashboardState.previousPage = state.currentPage;
+
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show dashboard
+            const dashboardPage = document.getElementById('page-dashboard');
+            setTimeout(() => {
+                dashboardPage.classList.add('active');
+            }, 50);
+
+            // Hide progress steps, show dashboard indicator
+            document.getElementById('progress-steps').style.opacity = '0.3';
+            document.getElementById('dashboard-toggle').innerHTML = '<i class="fas fa-times text-primary-400 mr-2"></i><span class="text-sm">Close</span>';
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Load stats
+            loadDashboardStats();
+        }
+
+        function closeDashboard() {
+            const dashboardPage = document.getElementById('page-dashboard');
+            dashboardPage.classList.remove('active');
+
+            // Show previous page
+            setTimeout(() => {
+                const targetPage = document.getElementById(`page-${dashboardState.previousPage}`);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                }
+            }, 50);
+
+            // Restore progress steps
+            document.getElementById('progress-steps').style.opacity = '1';
+            document.getElementById('dashboard-toggle').innerHTML = '<i class="fas fa-chart-line text-primary-400 mr-2"></i><span class="text-sm">Dashboard</span>';
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goToHome() {
+            closeDashboard();
+            state.currentPage = 0;
+            updateProgress();
+            showPage(0);
+        }
+
+        function switchDashboardTab(tabName) {
+            dashboardState.currentTab = tabName;
+
+            // Update tab buttons
+            document.querySelectorAll('.dashboard-tab').forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.dataset.tab === tabName) {
+                    tab.classList.add('active');
+                }
+            });
+
+            // Update content
+            document.querySelectorAll('.dashboard-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            const targetContent = document.getElementById(`tab-${tabName}`);
+            if (targetContent) {
+                targetContent.classList.remove('hidden');
+            }
+        }
+
+        // Load dashboard statistics (simulated)
+        function loadDashboardStats() {
+            // In a real app, this would fetch from the API
+            // For demo, we use random values
+            const randomize = (base, variance) => Math.floor(base + (Math.random() - 0.5) * variance);
+
+            document.getElementById('stat-signatures').textContent = randomize(127, 20);
+            document.getElementById('stat-jobs').textContent = randomize(89, 15);
+            document.getElementById('stat-yes').textContent = randomize(78, 10);
+            document.getElementById('stat-avg-quantum').textContent = (Math.random() * 0.5 + 0.25).toFixed(3);
+        }
+
+        function refreshJobs() {
+            showToast('Jobs refreshed successfully', 'success');
+
+            // Simulate updating job stats
+            document.getElementById('jobs-active').textContent = Math.floor(Math.random() * 5) + 1;
+            document.getElementById('jobs-completed').textContent = Math.floor(Math.random() * 20) + 80;
+        }
+
+        function refreshStats() {
+            showToast('Statistics refreshed', 'success');
+            loadDashboardStats();
+        }
+
+        function exportData() {
+            // Simulate data export
+            const data = {
+                signatures: 127,
+                jobs: 89,
+                responses: {
+                    sentiment: state.sentiment || 'N/A',
+                    device: state.device || 'N/A',
+                    industry: state.industry || 'N/A'
+                },
+                exportedAt: new Date().toISOString()
+            };
+
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'quantum-futures-export.json';
+            a.click();
+            URL.revokeObjectURL(url);
+
+            showToast('Data exported successfully', 'success');
+        }
+
+        // Confirmation modal functions
+        function showClearConfirmation() {
+            const modal = document.getElementById('confirm-modal');
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('active');
+            }, 10);
+        }
+
+        function closeConfirmModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+
+            const modal = document.getElementById('confirm-modal');
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        function confirmClearData() {
+            closeConfirmModal();
+
+            // Simulate clearing data
+            setTimeout(() => {
+                document.getElementById('stat-signatures').textContent = '0';
+                document.getElementById('stat-jobs').textContent = '0';
+                document.getElementById('stat-yes').textContent = '0';
+                document.getElementById('stat-avg-quantum').textContent = '0.000';
+                document.getElementById('jobs-active').textContent = '0';
+                document.getElementById('jobs-completed').textContent = '0';
+                document.getElementById('jobs-failed').textContent = '0';
+
+                showToast('All data has been cleared', 'success');
+            }, 500);
+        }
+
+        // Toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastIcon = document.getElementById('toast-icon');
+            const toastMessage = document.getElementById('toast-message');
+
+            toastMessage.textContent = message;
+            toast.className = `toast ${type}`;
+
+            if (type === 'success') {
+                toastIcon.className = 'fas fa-check-circle text-green-400';
+            } else if (type === 'error') {
+                toastIcon.className = 'fas fa-exclamation-circle text-red-400';
+            } else {
+                toastIcon.className = 'fas fa-info-circle text-blue-400';
+            }
+
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            updateProgress();
+            showPage(0);
+        });
+    </script>
+</body>
+</html>

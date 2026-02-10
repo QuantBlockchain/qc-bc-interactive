@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Signature Wall</title>
+    <link rel="stylesheet" href="/static/css/style.css?v={{ cache_bust }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="quantum-background">
+        <div class="quantum-particles"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>🌌 Quantum Signature Wall</h1>
+            <p>Explore quantum-resistant digital signatures in an interactive 3D visualization</p>
+            <div class="event-stats" id="eventStats">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalSignatures">0</span>
+                    <span class="stat-label">Quantum Signatures</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="yesVotes">0</span>
+                    <span class="stat-label">"是" Votes</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="noVotes">0</span>
+                    <span class="stat-label">"不是" Votes</span>
+                </div>
+            </div>
+            <div class="wall-content">
+                <!-- Call to Action for Empty Wall -->
+                <div class="wall-cta" id="wallCta" style="display: none;">
+                    <div class="cta-content">
+                        <div class="cta-icon">🌌</div>
+                        <h2>The Quantum Field Awaits</h2>
+                        <p>No signatures have been created yet. Be the first to contribute to the quantum wall!</p>
+                        <a href="/signup" class="cta-button">
+                            ✨ Create First Signature
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Signature Wall Visualization -->
+                <div class="signature-wall-container">
+                    <div class="wall-header">
+                        <h2>🔮 Interactive Signature Visualization</h2>
+                        <div class="wall-controls">
+                            <button id="refreshWall" class="refresh-btn">🔄 Refresh</button>
+                        </div>
+                    </div>
+                    <div class="signature-wall" id="signatureWall">
+                        <div class="wall-loading" id="wallLoading">Initializing quantum field...</div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </header>
+
+        <!-- Signature Detail Modal -->
+        <div class="modal-overlay" id="signatureModal" style="display: none;">
+            <div class="modal-content signature-modal">
+                <div class="modal-header">
+                    <h2>🔐 Quantum Signature Details</h2>
+                    <button class="close-btn" id="closeModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="signature-detail-card">
+                        <h3 id="modalSignatureName">Loading...</h3>
+
+                        <div class="detail-section">
+                            <h4>💭 Response</h4>
+                            <p id="modalSignatureResponse">Loading...</p>
+                        </div>
+
+                        <div class="detail-section">
+                            <h4>⚡ Quantum Task Results</h4>
+                            <div id="quantumTaskResults">
+                                <!-- Task results will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/wall.js?v={{ cache_bust }}"></script>
+</body>
+</html>

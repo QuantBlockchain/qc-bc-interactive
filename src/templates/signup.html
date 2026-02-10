@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Quantum Signature</title>
+    <link rel="stylesheet" href="/static/css/style.css?v={{ cache_bust }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="quantum-background">
+        <div class="quantum-particles"></div>
+    </div>
+
+    <!-- Token Authentication Modal -->
+    <div class="token-auth-overlay" id="tokenAuthOverlay">
+        <div class="token-auth-modal">
+            <div class="token-auth-header">
+                <h2>🔐 Access Control</h2>
+                <p>Enter the access token to proceed</p>
+            </div>
+            <form id="tokenAuthForm" class="token-auth-form">
+                <div class="token-input-group">
+                    <label for="accessToken">Access Token:</label>
+                    <input
+                        type="password"
+                        id="accessToken"
+                        name="accessToken"
+                        required
+                        placeholder="Enter your access token"
+                        autocomplete="off"
+                    >
+                    <div class="token-error" id="tokenError" style="display: none;"></div>
+                </div>
+                <button type="submit" class="token-submit-btn">
+                    <span>🚀 Verify Access</span>
+                </button>
+            </form>
+            <div class="token-hint">
+                Contact the administrator for access token
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>🔐 Create Your Quantum Signature</h1>
+            <p>Generate a quantum-resistant digital signature and join the wall</p>
+            <div class="nav-controls">
+                <a href="/" class="nav-btn">🏠 Home</a>
+                <a href="/wall" class="nav-btn">🌌 View Wall</a>
+                <a href="/admin" class="nav-btn">🔧 Admin</a>
+            </div>
+        </header>
+
+        <div class="signup-content">
+            <!-- Signature Creation Form -->
+            <div class="signup-section">
+                <div class="form-container">
+                    <!-- <div class="form-header">
+                        <h2>🎲 Generate Your Unique Quantum Signature</h2>
+                        <p>Answer the question below to create a quantum-resistant digital signature that will be displayed on our visualization wall.</p>
+                    </div> -->
+
+                    <form id="quantumForm" class="quantum-form">
+                        <div class="form-group">
+                            <label for="name">Your Name:<br>（您的名字）</label>
+                            <input type="text" id="name" name="name" required placeholder="Enter your full name（输入您的全名）">
+                            <div class="form-hint">This will be displayed publicly on the signature wall<br>（这将公开显示在签名墙上）</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quantumDevice">Select Quantum Device:<br>（选择量子设备）</label>
+                            <div class="device-select-container">
+                                <div class="select-wrapper">
+                                    <select id="quantumDevice" name="quantumDevice" required>
+                                        <option value="">Choose your quantum computing platform（选择您的量子计算平台）</option>
+                                        <option value="aws_sv1">☁️ Amazon Braket SV1 Simulator（AWS托管的State Vector量子模拟器-几分钟）</option>
+                                        <option value="ionq_forte" disabled>⚛️ IonQ Trap QPU（IonQ的离子阱量子计算机-十几分钟）- UNDER MAINTENANCE（设备维护中直到2026年11月20号）</option>
+                                        <option value="iqm_garnet">💎 IQM Superconducting QPU（IQM的超导量子处理器-十几分钟）</option>
+                                        <option value="quera_aquila">🔬 QuEra Neutral Atom QPU（QuEra的中性原子量子计算机-十几分钟）</option>
+                                        <option value="rigetti_ankaa3">🎯 Rigetti Superconducting QPU（Rigetti的超导量子处理器-十几分钟）</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="preview-device-btn" id="previewDeviceBtn" disabled title="Select a device first">
+                                    👁️ Preview Device
+                                </button>
+                            </div>
+                            <div class="form-hint device-info" id="deviceInfo">Choose a quantum device to see processing details (选择量子设备查看处理细节)</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Do you think quantum computing will break the SHA-256 encryption of Bitcoin in 10 years?<br>(您认为量子计算会在10年内攻破比特币的SHA-256加密吗？)</label>
+                            <div class="select-wrapper">
+                                <select id="message" name="message" required>
+                                    <option value="">Please choose your answer<br>（请选择您的答案）</option>
+                                    <option value="是">Yes（是）</option>
+                                    <option value="不是">No（不是）</option>
+                                </select>
+                            </div>
+                            <div class="form-hint">Your response will influence the quantum signature generation process<br>（您的回答会影响量子签名生成过程）</div>
+                        </div>
+
+                        <button type="submit" id="generateBtn" class="generate-signature-btn">
+                            <span class="btn-icon">✨</span>
+                            <span class="btn-text">Generate Quantum Signature<br>（生成量子签名）</span>
+                            <div class="btn-glow"></div>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Process Information -->
+                <div class="process-info">
+                    <h3>🧬 What Happens Next?</h3>
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <div class="step-icon">🎲</div>
+                            <div class="step-content">
+                                <h4>Multi-Device Quantum Processing</h4>
+                                <p>Choose from local simulators, AWS managed services, or real quantum hardware from IonQ, IQM, QuEra, and Rigetti</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-icon">🔐</div>
+                            <div class="step-content">
+                                <h4>Post-Quantum Cryptography</h4>
+                                <p>Lattice-based quantum-resistant keys are generated using quantum entropy</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-icon">📝</div>
+                            <div class="step-content">
+                                <h4>Digital Signature Creation</h4>
+                                <p>Your response is cryptographically signed with quantum-resistant algorithms</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-icon">🌌</div>
+                            <div class="step-content">
+                                <h4>Wall Visualization</h4>
+                                <p>Your signature appears as an interactive card on the 3D quantum wall</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <div class="results-header">
+                    <h2>🎉 Signature Created Successfully!</h2>
+                    <p>Your quantum signature has been generated and added to the wall</p>
+                </div>
+
+                <div class="results-grid">
+                    <div class="result-card quantum-glow">
+                        <h3>🎲 Your Quantum ID</h3>
+                        <div class="quantum-number" id="quantumNumber"></div>
+                        <p class="description">Quantum-generated unique identifier</p>
+                    </div>
+
+                    <div class="result-card quantum-glow">
+                        <h3>🔐 Quantum-Resistant Keys</h3>
+                        <div class="crypto-info">
+                            <div class="key-item">
+                                <span class="label">Algorithm:</span>
+                                <span class="value" id="algorithm">Quantum-Resistant-Lattice</span>
+                            </div>
+                            <div class="key-item">
+                                <span class="label">Public Key:</span>
+                                <span class="value hash-text" id="publicKey">Loading...</span>
+                            </div>
+                            <div class="key-item">
+                                <span class="label">Signature:</span>
+                                <span class="value hash-text" id="digitalSignature">Loading...</span>
+                            </div>
+                        </div>
+                        <p class="description">Post-quantum cryptographic signature</p>
+                    </div>
+
+                    <div class="result-card quantum-glow">
+                        <h3>⚛️ Device Information</h3>
+                        <div class="device-results">
+                            <div class="device-item">
+                                <span class="label">Device:</span>
+                                <span class="value" id="deviceName">Loading...</span>
+                            </div>
+                            <div class="device-item">
+                                <span class="label">Job ID:</span>
+                                <span class="value" id="jobId">N/A</span>
+                            </div>
+                            <div class="device-item">
+                                <span class="label">Processing:</span>
+                                <span class="value" id="processingType">Loading...</span>
+                            </div>
+                        </div>
+                        <p class="description">Quantum computing platform details</p>
+                    </div>
+                </div>
+
+                <div class="results-actions">
+                    <a href="/wall" class="action-btn primary-btn">🌌 View Your Signature on the Wall</a>
+                    <button id="createAnotherBtn" class="action-btn secondary-btn">🔄 Create Another Signature</button>
+                </div>
+            </div>
+
+            <!-- Loading Overlay -->
+            <div class="loading" id="loading" style="display: none;">
+                <div class="loading-content">
+                    <div class="quantum-spinner"></div>
+                    <p class="loading-text">Generating quantum-resistant signature...</p>
+                    <div class="loading-steps">
+                        <div class="loading-step active" id="step1">🎲 Generating quantum randomness</div>
+                        <div class="loading-step" id="step2">🔐 Creating cryptographic keys</div>
+                        <div class="loading-step" id="step3">📝 Signing your response</div>
+                        <div class="loading-step" id="step4">🌌 Adding to quantum wall</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Device Preview Modal -->
+            <div class="device-preview-modal" id="devicePreviewModal" style="display: none;">
+                <div class="device-preview-content">
+                    <div class="device-preview-header">
+                        <h2 id="devicePreviewTitle">🔬 Quantum Device Preview</h2>
+                        <p>Use your mouse to rotate and explore the device</p>
+                        <button class="device-preview-close-btn" id="closeDevicePreviewBtn">×</button>
+                    </div>
+                    <div class="device-preview-canvas-container">
+                        <canvas id="devicePreviewCanvas"></canvas>
+                        <div class="device-preview-controls">
+                            <div class="control-hint">
+                                <span>🖱️ Drag to Rotate</span>
+                                <span>📜 Scroll to Zoom</span>
+                                <span>Right-Click to Pan</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="device-preview-info">
+                        <div class="device-specs" id="deviceSpecs">
+                            <h3>Device Specifications</h3>
+                            <div class="spec-grid" id="specGrid"></div>
+                        </div>
+                        <div class="device-description" id="deviceDescription"></div>
+                    </div>
+                    <div class="device-preview-actions">
+                        <button class="device-preview-action-btn primary-btn" id="selectDeviceBtn">✅ Use This Device</button>
+                        <button class="device-preview-action-btn secondary-btn" id="closeDeviceModalBtn">Close Preview</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="/static/js/signup.js?v={{ cache_bust }}"></script>
+</body>
+</html>

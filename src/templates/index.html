@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Computing Demo Platform</title>
+    <link rel="stylesheet" href="/static/css/style.css?v={{ cache_bust }}">
+</head>
+<body>
+    <div class="quantum-background">
+        <div class="quantum-particles"></div>
+    </div>
+
+    <div class="container">
+        <header class="landing-header">
+            <h1>⚛️ Quantum Computing Demo Platform</h1>
+            <p>Explore the future of quantum computing, blockchain, and post-quantum cryptography</p>
+            <div class="version-badge">Version 3.0 - Advanced Cryptographic Demonstrations</div>
+        </header>
+
+        <div class="landing-content">
+            <!-- Feature Cards -->
+            <div class="feature-grid">
+                <div class="feature-card quantum-glow" onclick="window.location.href='/signup'">
+                    <div class="feature-icon">🔐</div>
+                    <h2>Create Quantum Signature</h2>
+                    <p>Generate your own quantum-resistant digital signature and contribute to the wall.</p>
+                    <div class="feature-highlights">
+                        <span class="highlight">🎲 Quantum Random Numbers</span>
+                        <span class="highlight">🔐 Post-Quantum Cryptography</span>
+                        <span class="highlight">📝 Digital Signing</span>
+                    </div>
+                    <div class="action-button">
+                        ✨ Create Signature
+                    </div>
+                </div>
+
+                <div class="feature-card quantum-glow" onclick="window.location.href='/wall'">
+                    <div class="feature-icon">🌌</div>
+                    <h2>Quantum Signature Wall</h2>
+                    <p>Explore quantum-resistant digital signatures in a stunning 3D interactive visualization.</p>
+                    <div class="feature-highlights">
+                        <span class="highlight">🌌 3D Visualization</span>
+                        <span class="highlight">⚡ Real-time Updates</span>
+                        <span class="highlight">🎨 Quantum Positioning</span>
+                    </div>
+                    <div class="action-button">
+                        🌌 View Wall
+                    </div>
+                </div>
+
+                <div class="feature-card quantum-glow" onclick="window.location.href='/jobs'">
+                    <div class="feature-icon">⚡</div>
+                    <h2>Job Monitor</h2>
+                    <p>Track quantum computing jobs across multiple devices including AWS, IonQ, IQM, QuEra, and Rigetti.</p>
+                    <div class="feature-highlights">
+                        <span class="highlight">📊 Real-time Monitoring</span>
+                        <span class="highlight">🔄 Auto-refresh</span>
+                        <span class="highlight">⚛️ Multi-device Support</span>
+                    </div>
+                    <div class="action-button">
+                        ⚡ Monitor Jobs
+                    </div>
+                </div>
+
+                <div class="feature-card quantum-glow" onclick="window.location.href='/admin'">
+                    <div class="feature-icon">🔧</div>
+                    <h2>Admin Dashboard</h2>
+                    <p>Administrative controls for managing the quantum signature wall and viewing system statistics.</p>
+                    <div class="feature-highlights">
+                        <span class="highlight">📊 Live Statistics</span>
+                        <span class="highlight">🗑️ Data Management</span>
+                        <span class="highlight">👥 User Activity</span>
+                    </div>
+                    <div class="action-button">
+                        🔧 Access Admin Panel
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technology Overview -->
+            <div class="tech-section">
+                <h2>🧬 Technology Stack</h2>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <div class="tech-icon">🔬</div>
+                        <h3>Multi-Device Quantum Computing</h3>
+                        <p>AWS Braket integration supporting local simulators, managed simulators, and real quantum hardware from IonQ, IQM, QuEra, and Rigetti</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-icon">🛡️</div>
+                        <h3>Post-Quantum Cryptography</h3>
+                        <p>Lattice-based quantum-resistant digital signatures protecting against quantum attacks</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-icon">🌐</div>
+                        <h3>Web Technologies</h3>
+                        <p>FastAPI backend with modern frontend featuring 3D visualizations and real-time updates</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-icon">🎨</div>
+                        <h3>Interactive Design</h3>
+                        <p>Glassmorphism effects, quantum animations, and responsive design with Chart.js visualizations</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="stats-section">
+                <h2>📈 Platform Statistics</h2>
+                <div class="quick-stats-grid">
+                    <div class="quick-stat-card">
+                        <div class="stat-icon">🔮</div>
+                        <span class="stat-number" id="totalSignatures">Loading...</span>
+                        <span class="stat-label">Total Signatures Generated</span>
+                    </div>
+                    <div class="quick-stat-card">
+                        <div class="stat-icon">🎲</div>
+                        <span class="stat-number" id="avgQuantumNumber">Loading...</span>
+                        <span class="stat-label">Average Quantum Number</span>
+                    </div>
+                    <div class="quick-stat-card">
+                        <div class="stat-icon">⚡</div>
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Active Demo Systems</span>
+                    </div>
+                    <div class="quick-stat-card">
+                        <div class="stat-icon">🌐</div>
+                        <span class="stat-number">∞</span>
+                        <span class="stat-label">Quantum Possibilities</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="landing-footer">
+            <p>Built with quantum computing, secured with post-quantum cryptography</p>
+            <div class="footer-links">
+                <a href="/signup">Create Signature</a>
+                <a href="/wall">Signature Wall</a>
+                <a href="/jobs">Job Monitor</a>
+                <a href="/admin">Admin Panel</a>
+                <a href="https://github.com/anthropics/claude-code" target="_blank">About</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Load platform statistics
+        async function loadPlatformStats() {
+            try {
+                const response = await fetch('/stats');
+                const stats = await response.json();
+
+                document.getElementById('totalSignatures').textContent = stats.total_signatures || 0;
+                document.getElementById('avgQuantumNumber').textContent = stats.average_quantum_number || 0;
+            } catch (error) {
+                console.error('Failed to load platform stats:', error);
+                document.getElementById('totalSignatures').textContent = '0';
+                document.getElementById('avgQuantumNumber').textContent = '0';
+            }
+        }
+
+        // Load stats on page load
+        document.addEventListener('DOMContentLoaded', loadPlatformStats);
+
+        // Auto-refresh stats every 30 seconds
+        setInterval(loadPlatformStats, 30000);
+    </script>
+</body>
+</html>
