@@ -1,5 +1,5 @@
-# Quantum Futures Interactive
-
+# Quantum Blockchain Interactive
+ 
 An interactive web platform that guides users through the intersection of quantum computing and blockchain security. Built for live events and workshops, the experience connects the 2025 Nobel Prize in Physics to real quantum hardware on AWS Braket, culminating in the generation of a quantum-resistant cryptographic key — your personal **Quantum-Safe Blockchain Passport**.
 
 ## The Experience
