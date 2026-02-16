@@ -1,7 +1,19 @@
-# Quantum Blockchain Interactive
+<p align="center">
+  <i>
+  “What I cannot create, I do not understand.”
+  </i><br/>
+  — Richard Feynman
+</p>
+
+<br/>
+
+# ⚛️ Quantum Blockchain Interactive
 
 <p align="center">
-  <b>An interdisciplinary demonstration of post-quantum cryptography, blockchain risk awareness, and sustainable distributed trust through interactive user experience and real quantum hardware execution.</b>
+  <b>
+  An interdisciplinary demonstration of post-quantum cryptography, blockchain risk awareness,
+  and sustainable distributed trust through interactive user experience and real quantum hardware execution.
+  </b>
 </p>
 
 <p align="center">
@@ -16,38 +28,59 @@
   </a>
 </p>
 
+<p align="center">
+  ⚛️ Quantum Computing &nbsp;&nbsp;•&nbsp;&nbsp;
+  🔐 Post-Quantum Cryptography &nbsp;&nbsp;•&nbsp;&nbsp;
+  ⛓️ Blockchain Security &nbsp;&nbsp;•&nbsp;&nbsp;
+  ☁️ AWS Braket
+</p>
+
 ---
 
-## Demo Contribution Summary
+## 🌐 Demo Contribution Summary
 
-**Quantum Blockchain Interactive** is a research demonstration exploring the transition toward quantum-resilient blockchain infrastructure through a guided interactive experience. The platform integrates post-quantum cryptography, blockchain security risk awareness, and real quantum hardware execution into a unified demonstrator designed for interdisciplinary audiences.
+**Quantum Blockchain Interactive** is a research demonstration exploring the transition toward quantum-resilient blockchain infrastructure through a guided interactive experience.
+
+The platform integrates:
+
+- ⚛️ post-quantum cryptography,
+- ⛓️ blockchain security risk awareness,
+- ☁️ real quantum hardware execution,
+
+into a unified demonstrator designed for interdisciplinary audiences.
 
 The demo illustrates:
 
 - how advances in quantum computing affect current blockchain cryptographic assumptions,
 - how post-quantum cryptographic mechanisms can be introduced through participatory interfaces,
 - how infrastructure decisions and stakeholder perception influence adoption dynamics,
-- and how distributed trust systems evolve under emerging computational paradigms.
+- how distributed trust systems evolve under emerging computational paradigms.
 
-Unlike demonstrations focused solely on protocol implementation or algorithmic benchmarking, this system emphasizes the interaction between technical security mechanisms, ecosystem understanding, and adoption processes. Participants experience post-quantum migration through a structured interaction flow culminating in the generation of a quantum-resistant cryptographic artifact using Amazon Braket.
+Unlike demonstrations focused solely on protocol implementation or algorithmic benchmarking, this system emphasizes the interaction between technical security mechanisms, ecosystem understanding, and adoption processes. Participants experience post-quantum migration through a structured interaction flow culminating in the generation of a quantum-resistant cryptographic artifact using **Amazon Braket**.
 
 ---
 
-## Overview
+## 🧭 Overview
 
-Quantum Blockchain Interactive is an interactive web platform designed for live demonstrations, workshops, and public engagement. The experience connects quantum computing progress, blockchain security challenges, and post-quantum cryptography through a structured user journey.
+Quantum Blockchain Interactive is an interactive web platform designed for:
+
+- 🎤 live demonstrations  
+- 🧪 workshops and exhibitions  
+- 🌍 public engagement  
+
+The experience connects quantum computing progress, blockchain security challenges, and post-quantum cryptography through a structured user journey.
 
 Participants move from scientific context and risk awareness to participatory interaction and infrastructure exploration, concluding with the generation of a quantum-safe cryptographic key — a personalized **Quantum-Safe Blockchain Passport**.
 
 The project serves simultaneously as:
 
-- an educational interface for emerging cryptographic transitions,
-- a research demonstration of interdisciplinary technology adoption,
-- and a deployable interactive system for events and exhibitions.
+- 📘 an educational interface for emerging cryptographic transitions,
+- 🔬 a research demonstration of interdisciplinary technology adoption,
+- 🚀 a deployable interactive system for events and exhibitions.
 
 ---
 
-## Table of Contents
+## 📚 Table of Contents
 
 - [Experience (UI Journey)](#experience-ui-journey)
 - [System Architecture](#system-architecture)
@@ -57,15 +90,16 @@ The project serves simultaneously as:
 
 ---
 
-## Experience (UI Journey)
+## 🎮 Experience (UI Journey)
 
-The application presents a **7-page guided interaction flow** that progressively introduces quantum computing concepts and blockchain security implications while maintaining accessibility for mixed technical audiences.
+The application presents a **7-page guided interaction flow** that progressively introduces quantum computing concepts and blockchain security implications while remaining accessible to mixed technical audiences.
 
-Detailed implementation-oriented UI documentation is available at:
+👉 Detailed UI documentation:  
+[`docs/ui-information/Readme.md`](./docs/ui-information/Readme.md)
 
-👉 [`docs/ui-information/Readme.md`](./docs/ui-information/Readme.md)
+---
 
-### Journey Overview
+### 🗺️ Journey Overview
 
 | Page | Screen | Experience Goal | UI Module |
 |------|--------|----------------|-----------|
@@ -79,62 +113,66 @@ Detailed implementation-oriented UI documentation is available at:
 
 ---
 
-### Experience Design Principles
+### 🧩 Experience Design Principles
 
 The interaction flow mirrors real-world technology adoption and post-quantum transition processes.
 
 | Design Principle | Pages | Role in Experience |
 |------------------|-------|-------------------|
-| **Context → Understanding** | Pages 1–2 | Establish shared scientific and security context across audiences |
-| **Participation → Reflection** | Pages 3–5 | Transform learning into interaction through consent, sentiment, and voting |
-| **Decision → Outcome** | Pages 6–7 | Connect infrastructure choices to observable cryptographic results |
+| **Context → Understanding** | Pages 1–2 | Establish shared scientific and security context |
+| **Participation → Reflection** | Pages 3–5 | Transform learning into interaction and feedback |
+| **Decision → Outcome** | Pages 6–7 | Connect infrastructure choices to cryptographic results |
 
 This progression allows participants to understand post-quantum migration as both a technical and socio-technical transition involving research, engineering, governance, and investment perspectives.
 
 ---
 
-### Admin Dashboard
+### 🛠️ Admin Dashboard
 
-A protected dashboard available at `/dashboard` provides:
+A protected dashboard at `/dashboard` provides:
 
-- session monitoring and activity metrics
-- invite code management
-- sentiment and voting aggregation
-- feedback review and export functionality
+- 📊 session monitoring and activity metrics
+- 🔑 invite code management
+- ☁️ sentiment and voting aggregation
+- 📝 feedback review and export
 
 ---
 
-## System Architecture
+## 🏗️ System Architecture
 
-The repository contains both the interactive frontend and the infrastructure required to deploy it as a serverless application on AWS. The architecture is designed for scalability during live demonstrations while maintaining operational simplicity.
+The repository contains both the interactive frontend and the infrastructure required to deploy it as a serverless application on AWS.
 
 ```
 
-CloudFront (CDN) → API Gateway → Lambda (Next.js / Docker ARM64)
+CloudFront (CDN)
+↓
+API Gateway (HTTP)
+↓
+Lambda (Next.js / Docker ARM64)
 │
-┌───────────┼───────────┐
-DynamoDB     Lambda       S3
-(data)       (Braket)   (feedback)
+┌──────┼────────────┐
+DynamoDB        Lambda        S3
+(data)          (Braket)     (feedback)
 
 ````
 
 ### Components
 
-- **Frontend** — Next.js App Router running inside AWS Lambda via Lambda Web Adapter.
-- **API Layer** — Server-side API routes; AWS credentials remain private.
+- **Frontend** — Next.js App Router running inside AWS Lambda.
+- **API Layer** — Server-side API routes; credentials remain private.
 - **Data Layer** — DynamoDB tables for sessions, sentiments, votes, keys, and invite codes.
-- **Quantum Integration** — Dedicated Lambda invoking Amazon Braket simulators or QPUs.
+- **Quantum Integration** — Lambda invoking Amazon Braket simulators or QPUs.
 - **Infrastructure** — Provisioned using a single AWS CDK stack.
 
 ---
 
-## Configuration
+## ⚙️ Configuration
 
 Application behavior is configured through environment variables used in both local development and cloud deployment.
 
-### Local Configuration
+### 💻 Local Configuration
 
-Create a local configuration file:
+Create:
 
 ```bash
 frontend/.env.local
@@ -147,9 +185,9 @@ AWS_REGION=us-east-1
 ADMIN_API_KEY=your-key
 ```
 
-### Cloud Configuration
+### ☁️ Cloud Configuration
 
-During deployment, environment variables are injected into Lambda functions through AWS CDK configuration. These values remain server-side and are not exposed to the browser.
+Environment variables are injected into Lambda functions through AWS CDK during deployment. These values remain server-side and are never exposed to the browser.
 
 | Variable                   | Required | Default                | Description                        |
 | -------------------------- | -------- | ---------------------- | ---------------------------------- |
@@ -163,7 +201,7 @@ During deployment, environment variables are injected into Lambda functions thro
 
 ---
 
-## Getting Started (Local Development)
+## 🚀 Getting Started (Local Development)
 
 Run the application locally for development or testing.
 
@@ -184,7 +222,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-The application will be available at:
+Application runs at:
 
 ```
 http://localhost:3000
@@ -192,19 +230,20 @@ http://localhost:3000
 
 ---
 
-## Cloud Deployment
+## ☁️ Cloud Deployment
 
-This section describes deployment of the application to AWS using CDK.
+Deploy the application to AWS using CDK:
 
 ```bash
 ./deploy.sh
 ```
 
-The deployment process:
+Deployment performs:
 
-1. Builds the frontend container
-2. Provisions infrastructure via AWS CDK
-3. Configures Lambda, API Gateway, DynamoDB, and CloudFront
-4. Outputs the public application URL
+1. Frontend container build
+2. Infrastructure provisioning via AWS CDK
+3. Lambda, API Gateway, DynamoDB, and CloudFront configuration
+4. Output of the public application URL
 
 After deployment, the application runs fully serverlessly and is ready for live demonstrations or production use.
+
