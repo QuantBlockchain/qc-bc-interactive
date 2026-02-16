@@ -1,12 +1,3 @@
-<p align="center">
-  <i>
-  “What I cannot create, I do not understand.”
-  </i><br/>
-  — Richard Feynman
-</p>
-
-<br/>
-
 # ⚛️ Quantum Blockchain Interactive
 
 <p align="center">
