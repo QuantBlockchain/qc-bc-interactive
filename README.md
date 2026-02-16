@@ -8,6 +8,15 @@
 </p>
 
 <p align="center">
+  <i>
+  “What I cannot create, I do not understand.”
+  </i><br/>
+  — Richard Feynman
+</p>
+
+<br/>
+
+<p align="center">
   <a href="./docs/ui-information/Readme.md">
     <img alt="UI Walkthrough" src="https://img.shields.io/badge/UI-Experience-blue">
   </a>
