@@ -140,29 +140,75 @@ A protected dashboard at `/dashboard` provides:
 
 ## 🏗️ System Architecture
 
-The repository contains both the interactive frontend and the infrastructure required to deploy it as a serverless application on AWS.
 
-```
+The application is deployed as a **single-stack, serverless web system** on AWS. It is optimized for **live demos and workshops**: low operational overhead, fast global delivery, and strict separation between the browser UI and privileged cloud operations (data + quantum execution).
 
-CloudFront (CDN)
-↓
-API Gateway (HTTP)
-↓
-Lambda (Next.js / Docker ARM64)
-│
-┌──────┼────────────┐
-DynamoDB        Lambda        S3
-(data)          (Braket)     (feedback)
+### High-level system flow
 
+```text
+CloudFront (CDN)  →  API Gateway (HTTP)  →  Lambda (Next.js / Docker ARM64)
+                                                  │
+                                      ┌───────────┼───────────┐
+                                  DynamoDB     Lambda       S3
+                                 (7 tables)   (Braket)  (feedback)
 ````
 
-### Components
+### What each component does
 
-- **Frontend** — Next.js App Router running inside AWS Lambda.
-- **API Layer** — Server-side API routes; credentials remain private.
-- **Data Layer** — DynamoDB tables for sessions, sentiments, votes, keys, and invite codes.
-- **Quantum Integration** — Lambda invoking Amazon Braket simulators or QPUs.
-- **Infrastructure** — Provisioned using a single AWS CDK stack.
+<table>
+  <tr>
+    <td width="22%"><b>🌍 CloudFront (CDN)</b></td>
+    <td>
+      Serves the UI and static assets (images, scripts) from edge locations to reduce latency during public events.
+      Dynamic requests (API calls and server-rendered routes) are forwarded downstream.
+    </td>
+  </tr>
+  <tr>
+    <td><b>🚪 API Gateway (HTTP)</b></td>
+    <td>
+      Provides the public HTTP entry point for the application’s server-side endpoints.
+      It establishes request boundaries (routing, throttling) between the internet and compute functions.
+    </td>
+  </tr>
+  <tr>
+    <td><b>⚙️ Lambda (Next.js / Docker ARM64)</b></td>
+    <td>
+      Runs the Next.js application as a serverless container. This layer performs server-side rendering and hosts API routes
+      for session orchestration, consent gating, sentiment/voting submission, and result retrieval—while ensuring no AWS credentials
+      are ever exposed to the browser.
+    </td>
+  </tr>
+  <tr>
+    <td><b>🗄️ DynamoDB (7 tables)</b></td>
+    <td>
+      Persists interaction artifacts and operational state with burst-friendly scaling. Typical tables include sessions, sentiments,
+      industry votes, generated key metadata, invite codes, admins, and feedback metadata.
+    </td>
+  </tr>
+  <tr>
+    <td><b>⚛️ Lambda (Braket)</b></td>
+    <td>
+      Isolates quantum execution from the web runtime. It submits tasks to Amazon Braket (simulators or QPUs), tracks job status,
+      and returns device/job metadata used to render auditable outcome artifacts (the “Quantum-Safe Passport”).
+    </td>
+  </tr>
+  <tr>
+    <td><b>📦 S3 (feedback)</b></td>
+    <td>
+      Stores optional large uploads such as feedback attachments or exported artifacts. DynamoDB retains associated metadata and pointers.
+    </td>
+  </tr>
+</table>
+
+### Why this architecture fits the demo
+
+* **Performance for live audiences:** CloudFront reduces global latency and stabilizes UI delivery under burst traffic.
+* **Security by design:** the browser never holds AWS credentials; privileged operations (data writes + Braket jobs) happen server-side.
+* **Auditability of outcomes:** quantum execution returns job/device metadata that can be surfaced in the final results page for traceability.
+* **Operational simplicity:** a single CDK stack provisions the system; one deployment path supports repeated event setups.
+
+> In summary, the stack is designed to keep the interactive experience responsive and reliable while supporting real post-quantum workflow integration with quantum hardware.
+
 
 ---
 
