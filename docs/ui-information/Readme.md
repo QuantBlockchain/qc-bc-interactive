@@ -4,8 +4,6 @@ This document provides a **technical, implementation-oriented walkthrough** of e
 
 > ✅ **Note:** References to Nobel Prize recognition within the experience reflect real-world scientific developments. In particular, references to the 2025 Nobel Prize in Physics align with the official Nobel Foundation press release:
 > https://www.nobelprize.org/prizes/physics/2025/press-release/
->
-> Narrative framing, contributor presentation, and storytelling elements remain configurable UI copy and may be adapted for different deployments or audiences.
 
 
 ---
