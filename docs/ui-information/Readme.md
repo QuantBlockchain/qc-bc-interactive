@@ -2,9 +2,32 @@
 
 This document provides a **technical, implementation-oriented walkthrough** of each user interface screen in **Quantum Futures Interactive**. It is written for engineers, designers, researchers, and reviewers who require a structured understanding of **screen purpose, user flow, captured data, and system intent**.
 
-> ⚠️ **Note:** Some narrative elements (e.g., Nobel Prize references or named individuals) may be prototype storytelling content and should be treated as configurable UI copy rather than verified historical claims.
+> ✅ **Note:** References to Nobel Prize recognition within the experience reflect real-world scientific developments. In particular, references to the 2025 Nobel Prize in Physics align with the official Nobel Foundation press release:
+> https://www.nobelprize.org/prizes/physics/2025/press-release/
+>
+> Narrative framing, contributor presentation, and storytelling elements remain configurable UI copy and may be adapted for different deployments or audiences.
+
 
 ---
+## 🔬 Scientific Background
+
+Quantum Futures Interactive is designed as an **educational and exploratory interface** demonstrating how advances in quantum information science influence modern digital infrastructure.
+
+Recent Nobel-recognized work in quantum physics reflects foundational progress in areas such as:
+
+* quantum information processing,
+* quantum state control and measurement,
+* and scalable quantum systems.
+
+These advances have direct implications for cryptography. Certain quantum algorithms — most notably Shor’s algorithm — theoretically weaken widely used public-key systems such as RSA and elliptic curve cryptography. As a result, the cybersecurity and blockchain communities are actively researching **post-quantum cryptography (PQC)** as a long-term mitigation strategy.
+
+The experience does not claim operational quantum advantage over current cryptographic systems. Instead, it illustrates:
+
+* why quantum progress motivates cryptographic migration planning,
+* how post-quantum standards are being developed (e.g., NIST PQC process),
+* and how emerging technologies may intersect with decentralized systems and digital identity.
+
+This context supports the educational goals of the experience while maintaining scientific accuracy and neutrality.
 
 ## 📚 Contents
 
@@ -299,3 +322,32 @@ This document provides a **technical, implementation-oriented walkthrough** of e
 | **Digital Signature**                 | Cryptographic proof verifying authenticity and integrity of data.                                                       |
 | **Quantum ID**                        | Identifier derived from quantum or quantum-seeded randomness within the experience.                                     |
 
+## ⚖️ Limitations & Non-Claims
+
+Quantum Futures Interactive is an **educational and simulation-based experience**. The following clarifications are provided to avoid misinterpretation in technical or research contexts:
+
+* The system does **not** perform quantum cryptanalysis or demonstrate practical breaking of classical cryptographic systems.
+* Generated identifiers and keys are **demonstrative artifacts** intended for educational purposes unless explicitly integrated with production cryptographic infrastructure.
+* References to quantum devices or execution environments may include simulated or abstracted representations.
+* Environmental and sustainability metrics are illustrative comparisons and should not be interpreted as formal lifecycle assessments.
+* Participation data is anonymized and intended for aggregate visualization rather than behavioral analysis.
+
+The experience is intended to improve understanding of emerging technological risks and mitigation strategies, not to represent operational security guarantees.
+
+## 📑 Citations & References
+
+The following sources provide scientific and technical background relevant to the concepts presented in this experience:
+
+* Nobel Prize Foundation — *The Nobel Prize in Physics 2025: Press Release*
+  https://www.nobelprize.org/prizes/physics/2025/press-release/
+
+* National Institute of Standards and Technology (NIST) — Post-Quantum Cryptography Standardization Project
+  https://csrc.nist.gov/projects/post-quantum-cryptography
+
+* Shor, P. W. (1994) — *Algorithms for Quantum Computation: Discrete Logarithms and Factoring*
+
+* Grover, L. K. (1996) — *A Fast Quantum Mechanical Algorithm for Database Search*
+
+* Bernstein, D. J., Buchmann, J., Dahmen, E. (eds.) — *Post-Quantum Cryptography*, Springer.
+
+* Chen, L. et al. — *Report on Post-Quantum Cryptography*, NISTIR 8105.
