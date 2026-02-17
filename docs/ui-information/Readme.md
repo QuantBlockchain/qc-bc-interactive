@@ -1,74 +1,89 @@
 # Quantum Futures Interactive — UI Page Descriptions
 
-This document provides a **technical, implementation-oriented walkthrough** of each user interface screen in **Quantum Futures Interactive**. It is written for engineers, designers, researchers, and reviewers who require a structured understanding of **screen purpose, user flow, captured data, and system intent**.
+This document provides a **technical, implementation-oriented walkthrough** of each user interface screen in **Quantum Futures Interactive**. It is written for engineers, designers, researchers, and reviewers who require a structured understanding of **screen purpose, user flow, captured data, system behavior, and technical context**.
 
-> ✅ **Note:** References to Nobel Prize recognition within the experience reflect real-world scientific developments. In particular, references to the 2025 Nobel Prize in Physics align with the official Nobel Foundation press release:
+The UI documentation mirrors the appendix of the ICBC demo manuscript and reflects the implemented interaction flow used in live demonstrations and workshops.
+
+> ✅ **Scientific Note**  
+> References to Nobel Prize recognition within the experience reflect real-world scientific developments. References to the 2025 Nobel Prize in Physics align with the official Nobel Foundation press release:  
 > https://www.nobelprize.org/prizes/physics/2025/press-release/
 
-
 ---
+
 ## 🔬 Scientific Background
 
-Quantum Futures Interactive is designed as an **educational and exploratory interface** demonstrating how advances in quantum information science influence modern digital infrastructure.
+Quantum Futures Interactive is designed as an **educational and exploratory interface** demonstrating how advances in quantum information science influence modern digital infrastructure, particularly blockchain-based distributed systems.
 
-Recent Nobel-recognized work in quantum physics reflects foundational progress in areas such as:
+Recent progress in quantum physics has enabled:
 
-* quantum information processing,
-* quantum state control and measurement,
-* and scalable quantum systems.
+- quantum state control and measurement,
+- scalable qubit implementations,
+- and cloud-accessible quantum computing platforms.
 
-These advances have direct implications for cryptography. Certain quantum algorithms — most notably Shor’s algorithm — theoretically weaken widely used public-key systems such as RSA and elliptic curve cryptography. As a result, the cybersecurity and blockchain communities are actively researching **post-quantum cryptography (PQC)** as a long-term mitigation strategy.
+These developments have direct implications for cryptography. Quantum algorithms — most notably **Shor’s algorithm** — theoretically weaken public-key cryptosystems such as RSA and elliptic curve cryptography (ECDSA), which are widely used in blockchain identity and transaction validation. As a result, industry and research communities are transitioning toward **post-quantum cryptography (PQC)**.
 
-The experience does not claim operational quantum advantage over current cryptographic systems. Instead, it illustrates:
+The experience does not claim operational quantum advantage. Instead, it illustrates:
 
-* why quantum progress motivates cryptographic migration planning,
-* how post-quantum standards are being developed (e.g., NIST PQC process),
-* and how emerging technologies may intersect with decentralized systems and digital identity.
+- why quantum progress motivates long-term cryptographic migration,
+- how post-quantum standards (e.g., NIST PQC) are emerging,
+- how infrastructure choices affect performance, sustainability, and trust,
+- and how interdisciplinary stakeholders participate in technology adoption.
 
-This context supports the educational goals of the experience while maintaining scientific accuracy and neutrality.
+---
 
 ## 📚 Contents
 
-* [UX Flow Summary](#ux-flow-summary)
-* [Screens](#screens)
-
-  * [1. 🚀 Welcome](#1--welcome-page-1png)
-  * [2. ⚛️ Quantum Meets Blockchain](#2--quantum-meets-blockchain-page-2png)
-  * [3. ✅ Experience Overview / Consent](#3--experience-overview--consent-page-3png)
-  * [4. 💬 Public Sentiment Input](#4--public-sentiment--input-page-4png)
-  * [5. 📊 Sentiment Results & Industry Voting](#5--public-sentiment--results--industry-voting-page-5png)
-  * [6. 🧪 Device Selection / Investment Simulation](#6--device-selection--investment-simulation-page-6png)
-  * [7. 🔐 Quantum Key Generation Results](#7--quantum-key-generation-results-page-7png)
-* [📖 Glossary](#-glossary)
+- [UX Flow Summary](#ux-flow-summary)
+- [Screens](#screens)
+  - [1. 🚀 Scientific Context](#1--scientific-context-page-1png)
+  - [2. ⚛️ Quantum Meets Blockchain](#2--quantum-meets-blockchain-page-2png)
+  - [3. ✅ Experience Overview / Consent](#3--experience-overview--consent-page-3png)
+  - [4. 💬 Public Sentiment Input](#4--public-sentiment-input-page-4png)
+  - [5. 📊 Sentiment Results & Technology Voting](#5--sentiment-results--technology-voting-page-5png)
+  - [6. 🧪 Quantum Device Selection & Infrastructure Tradeoffs](#6--quantum-device-selection--infrastructure-tradeoffs-page-6png)
+  - [7. 🔐 Post-Quantum Artifact Generation](#7--post-quantum-artifact-generation-page-7png)
+- [🌐 Interdisciplinary Contributions & SDG Alignment](#-interdisciplinary-contributions--sdg-alignment)
+- [📖 Glossary](#-glossary)
+- [⚖️ Limitations & Non-Claims](#️-limitations--non-claims)
 
 ---
 
 ## UX Flow Summary
 
+The interface follows a **7-page guided interaction flow** designed to mirror real-world adoption processes in emerging infrastructure technologies.
+
 <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:stretch; margin:12px 0;">
   <div style="flex:1; min-width:260px; border:1px solid #e5e7eb; border-radius:12px; padding:12px;">
-    <b>🧭 Experience Steps (1 → 6)</b>
+    <b>🧭 Experience Flow</b>
     <ul>
-      <li>🚀 <b>Step 1:</b> Welcome / context framing</li>
-      <li>⚛️ <b>Step 2:</b> Education (quantum threat + PQC mitigation)</li>
-      <li>✅ <b>Step 3:</b> Transition + consent gate</li>
-      <li>💬 <b>Step 4:</b> Sentiment input</li>
-      <li>📊 <b>Step 5:</b> Community results + voting</li>
-      <li>🧪 <b>Step 6:</b> Device selection</li>
-      <li>🔐 <b>Final:</b> PQ signature generation</li>
+      <li>🚀 Page 1 — Scientific context</li>
+      <li>⚛️ Page 2 — Quantum threat & PQC transition</li>
+      <li>✅ Page 3 — Consent & participation</li>
+      <li>💬 Page 4 — Sentiment capture</li>
+      <li>📊 Page 5 — Aggregation & voting</li>
+      <li>🧪 Page 6 — Device & infrastructure selection</li>
+      <li>🔐 Page 7 — Cryptographic artifact generation</li>
     </ul>
   </div>
   <div style="flex:1; min-width:260px; border:1px solid #e5e7eb; border-radius:12px; padding:12px;">
     <b>🗂️ Data Captured</b>
     <ul>
-      <li>✅ Consent acknowledgement</li>
-      <li>💬 One-word sentiment input</li>
-      <li>🗳️ Technology vote</li>
-      <li>🧪 Selected device</li>
-      <li>🔐 Generated identifier + key metadata</li>
+      <li>Consent acknowledgement</li>
+      <li>Single-word sentiment input</li>
+      <li>Technology prioritization vote</li>
+      <li>Selected quantum execution environment</li>
+      <li>Generated identifier and key metadata</li>
     </ul>
   </div>
 </div>
+
+The flow follows three experience design principles:
+
+| Principle | Pages | Purpose |
+|---|---|---|
+| **Context → Understanding** | Pages 1–2 | Establish scientific and security foundations |
+| **Participation → Reflection** | Pages 3–5 | Convert learning into interaction and feedback |
+| **Decision → Outcome** | Pages 6–7 | Connect infrastructure choice to cryptographic output |
 
 ---
 
@@ -76,311 +91,236 @@ This context supports the educational goals of the experience while maintaining 
 
 ---
 
-### 1. 🚀 Welcome (`page-1.png`)
+### 1. 🚀 Scientific Context (`page-1.png`)
 
-<figure style="margin:16px 0; padding:12px; border:1px solid #e5e7eb; border-radius:14px; box-shadow:0 1px 2px rgba(0,0,0,0.06);">
-  <img src="page-1.png" alt="Welcome page UI" style="width:100%; border-radius:10px;">
-  <figcaption style="margin-top:10px; color:#374151;">
-    <b>Figure 1.</b> Welcome screen introducing the experience and presenting featured contributor cards with a primary call-to-action.
-  </figcaption>
+<figure style="margin:16px 0; padding:12px; border:1px solid #e5e7eb; border-radius:14px;">
+  <img src="page-1.png" alt="Scientific context UI" style="width:100%; border-radius:10px;">
+  <figcaption><b>Figure 1.</b> Scientific context introducing physical foundations of quantum computing.</figcaption>
 </figure>
 
-<div style="border-left:4px solid #d1d5db; padding:10px 12px; margin:10px 0;">
-  <b>🎯 Purpose</b><br/>
-  Establish narrative context and provide the entry point into the guided experience.
-</div>
+**Purpose**
 
-**UI Highlights**
+Establish scientific grounding by introducing macroscopic quantum phenomena and their relationship to modern quantum computing systems.
 
-* ⚛️ Introductory framing of quantum computing breakthroughs.
-* 👤 Three profile cards with image, affiliation, and contribution summary.
-* 🔘 Primary CTA: **Start Journey**.
-* 📍 Step indicator: **Step 1 of 6**.
+**Technical Context**
+
+- Superconducting circuits and Josephson junctions as artificial atoms
+- Quantized energy levels enabling qubit construction
+- Microwave-driven gate operations and measurement
+- Relationship between quantum hardware advances and cryptographic implications
 
 **User Actions**
 
-* Begin flow via **Start Journey**.
-* Open additional details via **More** links.
+- Review contributor profiles and context cards
+- Enter guided interaction flow
 
 ---
 
 ### 2. ⚛️ Quantum Meets Blockchain (`page-2.png`)
 
-<figure style="margin:16px 0; padding:12px; border:1px solid #e5e7eb; border-radius:14px; box-shadow:0 1px 2px rgba(0,0,0,0.06);">
+<figure style="margin:16px 0; padding:12px; border:1px solid #e5e7eb; border-radius:14px;">
   <img src="page-2.png" alt="Quantum meets blockchain UI" style="width:100%; border-radius:10px;">
-  <figcaption style="margin-top:10px; color:#374151;">
-    <b>Figure 2.</b> Educational module illustrating quantum risk to classical cryptography and post-quantum mitigation approaches.
-  </figcaption>
+  <figcaption><b>Figure 2.</b> Quantum threat model and post-quantum cryptographic transition.</figcaption>
 </figure>
 
-<div style="border-left:4px solid #d1d5db; padding:10px 12px; margin:10px 0;">
-  <b>🎯 Purpose</b><br/>
-  Explain the quantum threat model and introduce post-quantum cryptography as a migration path.
-</div>
+**Purpose**
 
-**Layout**
+Explain how quantum algorithms affect blockchain cryptographic security.
 
-* ⚠️ **The Threat:** Quantum algorithms affecting classical cryptography.
-* 🛡️ **The Solution:** NIST post-quantum standards and alternatives.
+**Technical Elements**
 
-**Key Visual Elements**
+- Quantum Vulnerability Index visualization
+- Shor’s algorithm impact on:
+  - RSA
+  - ECDSA
+  - Diffie–Hellman
+- Grover’s algorithm effects on:
+  - SHA-256
+  - AES security margins
+- Introduction to PQC:
+  - lattice-based cryptography
+  - hash-based signatures
+  - post-quantum key encapsulation
 
-* 📈 Quantum Vulnerability Index (risk visualization).
-* 🔄 Mapping between classical and quantum-safe algorithms.
+**Outcome**
 
-**Navigation**
-
-* ⬅️ **Back**
-* ➡️ **Next**
+Users understand why blockchain infrastructure must migrate toward quantum-resistant primitives.
 
 ---
 
 ### 3. ✅ Experience Overview / Consent (`page-3.png`)
 
-<figure style="margin:16px 0; padding:12px; border:1px solid #e5e7eb; border-radius:14px; box-shadow:0 1px 2px rgba(0,0,0,0.06);">
-  <img src="page-3.png" alt="Experience overview and consent UI" style="width:100%; border-radius:10px;">
-  <figcaption style="margin-top:10px; color:#374151;">
-    <b>Figure 3.</b> Transition screen outlining upcoming interactive steps and requiring consent before continuing.
-  </figcaption>
+<figure style="margin:16px 0; padding:12px; border:1px solid #e5e7eb; border-radius:14px;">
+  <img src="page-3.png" alt="Consent UI" style="width:100%; border-radius:10px;">
+  <figcaption><b>Figure 3.</b> Participation overview and consent gate.</figcaption>
 </figure>
 
-<div style="border-left:4px solid #d1d5db; padding:10px 12px; margin:10px 0;">
-  <b>🎯 Purpose</b><br/>
-  Transition from educational content into participation while enforcing consent requirements.
-</div>
+**Purpose**
 
-**Upcoming Steps**
+Transition from passive learning into active participation while enforcing transparency.
 
-1. 💬 Share a quantum computing impression
-2. 🗳️ Vote on blockchain technologies
-3. 🧪 Choose a quantum device
-4. 🔐 Generate a quantum-resistant key
+**Technical Context**
 
-**Consent Gate**
+- Anonymous session creation
+- Consent acknowledgement before data submission
+- Governance-oriented participation model aligned with decentralized systems
 
-* ✅ Anonymous participation checkbox required.
-* 🔒 Data used for research purposes only.
-* CTA **Let’s Go** enabled only after consent.
+**User Actions**
+
+- Accept participation terms
+- Proceed to interactive stages
 
 ---
 
-### 4. 💬 Public Sentiment — Input (`page-4.png`)
+### 4. 💬 Public Sentiment Input (`page-4.png`)
 
-<figure style="margin:16px 0; padding:12px; border:1px solid #e5e7eb; border-radius:14px; box-shadow:0 1px 2px rgba(0,0,0,0.06);">
-  <img src="page-4.png" alt="Public sentiment input UI" style="width:100%; border-radius:10px;">
-  <figcaption style="margin-top:10px; color:#374151;">
-    <b>Figure 4.</b> Single-field sentiment capture asking for a one-word association with quantum computing.
-  </figcaption>
+<figure style="margin:16px 0; padding:12px; border:1px solid #e5e7eb; border-radius:14px;">
+  <img src="page-4.png" alt="Sentiment input UI" style="width:100%; border-radius:10px;">
+  <figcaption><b>Figure 4.</b> Single-word sentiment capture.</figcaption>
 </figure>
 
-<div style="border-left:4px solid #d1d5db; padding:10px 12px; margin:10px 0;">
-  <b>🎯 Purpose</b><br/>
-  Collect lightweight sentiment data suitable for aggregation and visualization.
-</div>
+**Purpose**
 
-**Interaction**
-
-* Prompt requesting a single word.
-* ✏️ Text input field.
-* ✅ **Submit** / ⬅️ **Back**.
+Capture lightweight perception data reflecting public understanding of quantum computing.
 
 **Implementation Notes**
 
-* Normalize input (trim, case handling).
-* Optional filtering and length limits.
-* Store anonymously per session.
+- Single-word input normalized server-side
+- Anonymous storage per session
+- Aggregated for visualization in Page 5
+
+**Technical Relevance**
+
+Models perception feedback mechanisms influencing technology adoption and governance decisions.
 
 ---
 
-### 5. 📊 Public Sentiment — Results & Industry Voting (`page-5.png`)
+### 5. 📊 Sentiment Results & Technology Voting (`page-5.png`)
 
-<figure style="margin:16px 0; padding:12px; border:1px solid #e5e7eb; border-radius:14px; box-shadow:0 1px 2px rgba(0,0,0,0.06);">
-  <img src="page-5.png" alt="Word cloud and voting UI" style="width:100%; border-radius:10px;">
-  <figcaption style="margin-top:10px; color:#374151;">
-    <b>Figure 5.</b> Aggregated sentiment visualization and technology voting interface with community results.
-  </figcaption>
+<figure style="margin:16px 0; padding:12px; border:1px solid #e5e7eb; border-radius:14px;">
+  <img src="page-5.png" alt="Voting UI" style="width:100%; border-radius:10px;">
+  <figcaption><b>Figure 5.</b> Aggregated sentiment visualization and technology prioritization.</figcaption>
 </figure>
 
-<div style="border-left:4px solid #d1d5db; padding:10px 12px; margin:10px 0;">
-  <b>🎯 Purpose</b><br/>
-  Reflect community input while capturing a prioritized technology preference.
-</div>
+**Purpose**
 
-**Section A — Word Cloud**
+Aggregate community perception and simulate ecosystem prioritization.
 
-* ☁️ Frequency-based visualization.
-* Highlighting of user contribution.
+**Technology Voting Options**
 
-**Section B — Technology Voting**
+Participants select one of:
 
-* 🗳️ Single-choice vote across six technologies:
+- Post-Quantum Signatures
+- Quantum Key Distribution (QKD)
+- Hash-based Cryptography
+- Quantum Random Number Generation (QRNG)
+- Quantum-Safe Smart Contracts
+- Zero-Knowledge Proofs (ZKPs)
 
-  * Post-Quantum Signatures
-  * Quantum Key Distribution
-  * Hash-based Cryptography
-  * Quantum Random Numbers
-  * Quantum-Safe Smart Contracts
-  * Zero-Knowledge Proofs
+**Technical Context**
 
-**Community Results**
-
-* 📊 Live bar chart with counts and percentages.
+- Models decentralized governance and consensus formation
+- Illustrates socio-technical coordination required for cryptographic migration
+- Demonstrates how infrastructure direction emerges from stakeholder priorities
 
 ---
 
-### 6. 🧪 Device Selection / Investment Simulation (`page-6.png`)
+### 6. 🧪 Quantum Device Selection & Infrastructure Tradeoffs (`page-6.png`)
 
-<figure style="margin:16px 0; padding:12px; border:1px solid #e5e7eb; border-radius:14px; box-shadow:0 1px 2px rgba(0,0,0,0.06);">
-  <img src="page-6.png" alt="Device selection and investment simulation UI" style="width:100%; border-radius:10px;">
-  <figcaption style="margin-top:10px; color:#374151;">
-    <b>Figure 6.</b> Quantum device exploration interface with simulator and QPU comparison plus environmental impact assessment.
-  </figcaption>
+<figure style="margin:16px 0; padding:12px; border:1px solid #e5e7eb; border-radius:14px;">
+  <img src="page-6.png" alt="Device selection UI" style="width:100%; border-radius:10px;">
+  <figcaption><b>Figure 6.</b> Quantum execution environment comparison.</figcaption>
 </figure>
 
-<div style="border-left:4px solid #d1d5db; padding:10px 12px; margin:10px 0;">
-  <b>🎯 Purpose</b><br/>
-  Introduce real-world tradeoffs between quantum hardware, simulation environments, and sustainability considerations.
-</div>
+**Purpose**
 
-**Device Categories**
+Introduce infrastructure-level decision making through quantum hardware comparison.
 
-* 🖥️ Classical simulators
-* ⚛️ Quantum Processing Units (QPUs)
+**Quantum Computing Paradigms**
 
-**Displayed Parameters**
+- Classical simulators (SV1, DM1, TN1)
+- Trapped-ion QPUs (IonQ Aria, IonQ Forte, AQT IBEX Q1)
+- Superconducting QPUs (IQM Garnet, IQM Emerald, Rigetti Ankaa-3)
+- Neutral-atom systems (QuEra Aquila)
 
-* Qubit count
-* Gate fidelity / quality metric
-* Connectivity model
-* Availability status
+**Displayed Metrics**
 
-**Environmental Module**
+- Qubit count
+- Gate fidelity / quality
+- Connectivity model
+- Execution availability
+- Sustainability indicators
 
-* 🌱 Methodology selection (LCA or simplified).
-* ⚡ Energy usage and carbon comparison.
-* 📉 Sustainability scoring.
+**Technical Insight**
 
-**Action**
-
-* Select device → **Confirm Investment**.
+Demonstrates tradeoffs between performance, scalability, operational complexity, and environmental impact relevant to long-lived digital infrastructure.
 
 ---
 
-### 7. 🔐 Quantum Key Generation Results (`page-7.png`)
+### 7. 🔐 Post-Quantum Artifact Generation (`page-7.png`)
 
-<figure style="margin:16px 0; padding:12px; border:1px solid #e5e7eb; border-radius:14px; box-shadow:0 1px 2px rgba(0,0,0,0.06);">
-  <img src="page-7.png" alt="Quantum key generation results UI" style="width:100%; border-radius:10px;">
-  <figcaption style="margin-top:10px; color:#374151;">
-    <b>Figure 7.</b> Final results screen showing generated identifier, cryptographic output, and device execution metadata.
-  </figcaption>
+<figure style="margin:16px 0; padding:12px; border:1px solid #e5e7eb; border-radius:14px;">
+  <img src="page-7.png" alt="Key generation UI" style="width:100%; border-radius:10px;">
+  <figcaption><b>Figure 7.</b> Generated post-quantum artifact and execution metadata.</figcaption>
 </figure>
 
-<div style="border-left:4px solid #d1d5db; padding:10px 12px; margin:10px 0;">
-  <b>🎯 Purpose</b><br/>
-  Present a completion artifact summarizing cryptographic output and execution context.
-</div>
+**Purpose**
+
+Present a verifiable outcome representing the interaction journey.
 
 **Displayed Outputs**
 
-* ✅ Success confirmation banner
-* 🔢 Quantum ID
-* 🔐 Public key and signature
-* ⚙️ Algorithm classification
+- Quantum-derived identifier
+- Post-quantum public key
+- Digital signature
+- Device and execution metadata
+- Job status and provenance data
 
-**Execution Metadata**
+**Technical Context**
 
-* Device name and provider
-* Processing type
-* Job ID and status
-
-**Completion**
-
-* 📘 Educational note on post-quantum security.
-* ✅ **Complete Journey** button.
-
----
-## 🌐 Interdisciplinary & Cross-Community Contributions & UN SDG Alignment
-
-Quantum Futures Interactive is structured to connect multiple communities involved in the evolution of quantum technologies, cryptography, and digital infrastructure. Each screen represents both a user interaction step and a contribution point for different disciplines and stakeholder groups.
-
-The table below maps **experience screens** to **community perspectives**, **types of contribution**, and relevant **UN Sustainable Development Goals (SDGs)** aligned with education, innovation, sustainability, and responsible technological development.
-
-| Screen                                                                                               | Experience Focus                        | Communities Engaged                                                                 | Contribution Perspective                                                                              | Intended Insight                                                                                   | 🌍 UN SDG Alignment                                                                                                                                 |
-| ---------------------------------------------------------------------------------------------------- | --------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 🚀 [Welcome](#1--welcome-page-1png)                                                                  | Context framing & narrative entry       | 👩‍🔬 Researchers · 🎨 Designers · 📣 Educators · 💼 Investors                      | Establishes shared language between scientific progress, public communication, and strategic interest | Aligns diverse audiences around why quantum progress matters before introducing technical detail   | 📘 **SDG 4 — Quality Education**<br/>🧩 **SDG 9 — Industry, Innovation & Infrastructure**                                                           |
-| ⚛️ [Quantum Meets Blockchain](#2--quantum-meets-blockchain-page-2png)                                | Education & risk framing                | 👩‍🔬 Researchers · 👨‍💻 Engineers · ⚖️ Governance & Regulation                     | Connects theoretical quantum advances with infrastructure risk and mitigation pathways                | Demonstrates how scientific discovery translates into engineering and governance challenges        | 📘 **SDG 4 — Quality Education**<br/>🧩 **SDG 9 — Industry, Innovation & Infrastructure**<br/>🏛️ **SDG 16 — Peace, Justice & Strong Institutions** |
-| ✅ [Experience Overview / Consent](#3--experience-overview--consent-page-3png)                        | Participation transition & transparency | 🎨 Designers · 🔨 Policy & Institutional Authority · 📚 Educators                  | Models ethical participation, consent, and responsible data collection practices                      | Reinforces trust and transparency as foundational components of emerging technology adoption       | 🏛️ **SDG 16 — Peace, Justice & Strong Institutions**                                                                                               |
-| 💬 [Public Sentiment Input](#4--public-sentiment--input-page-4png)                                   | Public perception capture               | 📣 Public · 📚 Educators · ⚖️ Governance · 👩‍🔬 Researchers                         | Collects lightweight perception data illustrating societal understanding of quantum technology        | Highlights gaps between technical reality and public expectation                                   | 📘 **SDG 4 — Quality Education**<br/>🤝 **SDG 17 — Partnerships for the Goals**                                                                     |
-| 📊 [Sentiment Results & Industry Voting](#5--public-sentiment--results--industry-voting-page-5png)   | Aggregation & prioritization            | 💼 Investors · ⚖️ Governance · 👨‍💻 Engineers · 👩‍🔬 Researchers                    | Simulates ecosystem prioritization and emerging consensus across technologies                         | Shows how technical direction emerges from collective preference and perceived value               | 🧩 **SDG 9 — Industry, Innovation & Infrastructure**<br/>🤝 **SDG 17 — Partnerships for the Goals**                                                 |
-| 🧪 [Device Selection / Investment Simulation](#6--device-selection--investment-simulation-page-6png) | Tradeoffs & infrastructure decisions    | 👨‍💻 Engineers · 💼 Investors · 🌱 Sustainability · 👩‍🔬 Researchers                | Demonstrates performance, availability, and environmental considerations in technology selection      | Illustrates that quantum adoption decisions involve economic, technical, and environmental factors | 🧩 **SDG 9 — Industry, Innovation & Infrastructure**<br/>🌱 **SDG 12 — Responsible Consumption & Production**<br/>🌍 **SDG 13 — Climate Action**    |
-| 🔐 [Quantum Key Generation Results](#7--quantum-key-generation-results-page-7png)                    | Outcome artifact & system context       | 👨‍💻 Engineers · 👩‍🔬 Researchers · 📚 Educators · 💼 Investors                     | Presents cryptographic output as a traceable result of prior decisions                                | Connects abstract concepts to tangible system outputs and lifecycle understanding                  | 🧩 **SDG 9 — Industry, Innovation & Infrastructure**<br/>🏛️ **SDG 16 — Peace, Justice & Strong Institutions**                                      |
+Quantum-derived entropy is used as an input to a post-quantum cryptographic process, demonstrating how infrastructure decisions influence trust artifacts recorded in distributed systems.
 
 ---
 
-### Community Icon Legend
+## 🌐 Interdisciplinary Contributions & SDG Alignment
 
-- 👩‍🔬 Researchers — scientific research and discovery contributions.
-- 👨‍💻 Engineers — technical implementation and infrastructure development.
-- 🎨 Designers — interaction design and user-experience perspectives.
-- 📚 Educators — learning facilitation and knowledge translation.
-- 💼 Investors — strategic, economic, and ecosystem decision perspectives.
-- ⚖️ Governance & Regulation — regulatory frameworks, oversight, and governance perspectives.
-- 🔨 Policy & Institutional Authority — policy-making, institutional decision-making, and enforcement roles.
-- 📣 Public — public participants and non-specialist audiences.
-- 🌱 Sustainability — environmental and sustainability considerations.
+The UI workflow connects multiple stakeholder groups involved in quantum and blockchain ecosystems.
+
+Across Pages 1–7:
+
+- Pages 1–2 emphasize **Security, Privacy & Forensics**
+- Pages 3–5 emphasize **Blockchain for Metaverse & Digital Twins** through participatory coordination
+- Pages 6–7 emphasize **Performance, Scalability & Sustainability Issues**
+
+The experience demonstrates that quantum-safe infrastructure adoption requires coordination between scientific research, engineering implementation, governance frameworks, sustainability considerations, and public understanding.
 
 ---
-
-**Summary:**  
-Across all screens, the experience demonstrates that progress in quantum computing and post-quantum cryptography is inherently interdisciplinary. Scientific research, engineering implementation, economic investment, governance frameworks, policy authority, environmental considerations, and public understanding evolve together, aligning with global goals for responsible innovation and sustainable technological development.
-
 
 ## 📖 Glossary
 
-| Term                                  | Definition                                                                                                              |
-| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| **Quantum Computing**                 | A computing paradigm using quantum mechanical phenomena such as superposition and entanglement to perform computations. |
-| **Qubit**                             | The basic unit of quantum information, capable of existing in multiple states simultaneously.                           |
-| **PQC (Post-Quantum Cryptography)**   | Cryptographic algorithms designed to remain secure against attacks from quantum computers.                              |
-| **Shor’s Algorithm**                  | A quantum algorithm capable of efficiently factoring large integers, threatening RSA and ECC cryptography.              |
-| **Grover’s Algorithm**                | A quantum search algorithm that reduces brute-force search complexity.                                                  |
-| **ECDSA**                             | Elliptic Curve Digital Signature Algorithm used widely in blockchain systems.                                           |
-| **RSA**                               | Public-key cryptographic system based on integer factorization difficulty.                                              |
-| **KEM (Key Encapsulation Mechanism)** | Cryptographic method used for secure key exchange in post-quantum systems.                                              |
-| **Lattice-Based Cryptography**        | PQC approach based on hardness of lattice problems such as Learning With Errors (LWE).                                  |
-| **QPU (Quantum Processing Unit)**     | Hardware device that executes quantum circuits.                                                                         |
-| **Quantum Simulator**                 | Classical system that simulates quantum computations.                                                                   |
-| **Word Cloud**                        | Visualization where word size represents frequency of occurrence.                                                       |
-| **LCA (Life Cycle Assessment)**       | Methodology for evaluating environmental impact across a system’s lifecycle.                                            |
-| **Digital Signature**                 | Cryptographic proof verifying authenticity and integrity of data.                                                       |
-| **Quantum ID**                        | Identifier derived from quantum or quantum-seeded randomness within the experience.                                     |
+| Term | Definition |
+|---|---|
+| Quantum Computing | Computing using superposition and entanglement. |
+| Qubit | Basic unit of quantum information. |
+| PQC | Cryptography secure against quantum attacks. |
+| Shor’s Algorithm | Quantum factoring algorithm affecting RSA/ECC. |
+| Grover’s Algorithm | Quantum search algorithm reducing brute-force complexity. |
+| ECDSA | Signature scheme widely used in blockchain. |
+| LWE | Learning With Errors problem used in PQC. |
+| QPU | Quantum Processing Unit. |
+| QRNG | Quantum Random Number Generator. |
+| LCA | Life Cycle Assessment for environmental impact. |
+
+---
 
 ## ⚖️ Limitations & Non-Claims
 
-Quantum Futures Interactive is an **educational and simulation-based experience**. The following clarifications are provided to avoid misinterpretation in technical or research contexts:
+Quantum Futures Interactive is an **educational and demonstration system**:
 
-* The system does **not** perform quantum cryptanalysis or demonstrate practical breaking of classical cryptographic systems.
-* Generated identifiers and keys are **demonstrative artifacts** intended for educational purposes unless explicitly integrated with production cryptographic infrastructure.
-* References to quantum devices or execution environments may include simulated or abstracted representations.
-* Environmental and sustainability metrics are illustrative comparisons and should not be interpreted as formal lifecycle assessments.
-* Participation data is anonymized and intended for aggregate visualization rather than behavioral analysis.
+- It does not perform quantum cryptanalysis.
+- Generated keys are demonstrative artifacts.
+- Device representations may include simulated execution.
+- Sustainability metrics are illustrative comparisons.
+- Participation data is anonymized and aggregated.
 
-The experience is intended to improve understanding of emerging technological risks and mitigation strategies, not to represent operational security guarantees.
-
-## 📑 Citations & References
-
-The following sources provide scientific and technical background relevant to the concepts presented in this experience:
-
-* Nobel Prize Foundation — *The Nobel Prize in Physics 2025: Press Release*
-  https://www.nobelprize.org/prizes/physics/2025/press-release/
-
-* National Institute of Standards and Technology (NIST) — Post-Quantum Cryptography Standardization Project
-  https://csrc.nist.gov/projects/post-quantum-cryptography
-
-* Shor, P. W. (1994) — *Algorithms for Quantum Computation: Discrete Logarithms and Factoring*
-
-* Grover, L. K. (1996) — *A Fast Quantum Mechanical Algorithm for Database Search*
-
-* Bernstein, D. J., Buchmann, J., Dahmen, E. (eds.) — *Post-Quantum Cryptography*, Springer.
-
-* Chen, L. et al. — *Report on Post-Quantum Cryptography*, NISTIR 8105.
+The goal is to improve understanding of emerging technological transitions rather than provide operational security guarantees.
