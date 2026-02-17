@@ -281,18 +281,44 @@ Present a verifiable outcome representing the interaction journey.
 Quantum-derived entropy is used as an input to a post-quantum cryptographic process, demonstrating how infrastructure decisions influence trust artifacts recorded in distributed systems.
 
 ---
-
 ## 🌐 Interdisciplinary Contributions & SDG Alignment
 
-The UI workflow connects multiple stakeholder groups involved in quantum and blockchain ecosystems.
+The interaction flow connects technical concepts in quantum computing and blockchain infrastructure with interdisciplinary stakeholder perspectives. Each page represents both a user interaction step and a contribution point toward broader ecosystem understanding, reflecting how post-quantum migration involves research, engineering, governance, sustainability, and public engagement.
 
-Across Pages 1–7:
+The table below mirrors **Table I** in the ICBC demonstration paper and maps experience stages to technical focus, contribution type, stakeholder communities, and relevant United Nations Sustainable Development Goals (SDGs).
 
-- Pages 1–2 emphasize **Security, Privacy & Forensics**
-- Pages 3–5 emphasize **Blockchain for Metaverse & Digital Twins** through participatory coordination
-- Pages 6–7 emphasize **Performance, Scalability & Sustainability Issues**
+---
 
-The experience demonstrates that quantum-safe infrastructure adoption requires coordination between scientific research, engineering implementation, governance frameworks, sustainability considerations, and public understanding.
+### Demonstration Flow, Technical Contributions, and Community Impact
+
+| Screen | Focus (F) · Contribution (C) · Insight (I) | Communities Engaged | UN SDGs |
+|---|---|---|---|
+| 🚀 **P1 — Scientific Context** | **F:** Introduce post-quantum relevance to blockchain cryptography.<br>**C:** Establish shared language linking quantum advances and blockchain trust assumptions.<br>**I:** Prepare participants for quantum-safe technical concepts. | 👩‍🔬 Researchers · 🎨 Designers · 📚 Educators · 💼 Investors | SDG 4 · SDG 9 · SDG 16 |
+| ⚛️ **P2 — Quantum Threat Model** | **F:** Explain quantum threats and migration motivation.<br>**C:** Connect algorithmic advances to risks for blockchain signatures and data integrity.<br>**I:** Show how discovery informs engineering and governance decisions. | 👩‍🔬 Researchers · 👨‍💻 Engineers · ⚖️ Governance | SDG 4 · SDG 9 · SDG 16 |
+| ✅ **P3 — Consent & Participation** | **F:** Transition from learning to informed participation.<br>**C:** Apply consent and responsible handling within a cryptographic workflow.<br>**I:** Reinforce transparency as a basis for trusted infrastructure. | 🎨 Designers · 🏛️ Policy · 📚 Educators | SDG 4 · SDG 9 · SDG 16 · SDG 17 |
+| 💬 **P4 — Public Sentiment** | **F:** Capture public perception with minimal effort.<br>**C:** Contrast intuition with technical constraints of quantum-safe migration.<br>**I:** Reveal communication gaps affecting adoption. | 📣 Public · 📚 Educators · ⚖️ Governance · 👩‍🔬 Researchers | SDG 4 · SDG 9 · SDG 16 · SDG 17 |
+| 📊 **P5 — Technology Voting** | **F:** Display aggregated sentiment and preferences.<br>**C:** Elicit priorities across quantum-safe infrastructure options.<br>**I:** Illustrate ecosystem consensus formation. | 💼 Investors · ⚖️ Governance · 👨‍💻 Engineers · 👩‍🔬 Researchers | SDG 4 · SDG 9 · SDG 16 · SDG 17 |
+| 🧪 **P6 — Device Selection** | **F:** Explore quantum execution environments via simulation.<br>**C:** Compare architectures in performance, availability, and sustainability.<br>**I:** Link infrastructure choices to strategic tradeoffs. | 👨‍💻 Engineers · 💼 Investors · 🌱 Sustainability · 👩‍🔬 Researchers | SDG 4 · SDG 9 · SDG 12 · SDG 13 · SDG 16 |
+| 🔐 **P7 — Artifact Generation** | **F:** Generate a demonstrative post-quantum artifact.<br>**C:** Provide execution metadata linking device selection and provenance.<br>**I:** Connect learning to verifiable trust outputs. | 👨‍💻 Engineers · 👩‍🔬 Researchers · 📚 Educators · 💼 Investors | SDG 4 · SDG 9 · SDG 12 · SDG 13 · SDG 16 |
+
+---
+
+### Community Legend
+
+- 👩‍🔬 **Researchers** — scientific discovery and algorithm development  
+- 👨‍💻 **Engineers** — system implementation and infrastructure design  
+- 🎨 **Designers** — interaction and user experience development  
+- 📚 **Educators** — knowledge transfer and technical literacy  
+- 💼 **Investors** — strategic and ecosystem decision perspectives  
+- ⚖️ **Governance** — regulation and institutional oversight  
+- 🏛️ **Policy** — policy-making and institutional authority  
+- 📣 **Public** — non-specialist participants and users  
+- 🌱 **Sustainability** — environmental and lifecycle considerations  
+
+---
+
+Across all pages, the experience demonstrates that post-quantum migration is not purely a cryptographic upgrade but a socio-technical transition involving performance constraints, sustainability tradeoffs, governance considerations, and collective decision-making across technical and non-technical communities.
+
 
 ---
 
