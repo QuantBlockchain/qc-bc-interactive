@@ -1,4 +1,4 @@
-# ⚛️ Quantum Blockchain Interactive
+# ⚛️ Quantum Blockchain Interactive [![DOI](https://zenodo.org/badge/1154513105.svg)](https://doi.org/10.5281/zenodo.18668973)
 
 <p align="center">
   <b>
